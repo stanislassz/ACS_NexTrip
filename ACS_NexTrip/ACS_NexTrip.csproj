@@ -60,6 +60,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Pages\**" />
+	  <Compile Remove="Pages\**" />
+	  <EmbeddedResource Remove="Pages\**" />
+	  <MauiCss Remove="Pages\**" />
+	  <MauiXaml Remove="Pages\**" />
+	  <None Remove="Pages\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.8" />
 	</ItemGroup>
@@ -67,7 +76,6 @@
 	<ItemGroup>
 	  <Folder Include="Models\" />
 	  <Folder Include="ViewModels\" />
-	  <Folder Include="Pages\" />
 	</ItemGroup>
 
 </Project>
