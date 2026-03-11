@@ -29,7 +29,6 @@ public partial class RegisterPage : ContentPage
                 cmd.Parameters.AddWithValue("@Password", EntryPassword.Text);
                 cmd.Parameters.AddWithValue("@Nom", EntryNom.Text);
                 cmd.Parameters.AddWithValue("@Prenom", EntryPrenom.Text);
-                cmd.Parameters.AddWithValue("@Email", EntryEmail.Text);
 
                 int resultat = await cmd.ExecuteNonQueryAsync();
 
