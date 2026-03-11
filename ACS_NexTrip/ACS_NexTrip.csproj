@@ -76,7 +76,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-<<<<<<< HEAD
 		<Folder Include="ViewModels\" />
 	</ItemGroup>
 
@@ -90,25 +89,11 @@
 		<MauiXaml Update="Views\RegisterPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-=======
 	  <Folder Include="Models\" />
 	  <Folder Include="Models\" />
 	  <Folder Include="ViewModels\" />
 	  <Folder Include="Pages\" />
 	  <Folder Include="ViewModels\" />
->>>>>>> fe8a2a6a64f3d63d33aacbf9c4c78c5cf3aff617
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiXaml Update="Controls\ActionCard.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Controls\CustomButton.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Controls\CustomEntry.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	</ItemGroup>
 
 </Project>
