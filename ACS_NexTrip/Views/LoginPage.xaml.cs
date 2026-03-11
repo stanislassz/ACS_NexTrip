@@ -42,7 +42,7 @@ public partial class LoginPage : ContentPage
                     if (reader.Read())
                     {
                         // Si l'utilisateur existe
-                        await DisplayAlert("Succès", "Connexion réussie !", "OK");
+                        // await DisplayAlert("Succès", "Connexion réussie !", "OK");
                         await Shell.Current.GoToAsync("/HomePage");
                     }
                     else
