@@ -13,13 +13,13 @@ namespace ACS_NexTrip.Services
             var builder = new SqlConnectionStringBuilder
             {
                 // Nom du serveur copié de ton image
-                DataSource = @"2SIO-MAL\MSSQLSERVER01",
+                DataSource = @"SIO_SSZ",
                 InitialCatalog = "ACS_VOYAGE",
 
                 // On passe en Authentification SQL Server
                 IntegratedSecurity = false,
                 UserID = "sa",
-                Password = "SLAMbest@2024", // Remplace par ton vrai mot de passe
+                Password = "Info76240#", // Remplace par ton vrai mot de passe
 
                 TrustServerCertificate = true
             };

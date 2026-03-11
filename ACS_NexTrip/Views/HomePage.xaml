@@ -2,8 +2,277 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ACS_NexTrip.Views.HomePage"
+             Shell.NavBarIsVisible="False"
+             BackgroundImageSource="cloud_background.jpg"
              Title="HomePage">
-    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
-        <Label Text="Bienvenue sur l'accueil Erasmus !" FontSize="20" />
-    </VerticalStackLayout>
+
+    <Grid RowDefinitions="Auto, *, Auto">
+
+        <!-- Header personnalisé -->
+        <Border Grid.Row="0" 
+            BackgroundColor="{AppThemeBinding Light=White, Dark={StaticResource Gray800}}"
+            Padding="20,10">
+            <Border.Shadow>
+                <Shadow Brush="{StaticResource Gray900}"
+                    Offset="0,2"
+                    Radius="8"
+                    Opacity="0.1"/>
+            </Border.Shadow>
+
+            <Grid ColumnDefinitions="Auto, *, Auto" 
+              ColumnSpacing="20"
+              HeightRequest="60">
+
+                <!-- Logo à gauche -->
+                <HorizontalStackLayout Grid.Column="0" 
+                                   Spacing="10" 
+                                   VerticalOptions="Center">
+                    <Border BackgroundColor="{StaticResource Orange500}"
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        StrokeThickness="0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10"/>
+                        </Border.StrokeShape>
+                        <Label Text="TM" 
+                           FontSize="18" 
+                           FontAttributes="Bold" 
+                           TextColor="White"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+                    </Border>
+                    <Label Text="TravelManager" 
+                       FontSize="22" 
+                       FontAttributes="Bold" 
+                       TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}"
+                       VerticalOptions="Center"/>
+                </HorizontalStackLayout>
+
+                <!-- Boutons de navigation au centre -->
+                <HorizontalStackLayout Grid.Column="1" 
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"
+                                   Spacing="10">
+
+                    <Border BackgroundColor="{StaticResource Orange500}"
+                        Padding="20,10"
+                        StrokeThickness="0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10"/>
+                        </Border.StrokeShape>
+                        <Label Text="🏠 Accueil" 
+                           TextColor="White" 
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateToDashboardCommand}"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <Border BackgroundColor="Transparent"
+                        Padding="20,10"
+                        StrokeThickness="0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10"/>
+                        </Border.StrokeShape>
+                        <Label Text="🚗 Trajets" 
+                           TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}" 
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateToTripsCommand}"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <Border BackgroundColor="Transparent"
+                        Padding="20,10"
+                        StrokeThickness="0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10"/>
+                        </Border.StrokeShape>
+                        <Label Text="👥 Utilisateurs" 
+                           TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}" 
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateToUsersCommand}"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                </HorizontalStackLayout>
+
+                <!-- Profil utilisateur à droite -->
+                <HorizontalStackLayout Grid.Column="2" 
+                                   Spacing="15" 
+                                   VerticalOptions="Center">
+
+                    <!-- Notifications -->
+                    <Border BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray700}}"
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        StrokeThickness="0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="20"/>
+                        </Border.StrokeShape>
+                        <Label Text="🔔" 
+                           FontSize="20"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ShowNotificationsCommand}"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <!-- Profil utilisateur -->
+                    <Border BackgroundColor="{StaticResource Orange500}"
+                        HeightRequest="45"
+                        WidthRequest="45"
+                        StrokeThickness="2"
+                        Stroke="{StaticResource Orange300}">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="22.5"/>
+                        </Border.StrokeShape>
+                        <Label Text="JD" 
+                           FontSize="16" 
+                           FontAttributes="Bold" 
+                           TextColor="White"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ShowProfileCommand}"/>
+                        </Border.GestureRecognizers>
+                    </Border>
+
+                    <!-- Nom utilisateur -->
+                    <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+                        <Label Text="Jean Dupont" 
+                           FontSize="14" 
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}"/>
+                        <Label Text="Administrateur" 
+                           FontSize="11"
+                           TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}"/>
+                    </VerticalStackLayout>
+
+                </HorizontalStackLayout>
+
+            </Grid>
+        </Border>
+
+        <!-- Contenu principal -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="30" Spacing="20">
+
+                <!-- Titre de la page -->
+                <Label Text="Où allez-vous ?" 
+                   FontSize="32" 
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}"/>
+
+                <Label Text="Planifiez votre prochain voyage en quelque clics"
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}"/>
+
+                <!-- Statistiques rapides -->
+                <Grid ColumnDefinitions=" *, *, *, *" ColumnSpacing="20">
+
+                    <!-- Card 1 -->
+                    <Border Grid.Column="0" 
+                        BackgroundColor="{AppThemeBinding Light=White, Dark={StaticResource Gray800}}"
+                        Padding="50">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="15"/>
+                        </Border.StrokeShape>
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource Gray900}"
+                                Offset="0,4"
+                                Radius="15"
+                                Opacity="0.1"/>
+                        </Border.Shadow>
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="🛣️ Voir mes trajets" FontSize="22"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Card 2 -->
+                    <Border Grid.Column="1" 
+                        BackgroundColor="{AppThemeBinding Light=White, Dark={StaticResource Gray800}}"
+                        Padding="50">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="15"/>
+                        </Border.StrokeShape>
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource Gray900}"
+                                Offset="0,4"
+                                Radius="15"
+                                Opacity="0.1"/>
+                        </Border.Shadow>
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="📍 Réserver un nouveau trajet" FontSize="22"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Card 3 -->
+                    <Border Grid.Column="2" 
+                        BackgroundColor="{AppThemeBinding Light=White, Dark={StaticResource Gray800}}"
+                        Padding="50">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="15"/>
+                        </Border.StrokeShape>
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource Gray900}"
+                                Offset="0,4"
+                                Radius="15"
+                                Opacity="0.1"/>
+                        </Border.Shadow>
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="⏱️ Historique" FontSize="22"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Card 4 -->
+                    <Border Grid.Column="3" 
+                        BackgroundColor="{AppThemeBinding Light=White, Dark={StaticResource Gray800}}"
+                        Padding="50">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="15"/>
+                        </Border.StrokeShape>
+                        <Border.Shadow>
+                            <Shadow Brush="{StaticResource Gray900}"
+                                Offset="0,4"
+                                Radius="15"
+                                Opacity="0.1"/>
+                        </Border.Shadow>
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="ℹ️ Infos trafic" FontSize="22"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                </Grid>
+
+                <!-- Section trajets récents -->
+                <Border Grid.Row="2" BackgroundColor="{AppThemeBinding Light=White, Dark={StaticResource Gray800}}" Padding="20,10">
+                    <Border.Shadow>
+                        <Shadow Brush="{StaticResource Gray900}" Offset="0,2" Radius="8" Opacity="0.1"/>
+                    </Border.Shadow>
+
+                    <VerticalStackLayout Spacing="15" Margin="0,0,0,20">
+                        <Label Text="Prochains trajets" 
+                           FontSize="24" 
+                           FontAttributes="Bold"
+                           TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}"/>
+                    </VerticalStackLayout>
+                </Border>
+
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+    </Grid>
 </ContentPage>
