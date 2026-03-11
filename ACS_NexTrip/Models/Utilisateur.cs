@@ -1,26 +1,20 @@
-namespace ACS_NexTrip.Models;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-public class Utilisateur
+namespace ACS_NexTrip.Models
 {
-    public int Id { get; set; }
-    public string FirstName { get; set; } = string.Empty;
-    public string LastName { get; set; } = string.Empty;
-    public string Email { get; set; } = string.Empty;
-    public UserRole Role { get; set; }
-    public UserStatus Status { get; set; }
-    public DateTime? LastConnection { get; set; }
-    public string FullName => $"{FirstName} {LastName}";
-}
+    public class Utilisateur
+    {
+        // Ces noms correspondent aux colonnes de ton MCD
+        public int UTI_ID { get; set; }
+        public string UTI_Login { get; set; }
+        public string UTI_Password { get; set; }
+        public string UTI_Nom { get; set; }
+        public string UTI_Prenom { get; set; }
+        public string UTI_Email { get; set; }
 
-public enum UserRole
-{
-    Admin,
-    Gestionnaire,
-    Voyageur
-}
-
-public enum UserStatus
-{
-    Actif,
-    Inactif
+        // Pour savoir s'il est Voyageur ou Gestionnaire (La relation "Faire parti")
+        public int ROL_Id { get; set; }
+    }
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ACS_NexTrip.Views.RegisterPage"
+             Title="RegisterPage">
+    <VerticalStackLayout Spacing="15" Padding="30">
+        <Entry x:Name="EntryNom" Placeholder="Nom" />
+        <Entry x:Name="EntryPrenom" Placeholder="Prénom" />
+        <Entry x:Name="EntryEmail" Placeholder="Email" Keyboard="Email" />
+        <Entry x:Name="EntryLogin" Placeholder="Identifiant" />
+        <Entry x:Name="EntryPassword" Placeholder="Mot de passe" IsPassword="True" />
+
+        <Button Text="S'INSCRIRE" Clicked="OnInscriptionClicked" />
+        <Button Text="Retour" Clicked="OnRetourClicked" />
+    </VerticalStackLayout>
+</ContentPage>

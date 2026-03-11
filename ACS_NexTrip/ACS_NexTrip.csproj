@@ -51,7 +51,7 @@
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
 		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
-		
+
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
 
@@ -60,25 +60,43 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <AndroidResource Remove="Pages\**" />
-	  <Compile Remove="Pages\**" />
-	  <EmbeddedResource Remove="Pages\**" />
-	  <MauiCss Remove="Pages\**" />
-	  <MauiXaml Remove="Pages\**" />
-	  <None Remove="Pages\**" />
+		<AndroidResource Remove="Pages\**" />
+		<Compile Remove="Pages\**" />
+		<EmbeddedResource Remove="Pages\**" />
+		<MauiCss Remove="Pages\**" />
+		<MauiXaml Remove="Pages\**" />
+		<None Remove="Pages\**" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.8" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.0-preview4.26064.3" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.40" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.4" />
 	</ItemGroup>
 
 	<ItemGroup>
+<<<<<<< HEAD
+		<Folder Include="ViewModels\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<MauiXaml Update="Views\HomePage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\LoginPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\RegisterPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+=======
 	  <Folder Include="Models\" />
 	  <Folder Include="Models\" />
 	  <Folder Include="ViewModels\" />
 	  <Folder Include="Pages\" />
 	  <Folder Include="ViewModels\" />
+>>>>>>> fe8a2a6a64f3d63d33aacbf9c4c78c5cf3aff617
 	</ItemGroup>
 
 	<ItemGroup>
