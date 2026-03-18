@@ -9,7 +9,7 @@
 
         <!-- Header personnalisé -->
         <Border Grid.Row="0" 
-            BackgroundColor="{AppThemeBinding Light=White}"
+            BackgroundColor="White"
             Padding="20,10">
             <Border.Shadow>
                 <Shadow Brush="{StaticResource Gray900}"
@@ -36,14 +36,14 @@
                         <Label Text="TM" 
                            FontSize="18" 
                            FontAttributes="Bold" 
-                           TextColor="White"
+                           TextColor="Orange"
                            HorizontalOptions="Center"
                            VerticalOptions="Center"/>
                     </Border>
                     <Label Text="TravelManager" 
                        FontSize="22" 
                        FontAttributes="Bold" 
-                       TextColor="{StaticResource Orange500}"
+                       TextColor="Orange"
                        VerticalOptions="Center"/>
                 </HorizontalStackLayout>
 
@@ -56,7 +56,7 @@
                     <!-- Accueil actif -->
                     <VerticalStackLayout VerticalOptions="Center" Spacing="5">
                         <Label Text="Accueil" 
-                           TextColor="{StaticResource Orange500}" 
+                           TextColor="Orange" 
                            FontSize="14"
                            FontAttributes="Bold"
                            HorizontalOptions="Center"/>
@@ -69,7 +69,7 @@
                     <!-- Trajets inactif -->
                     <VerticalStackLayout VerticalOptions="Center" Spacing="5">
                         <Label Text="Trajets" 
-                           TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}" 
+                           TextColor="Orange" 
                            FontSize="14"
                            FontAttributes="Bold"
                            HorizontalOptions="Center"/>
@@ -82,7 +82,7 @@
                     <!-- Utilisateurs inactif -->
                     <VerticalStackLayout VerticalOptions="Center" Spacing="5">
                         <Label Text="Utilisateurs" 
-                           TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}" 
+                           TextColor="Orange" 
                            FontSize="14"
                            FontAttributes="Bold"
                            HorizontalOptions="Center"/>
@@ -100,7 +100,7 @@
                                    VerticalOptions="Center">
 
                     <!-- Notifications -->
-                    <Border BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray700}}"
+                    <Border BackgroundColor="White"
                         HeightRequest="40"
                         WidthRequest="40"
                         StrokeThickness="0">
@@ -117,7 +117,7 @@
                     </Border>
 
                     <!-- Profil utilisateur -->
-                    <Border BackgroundColor="{StaticResource Orange500}"
+                    <Border BackgroundColor="Orange"
                         HeightRequest="45"
                         WidthRequest="45"
                         StrokeThickness="2"
@@ -128,7 +128,7 @@
                         <Label Text="JD" 
                            FontSize="16" 
                            FontAttributes="Bold" 
-                           TextColor="White"
+                           TextColor="Black"
                            HorizontalOptions="Center"
                            VerticalOptions="Center"/>
                         <Border.GestureRecognizers>
@@ -141,10 +141,10 @@
                         <Label Text="Jean Dupont" 
                            FontSize="14" 
                            FontAttributes="Bold"
-                           TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}"/>
+                           TextColor="Black"/>
                         <Label Text="Administrateur" 
                            FontSize="11"
-                           TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}"/>
+                           TextColor="Black"/>
                     </VerticalStackLayout>
 
                 </HorizontalStackLayout>
@@ -176,7 +176,7 @@
                    TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}"/>
 
                 <!-- Barre de recherche -->
-                <Border BackgroundColor="{AppThemeBinding Light=White, Dark={StaticResource Gray800}}"
+                <Border BackgroundColor="White"
                         Padding="30"
                         Margin="0, 10, 0, 10">
                     <Border.StrokeShape>
@@ -188,7 +188,7 @@
 
                     <VerticalStackLayout Spacing="20">
                         <!-- Champs de recherche -->
-                        <Grid ColumnDefinitions="*, *, *, *" ColumnSpacing="15">
+                        <Grid ColumnDefinitions="*, *, *, *" ColumnSpacing="15" BackgroundColor="White">
 
                             <!-- D'où partez-vous -->
                             <Border Grid.Column="0" Stroke="{StaticResource Gray300}" StrokeThickness="1" BackgroundColor="Transparent" Padding="15,0">
@@ -218,7 +218,7 @@
                                     <RoundRectangle CornerRadius="10"/>
                                 </Border.StrokeShape>
                                 <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
-                                    <Label Text="📅" VerticalOptions="Center" TextColor="{StaticResource Gray500}"/>
+                                    <Label Text="📅" VerticalOptions="Center" TextColor="Black"/>
                                     <DatePicker BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Fill"/>
                                 </HorizontalStackLayout>
                             </Border>
@@ -229,7 +229,7 @@
                                     <RoundRectangle CornerRadius="10"/>
                                 </Border.StrokeShape>
                                 <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
-                                    <Label Text="🕒" VerticalOptions="Center" TextColor="{StaticResource Gray500}"/>
+                                    <Label Text="🕒" VerticalOptions="Center" TextColor="Black"/>
                                     <TimePicker BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Fill"/>
                                 </HorizontalStackLayout>
                             </Border>
@@ -252,7 +252,7 @@
 
                     <!-- Card 1 -->
                     <Border Grid.Column="0" 
-                        BackgroundColor="{AppThemeBinding Light=White, Dark={StaticResource Gray800}}"
+                        BackgroundColor="White"
                         Padding="50">
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="15"/>
@@ -264,13 +264,13 @@
                                 Opacity="0.1"/>
                         </Border.Shadow>
                         <VerticalStackLayout Spacing="10">
-                            <Label Text="🛣️ Voir mes trajets" FontSize="22"/>
+                            <Label Text="🛣️ Voir mes trajets" FontSize="22" TextColor="Black"/>
                         </VerticalStackLayout>
                     </Border>
 
                     <!-- Card 2 -->
                     <Border Grid.Column="1" 
-                        BackgroundColor="{AppThemeBinding Light=White, Dark={StaticResource Gray800}}"
+                        BackgroundColor="White"
                         Padding="50">
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="15"/>
@@ -282,13 +282,13 @@
                                 Opacity="0.1"/>
                         </Border.Shadow>
                         <VerticalStackLayout Spacing="10">
-                            <Label Text="📍 Réserver un nouveau trajet" FontSize="22"/>
+                            <Label Text="📍 Réserver un nouveau trajet" FontSize="22" TextColor="Black"/>
                         </VerticalStackLayout>
                     </Border>
 
                     <!-- Card 3 -->
                     <Border Grid.Column="2" 
-                        BackgroundColor="{AppThemeBinding Light=White, Dark={StaticResource Gray800}}"
+                        BackgroundColor="White"
                         Padding="50">
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="15"/>
@@ -300,13 +300,13 @@
                                 Opacity="0.1"/>
                         </Border.Shadow>
                         <VerticalStackLayout Spacing="10">
-                            <Label Text="⏱️ Historique" FontSize="22"/>
+                            <Label Text="⏱️ Historique" FontSize="22" TextColor="Black"/>
                         </VerticalStackLayout>
                     </Border>
 
                     <!-- Card 4 -->
                     <Border Grid.Column="3" 
-                        BackgroundColor="{AppThemeBinding Light=White, Dark={StaticResource Gray800}}"
+                        BackgroundColor="White"
                         Padding="50">
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="15"/>
@@ -318,7 +318,7 @@
                                 Opacity="0.1"/>
                         </Border.Shadow>
                         <VerticalStackLayout Spacing="10">
-                            <Label Text="ℹ️ Infos trafic" FontSize="22"/>
+                            <Label Text="ℹ️ Infos trafic" FontSize="22" TextColor="Black"/>
                         </VerticalStackLayout>
                     </Border>
 
