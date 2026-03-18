@@ -6,4 +6,11 @@ public partial class HomePage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private async void OnTrajetsClicked(object sender, EventArgs e)
+    {
+        // On navigue vers la page des trajets
+        // Assure-toi que le nom de ta classe est bien TrajetPage
+        await Navigation.PushAsync(new TrajetPage());
+    }
 }
