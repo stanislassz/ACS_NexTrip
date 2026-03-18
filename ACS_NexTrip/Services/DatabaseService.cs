@@ -1,4 +1,7 @@
-﻿using Microsoft.Data.SqlClient; // Pilote pour SQL Server
+﻿using System.Data;
+using System.Diagnostics;
+using Microsoft.Data.SqlClient; // Pilote pour SQL Server
+using ACS_NexTrip.Models;
 
 namespace ACS_NexTrip.Services
 {
@@ -9,18 +12,13 @@ namespace ACS_NexTrip.Services
 
         public ConnexionBD()
         {
-            // Configuration basée sur ta capture d'écran SSMS
             var builder = new SqlConnectionStringBuilder
             {
-                // Nom du serveur copié de ton image
-                DataSource = @"STAN",
+                DataSource = @"2SIO-MAL\MSSQLSERVER01",
                 InitialCatalog = "ACS_VOYAGE",
-
-                // On passe en Authentification SQL Server
                 IntegratedSecurity = false,
                 UserID = "sa",
-                Password = "sa", // Remplace par ton vrai mot de passe
-
+                Password = "SLAMbest@2024", 
                 TrustServerCertificate = true
             };
 
@@ -40,6 +38,37 @@ namespace ACS_NexTrip.Services
         {
             if (Connection.State == System.Data.ConnectionState.Open)
                 Connection.Close();
+        }
+
+
+        // Afficher les trajets 
+        public async Task<List<Trajet>> GetTrajetsAsync()
+        {
+            List<Trajet> liste = new List<Trajet>();
+
+            this.Ouvrir();
+
+            string queryString = "ps_GetTrajets";
+            SqlCommand command = new SqlCommand(queryString, this.Connection);
+            command.CommandType = CommandType.StoredProcedure;
+            SqlDataReader reader = await command.ExecuteReaderAsync();
+
+            while (reader.Read())
+            {
+                liste.Add(new Trajet
+                {
+                    TRA_DATEDEPART = (DateTime)reader["TRA_DATEDEPART"],
+                    TRA_LIEU_DEPART = reader["TRA_LIEU_DEPART"].ToString(),
+                    TRA_LIEU_ARRIVEE = reader["TRA_LIEU_ARRIVEE"].ToString(),
+                    TYP_LIBELLE = reader["TYP_LIBELLE"].ToString(),
+                    TRA_PRIX = Convert.ToDecimal(reader["TRA_PRIX"])
+                });
+            }
+
+            reader.Close();
+            this.Fermer();
+
+            return liste;
         }
     }
 }
