@@ -14,11 +14,11 @@ namespace ACS_NexTrip.Services
         {
             var builder = new SqlConnectionStringBuilder
             {
-                DataSource = @"2SIO-MAL\MSSQLSERVER01",
+                DataSource = @"SIO-TCA",
                 InitialCatalog = "ACS_VOYAGE",
                 IntegratedSecurity = false,
                 UserID = "sa",
-                Password = "SLAMbest@2024", 
+                Password = "Info76240#", 
                 TrustServerCertificate = true
             };
 
@@ -64,6 +64,42 @@ namespace ACS_NexTrip.Services
                     TRA_PRIX = Convert.ToDecimal(reader["TRA_PRIX"])
                 });
             }
+
+            reader.Close();
+            this.Fermer();
+
+            return liste;
+        }
+
+        public async Task<List<Utilisateur>> GetUtilisateurAsync()
+        {
+            List<Utilisateur> liste = new List<Utilisateur>();
+
+            this.Ouvrir();
+
+            string queryString = "ps_GetUtilisateur";
+            SqlCommand command = new SqlCommand(queryString, this.Connection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@IdUtilisateur", 4);
+            SqlDataReader reader = await command.ExecuteReaderAsync();
+
+            reader.Read();
+            
+            liste.Add(new Utilisateur
+            {
+                UTI_LOGIN = (string?)reader["UTI_LOGIN"],
+                UTI_PASSWORD = (string?)reader["UTI_PASSWORD"],
+                UTI_NOM = (string?)reader["UTI_NOM"],
+                UTI_PRENOM = (string?)reader["UTI_PRENOM"],
+                UTI_DATENAISSANCE = (DateTime)reader["UTI_DATENAISSANCE"],
+                UTI_ADRESSE = (string?)reader["UTI_ADRESSE"],
+                UTI_CP = (string?)reader["UTI_CP"],
+                UTI_TEL = (string?)reader["UTI_TEL"],
+                UTI_EMAIL = (string?)reader["UTI_EMAIL"],
+                LIE_LIBELLE = (string?)reader["LIE_LIBELLE"],
+                ROL_LIBELLE = (string?)reader["ROL_LIBELLE"]
+            });
+            
 
             reader.Close();
             this.Fermer();

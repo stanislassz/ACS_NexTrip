@@ -6,15 +6,17 @@ namespace ACS_NexTrip.Models
 {
     public class Utilisateur
     {
-        // Ces noms correspondent aux colonnes de ton MCD
         public int UTI_ID { get; set; }
-        public string UTI_Login { get; set; }
-        public string UTI_Password { get; set; }
-        public string UTI_Nom { get; set; }
-        public string UTI_Prenom { get; set; }
-        public string UTI_Email { get; set; }
-
-        // Pour savoir s'il est Voyageur ou Gestionnaire (La relation "Faire parti")
-        public int ROL_Id { get; set; }
+        public string UTI_LOGIN { get; set; }
+        public string UTI_PASSWORD { get; set; }
+        public string UTI_NOM { get; set; }
+        public string UTI_PRENOM { get; set; }
+        public DateTime UTI_DATENAISSANCE { get; set; }
+        public string UTI_ADRESSE { get; set; }
+        public string UTI_CP { get; set; }
+        public string UTI_TEL { get; set; }
+        public string UTI_EMAIL { get; set; }
+        public string LIE_LIBELLE { get; set; }
+        public string ROL_LIBELLE { get; set; }
     }
 }

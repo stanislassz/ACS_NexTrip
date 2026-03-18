@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ACS_NexTrip.Services;
 
 namespace ACS_NexTrip.Views
 {
@@ -11,6 +7,20 @@ namespace ACS_NexTrip.Views
         public SettingsPage()
         {
             InitializeComponent();
+        }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            var service = new ConnexionBD();
+            var result = await service.GetUtilisateurAsync();
+
+            // On force MAUI à mettre à jour l'interface sur le thread principal
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                UtilisateurCollection.ItemsSource = result;
+            });
         }
     }
 }
