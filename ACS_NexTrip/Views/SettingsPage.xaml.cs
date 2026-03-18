@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace ACS_NexTrip.Views
 {
-    internal class SettingsPage
+    public partial class SettingsPage : ContentPage
     {
+        public SettingsPage()
+        {
+            InitializeComponent();
+        }
     }
 }

@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace ACS_NexTrip.Views
 {
-    internal class TrajetPage
+    public partial class TrajetPage : ContentPage
     {
+        public TrajetPage() 
+        {
+            InitializeComponent();
+        }
     }
 }
