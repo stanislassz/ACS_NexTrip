@@ -31,26 +31,49 @@
 
                 <HorizontalStackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Spacing="30">
 
+                    <!-- Accueil actif -->
                     <VerticalStackLayout VerticalOptions="Center" Spacing="5">
-                        <Label Text="Accueil" TextColor="{StaticResource Gray500}" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center"/>
-                        <BoxView HeightRequest="2" Color="Transparent" HorizontalOptions="Fill"/>
+                        <Label Text="Accueil" 
+       TextColor="Orange" 
+       FontSize="14"
+       FontAttributes="Bold"
+       HorizontalOptions="Center"/>
+                        <BoxView HeightRequest="2" Color="{StaticResource Orange500}" HorizontalOptions="Fill"/>
                         <VerticalStackLayout.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding NavigateToDashboardCommand}"/>
                         </VerticalStackLayout.GestureRecognizers>
                     </VerticalStackLayout>
 
+                    <!-- Trajets actif -->
                     <VerticalStackLayout VerticalOptions="Center" Spacing="5" Padding="10,0">
-                        <Label Text="Trajets" TextColor="{StaticResource Gray500}" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center"/>
-                        <BoxView HeightRequest="2" Color="Transparent" HorizontalOptions="Fill"/>
+                        <Label Text="Trajets" 
+           TextColor="Orange" 
+           FontSize="14"
+           FontAttributes="Bold"
+           HorizontalOptions="Center"/>
+
+                        <BoxView HeightRequest="2" 
+             Color="Orange" 
+             HorizontalOptions="Fill"/>
+
                         <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnTrajetsClicked"/>
+                            <TapGestureRecognizer Command="{Binding NavigateToTripsCommand}"/>
                         </VerticalStackLayout.GestureRecognizers>
                     </VerticalStackLayout>
 
+                    <!-- Utilisateurs inactif -->
                     <VerticalStackLayout VerticalOptions="Center" Spacing="5">
-                        <Label Text="Utilisateurs" TextColor="Orange" FontSize="14" FontAttributes="Bold" HorizontalOptions="Center"/>
-                        <BoxView HeightRequest="2" Color="{StaticResource Orange500}" HorizontalOptions="Fill"/>
+                        <Label Text="Utilisateurs" 
+       TextColor="Orange" 
+       FontSize="14"
+       FontAttributes="Bold"
+       HorizontalOptions="Center"/>
+                        <BoxView HeightRequest="2" Color="Transparent" HorizontalOptions="Fill"/>
+                        <VerticalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateToUsersCommand}"/>
+                        </VerticalStackLayout.GestureRecognizers>
                     </VerticalStackLayout>
+
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Grid.Column="2" Spacing="15" VerticalOptions="Center">
