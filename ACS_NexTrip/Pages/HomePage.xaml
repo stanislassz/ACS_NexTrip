@@ -85,7 +85,7 @@
 
                 <!-- Utilisateurs actif -->
                     <VerticalStackLayout VerticalOptions="Center" Spacing="5">
-                        <Label Text="Utilisateurs" 
+                        <Label Text="Paramètre" 
                         TextColor="Orange" 
                         FontSize="14"
                         FontAttributes="Bold"

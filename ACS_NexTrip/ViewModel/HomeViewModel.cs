@@ -17,9 +17,9 @@
         public HomeViewModel()
         {
             // Initialisation des commandes
-            NavigateToDashboardCommand = new Command(() => { /* Déjà sur l'accueil */ });
+            NavigateToDashboardCommand = new Command(async () => await GoToHomeAsync());
             NavigateToTripsCommand = new Command(async () => await GoToTripsAsync());
-            NavigateToUsersCommand = new Command(async () => await GoToUsersAsync());
+            NavigateToUsersCommand = new Command(async () => await GoToSettingsAsync());
             ShowNotificationsCommand = new Command(() => { /* À implémenter */ });
             ShowProfileCommand = new Command(() => { /* À implémenter */ });
         }
@@ -29,9 +29,13 @@
             await Shell.Current.GoToAsync("TrajetPage");
         }
 
-        private async Task GoToUsersAsync()
+        private async Task GoToSettingsAsync()
         {
             await Shell.Current.GoToAsync("SettingsPage");
+        }
+        private async Task GoToHomeAsync()
+        {
+            await Shell.Current.GoToAsync("HomePage");
         }
     }
 }

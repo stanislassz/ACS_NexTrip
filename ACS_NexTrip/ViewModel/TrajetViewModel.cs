@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
 using ACS_NexTrip.Models;
 using ACS_NexTrip.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -8,14 +9,42 @@ namespace ACS_NexTrip.ViewModel
 {
     public partial class TrajetViewModel : ObservableObject
     {
+        // Commandes pour les bindings du XAML
+        public ICommand NavigateToDashboardCommand { get; }
+        public ICommand NavigateToTripsCommand { get; }
+        public ICommand NavigateToUsersCommand { get; }
+        public ICommand ShowNotificationsCommand { get; }
+        public ICommand ShowProfileCommand { get; }
+
         private readonly ConnexionBD _db;
 
         // La liste qui sera liée au CollectionView dans le XAML
         [ObservableProperty]
         private ObservableCollection<Trajet> _trajets;
 
+        private async Task GoToTripsAsync()
+        {
+            await Shell.Current.GoToAsync("TrajetPage");
+        }
+
+        private async Task GoToSettingsAsync()
+        {
+            await Shell.Current.GoToAsync("SettingsPage");
+        }
+        private async Task GoToHomeAsync()
+        {
+            await Shell.Current.GoToAsync("HomePage");
+        }
+
         public TrajetViewModel(ConnexionBD db)
         {
+            // Initialisation des commandes
+            NavigateToDashboardCommand = new Command(async () => await GoToHomeAsync());
+            NavigateToTripsCommand = new Command(async () => await GoToTripsAsync());
+            NavigateToUsersCommand = new Command(async () => await GoToSettingsAsync());
+            ShowNotificationsCommand = new Command(() => { /* À implémenter */ });
+            ShowProfileCommand = new Command(() => { /* À implémenter */ });
+
             // On charge les trajets dès l'initialisation
             _db = db;
             ChargerTrajets();
@@ -73,5 +102,7 @@ namespace ACS_NexTrip.ViewModel
                     "OK");
             }
         }
+
+
     }
 }
