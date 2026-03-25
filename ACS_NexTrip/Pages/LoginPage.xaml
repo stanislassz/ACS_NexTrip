@@ -1,8 +1,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ACS_NexTrip.ViewModel"
              x:Class="ACS_NexTrip.Pages.LoginPage"
-             BackgroundColor="#E6F2F5"
-             Shell.NavBarIsVisible="False">
+             x:DataType="vm:LoginViewModel">
+
+    <ContentPage.BindingContext>
+        <vm:LoginViewModel />
+    </ContentPage.BindingContext>
+
     <ScrollView VerticalOptions="FillAndExpand">
         <Grid Padding="20">
             <Frame CornerRadius="10" 
@@ -14,22 +19,14 @@
                    WidthRequest="350">
                 <VerticalStackLayout Spacing="15" HorizontalOptions="FillAndExpand">
 
-                    <Label Text="Connexion" 
-                           FontSize="28" 
-                           FontAttributes="Bold" 
-                           TextColor="Black" 
-                           HorizontalOptions="Center" 
-                           Margin="0,0,0,20" />
+                    <Label Text="Connexion" FontSize="28" FontAttributes="Bold" TextColor="Black" HorizontalOptions="Center" Margin="0,0,0,20" />
 
                     <VerticalStackLayout Spacing="2">
-                        <Label Text="Identifiant" 
-                               FontSize="12" 
-                               TextColor="#888888" 
-                               Margin="0,0,0,2"/>
+                        <Label Text="Identifiant" FontSize="12" TextColor="#888888" Margin="0,0,0,2"/>
                         <Grid ColumnDefinitions="30, *" ColumnSpacing="0">
                             <Image Grid.Column="0" Source="icon_user.png" HeightRequest="16" WidthRequest="16" HorizontalOptions="Start" />
                             <Entry Grid.Column="1" 
-                                   x:Name="EntryLogin" 
+                                   Text="{Binding Login}"
                                    Placeholder="jean.dupont" 
                                    TextColor="Black" 
                                    Keyboard="Email" 
@@ -39,14 +36,11 @@
                     </VerticalStackLayout>
 
                     <VerticalStackLayout Spacing="2" Margin="0,10,0,0">
-                        <Label Text="Mot de passe" 
-                               FontSize="12" 
-                               TextColor="#888888" 
-                               Margin="0,0,0,2"/>
+                        <Label Text="Mot de passe" FontSize="12" TextColor="#888888" Margin="0,0,0,2"/>
                         <Grid ColumnDefinitions="30, *" ColumnSpacing="0">
                             <Image Grid.Column="0" Source="icon_password.png" HeightRequest="16" WidthRequest="16" HorizontalOptions="Start" />
                             <Entry Grid.Column="1" 
-                                   x:Name="EntryPassword" 
+                                   Text="{Binding Password}"
                                    Placeholder="*********" 
                                    IsPassword="True" 
                                    TextColor="Black" 
@@ -56,26 +50,19 @@
                     </VerticalStackLayout>
 
                     <Button Text="Connexion" 
-                            Clicked="OnConnexionClicked" 
+                            Command="{Binding ConnexionCommand}"
                             BackgroundColor="Black" 
                             TextColor="White" 
                             CornerRadius="25" 
                             HeightRequest="50" 
                             Margin="0,15,0,0"/>
 
-                    <Label Text="Vous n'avez pas de compte ?" 
-                           FontSize="12" 
-                           TextColor="#555555" 
-                           HorizontalOptions="Center" 
-                           Margin="0,15,0,0"/>
+                    <Label Text="Vous n'avez pas de compte ?" FontSize="12" TextColor="#555555" HorizontalOptions="Center" Margin="0,15,0,0"/>
 
                     <Button Text="Inscrivez-vous !" 
-                            Clicked="OnGoToRegisterClicked" 
+                            Command="{Binding GoToRegisterCommand}" 
                             BackgroundColor="Transparent" 
-                            TextColor="Black" 
-                            FontSize="13" 
-                            TextTransform="None" 
-                            Margin="0,-10,0,0"/>
+                            TextColor="Black" />
 
                 </VerticalStackLayout>
             </Frame>

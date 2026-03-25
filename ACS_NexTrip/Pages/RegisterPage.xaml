@@ -1,7 +1,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ACS_NexTrip.ViewModel" 
              x:Class="ACS_NexTrip.Pages.RegisterPage"
-             BackgroundColor="#E6F2F5">
+             x:DataType="vm:RegisterViewModel">
+
+    <ContentPage.BindingContext>
+        <vm:RegisterViewModel />
+    </ContentPage.BindingContext>
 
     <ScrollView>
         <Grid Padding="20">
@@ -24,30 +29,36 @@
 
                     <VerticalStackLayout Spacing="2">
                         <Label Text="Nom" FontSize="11" TextColor="#888888" />
-                        <Entry x:Name="EntryNom" Placeholder="Votre nom" TextColor="Black" />
+                        <Entry Text="{Binding Nom}" Placeholder="Votre nom" TextColor="Black" />
                         <BoxView HeightRequest="1" Color="#CCCCCC" />
                     </VerticalStackLayout>
 
                     <VerticalStackLayout Spacing="2">
                         <Label Text="Prénom" FontSize="11" TextColor="#888888" />
-                        <Entry x:Name="EntryPrenom" Placeholder="Votre prénom" TextColor="Black" />
+                        <Entry Text="{Binding Prenom}" Placeholder="Votre prénom" TextColor="Black" />
+                        <BoxView HeightRequest="1" Color="#CCCCCC" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="2">
+                        <Label Text="Email" FontSize="11" TextColor="#888888" />
+                        <Entry Text="{Binding Email}" Placeholder="votre@email.com" Keyboard="Email" TextColor="Black" />
                         <BoxView HeightRequest="1" Color="#CCCCCC" />
                     </VerticalStackLayout>
 
                     <VerticalStackLayout Spacing="2">
                         <Label Text="Identifiant" FontSize="11" TextColor="#888888" />
-                        <Entry x:Name="EntryLogin" Placeholder="Choissisez un pseudo" TextColor="Black" />
+                        <Entry Text="{Binding Login}" Placeholder="Choisissez un pseudo" TextColor="Black" />
                         <BoxView HeightRequest="1" Color="#CCCCCC" />
                     </VerticalStackLayout>
 
                     <VerticalStackLayout Spacing="2">
                         <Label Text="Mot de passe" FontSize="11" TextColor="#888888" />
-                        <Entry x:Name="EntryPassword" Placeholder="*********" IsPassword="True" TextColor="Black" />
+                        <Entry Text="{Binding Password}" Placeholder="........" IsPassword="True" TextColor="Black" />
                         <BoxView HeightRequest="1" Color="#CCCCCC" />
                     </VerticalStackLayout>
 
                     <Button Text="S'INSCRIRE" 
-                            Clicked="OnInscriptionClicked" 
+                            Command="{Binding RegisterCommand}" 
                             BackgroundColor="Black" 
                             TextColor="White" 
                             CornerRadius="25" 
@@ -56,7 +67,7 @@
                             FontAttributes="Bold"/>
 
                     <Button Text="Retour à la connexion" 
-                            Clicked="OnRetourClicked" 
+                            Command="{Binding GoBackCommand}" 
                             BackgroundColor="Transparent" 
                             TextColor="#555555" 
                             FontSize="12"

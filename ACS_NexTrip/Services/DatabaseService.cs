@@ -14,11 +14,11 @@ namespace ACS_NexTrip.Services
         {
             var builder = new SqlConnectionStringBuilder
             {
-                DataSource = @"SIO-TCA",
+                DataSource = @"2SIO-MAL\MSSQLSERVER01",
                 InitialCatalog = "ACS_VOYAGE",
                 IntegratedSecurity = false,
                 UserID = "sa",
-                Password = "Info76240#", 
+                Password = "SLAMbest@2024",
                 TrustServerCertificate = true
             };
 
@@ -39,6 +39,76 @@ namespace ACS_NexTrip.Services
             if (Connection.State == System.Data.ConnectionState.Open)
                 Connection.Close();
         }
+
+
+
+
+        public async Task<bool> VerifierConnexionAsync(string login, string password)
+        {
+            try
+            {
+                this.Ouvrir();
+                using (SqlCommand cmd = new SqlCommand("ps_Connexion", this.Connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Login", login);
+                    cmd.Parameters.AddWithValue("@Password", password);
+
+                    using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                    {
+                        // HasRows renvoie true si la PS a trouvé un utilisateur correspondant
+                        return reader.HasRows;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Erreur Login SQL : " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                this.Fermer();
+            }
+        }
+
+
+
+
+
+
+
+        public async Task<bool> InscrireUtilisateurAsync(Utilisateur u)
+        {
+            try
+            {
+                this.Ouvrir();
+                using (SqlCommand cmd = new SqlCommand("ps_Inscription", this.Connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    // Dans InscrireUtilisateurAsync
+                    cmd.Parameters.AddWithValue("@Login", u.UTI_LOGIN);   
+                    cmd.Parameters.AddWithValue("@Password", u.UTI_PASSWORD);
+                    cmd.Parameters.AddWithValue("@Nom", u.UTI_NOM);
+                    cmd.Parameters.AddWithValue("@Prenom", u.UTI_PRENOM);
+                    cmd.Parameters.AddWithValue("@Email", u.UTI_EMAIL);
+
+                    int rows = await cmd.ExecuteNonQueryAsync();
+                    return rows > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Erreur SQL : " + ex.Message);
+                return false;
+            }
+            finally { this.Fermer(); }
+        }
+
+
+
+
 
 
         // Afficher les trajets 
@@ -70,6 +140,11 @@ namespace ACS_NexTrip.Services
 
             return liste;
         }
+
+
+
+
+
 
         public async Task<List<Utilisateur>> GetUtilisateurAsync()
         {
