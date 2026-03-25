@@ -57,98 +57,95 @@
             </Grid>
         </Border>
 
-        <ScrollView Grid.Row="1">
-            <VerticalStackLayout Padding="30" Spacing="20">
+        <Grid Grid.Row="1" Padding="30">
+            <CollectionView ItemsSource="{Binding Trajets}">
 
-                <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,10">
-                    <VerticalStackLayout Grid.Column="0" Spacing="5">
-                        <Label Text="Trajets Disponibles" FontSize="28" FontAttributes="Bold" TextColor="{StaticResource Gray900}"/>
-                        <Label Text="Consultez les voyages et réservations en cours" FontSize="14" TextColor="{StaticResource Gray600}"/>
-                    </VerticalStackLayout>
+                <CollectionView.Header>
+                    <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,20">
+                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+                            <Label Text="Trajets Disponibles" FontSize="28" FontAttributes="Bold" TextColor="{StaticResource Gray900}"/>
+                            <Label Text="Consultez les voyages et réservations en cours" FontSize="14" TextColor="{StaticResource Gray600}"/>
+                        </VerticalStackLayout>
 
-                    <Button Grid.Column="1"
-                            Text="+"
-                            FontSize="24"
-                            FontAttributes="Bold"
-                            TextColor="White"
-                            BackgroundColor="Orange"
-                            HeightRequest="50"
-                            WidthRequest="50"
-                            CornerRadius="25"
-                            VerticalOptions="Center"
-                            Command="{Binding GoToAddTrajetCommand}"/>
-                </Grid>
+                        <Button Grid.Column="1"
+                                Text="+"
+                                FontSize="24"
+                                FontAttributes="Bold"
+                                TextColor="White"
+                                BackgroundColor="Orange"
+                                HeightRequest="50"
+                                WidthRequest="50"
+                                CornerRadius="25"
+                                VerticalOptions="Center"
+                                Command="{Binding GoToAddTrajetCommand}"/>
+                    </Grid>
+                </CollectionView.Header>
 
-                <CollectionView ItemsSource="{Binding Trajets}">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="15" />
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:Trajet">
-                            <Border BackgroundColor="White" Padding="20">
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="15"/>
-                                </Border.StrokeShape>
-                                <Border.Shadow>
-                                    <Shadow Brush="Black" Offset="0,4" Radius="10" Opacity="0.05"/>
-                                </Border.Shadow>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="15" />
+                </CollectionView.ItemsLayout>
 
-                                <Grid ColumnDefinitions="Auto, *, Auto, Auto" ColumnSpacing="20">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Trajet">
+                        <Border BackgroundColor="White" Padding="20">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="15"/>
+                            </Border.StrokeShape>
+                            <Border.Shadow>
+                                <Shadow Brush="Black" Offset="0,4" Radius="10" Opacity="0.05"/>
+                            </Border.Shadow>
 
-                                    <Border Grid.Column="0" BackgroundColor="#E3F2FD" HeightRequest="60" WidthRequest="60" StrokeThickness="0">
+                            <Grid ColumnDefinitions="Auto, *, Auto, Auto" ColumnSpacing="20">
+
+                                <Border Grid.Column="0" BackgroundColor="#E3F2FD" HeightRequest="60" WidthRequest="60" StrokeThickness="0">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="30"/>
+                                    </Border.StrokeShape>
+                                    <Label Text="✈️" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                </Border>
+
+                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="5">
+                                    <HorizontalStackLayout Spacing="10">
+                                        <Label Text="{Binding TRA_LIEU_DEPART}" FontSize="18" FontAttributes="Bold" TextColor="Black"/>
+                                        <Label Text="➔" FontSize="18" TextColor="Orange" VerticalOptions="Center"/>
+                                        <Label Text="{Binding TRA_LIEU_ARRIVEE}" FontSize="18" FontAttributes="Bold" TextColor="Black"/>
+                                    </HorizontalStackLayout>
+
+                                    <HorizontalStackLayout Spacing="15">
+                                        <HorizontalStackLayout Spacing="5">
+                                            <Label Text="📅" FontSize="12"/>
+                                            <Label Text="{Binding TRA_DATEDEPART, StringFormat='{0:dd/MM/yyyy HH:mm}'}" TextColor="{StaticResource Gray600}" FontSize="13"/>
+                                        </HorizontalStackLayout>
+                                        <HorizontalStackLayout Spacing="5">
+                                            <Label Text="🏷️" FontSize="12"/>
+                                            <Label Text="{Binding TYP_LIBELLE}" TextColor="{StaticResource Gray600}" FontSize="13"/>
+                                        </HorizontalStackLayout>
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+
+                                <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" HorizontalOptions="End">
+                                    <Label Text="{Binding TRA_PRIX, StringFormat='{0:F2} €'}" 
+                                           FontSize="20" 
+                                           FontAttributes="Bold" 
+                                           TextColor="Orange"/>
+                                    <Border BackgroundColor="#FFF3E0" Padding="8,2">
                                         <Border.StrokeShape>
-                                            <RoundRectangle CornerRadius="30"/>
+                                            <RoundRectangle CornerRadius="5"/>
                                         </Border.StrokeShape>
-                                        <Label Text="✈️" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                        <Label Text="Disponible" FontSize="10" TextColor="Orange" FontAttributes="Bold"/>
                                     </Border>
+                                </VerticalStackLayout>
 
-                                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="5">
-                                        <HorizontalStackLayout Spacing="10">
-                                            <Label Text="{Binding TRA_LIEU_DEPART}" FontSize="18" FontAttributes="Bold" TextColor="Black"/>
-                                            <Label Text="➔" FontSize="18" TextColor="Orange" VerticalOptions="Center"/>
-                                            <Label Text="{Binding TRA_LIEU_ARRIVEE}" FontSize="18" FontAttributes="Bold" TextColor="Black"/>
-                                        </HorizontalStackLayout>
-
-                                        <HorizontalStackLayout Spacing="15">
-                                            <HorizontalStackLayout Spacing="5">
-                                                <Label Text="📅" FontSize="12"/>
-                                                <Label Text="{Binding TRA_DATEDEPART, StringFormat='{0:dd/MM/yyyy HH:mm}'}" TextColor="{StaticResource Gray600}" FontSize="13"/>
-                                            </HorizontalStackLayout>
-                                            <HorizontalStackLayout Spacing="5">
-                                                <Label Text="🏷️" FontSize="12"/>
-                                                <Label Text="{Binding TYP_LIBELLE}" TextColor="{StaticResource Gray600}" FontSize="13"/>
-                                            </HorizontalStackLayout>
-                                        </HorizontalStackLayout>
-                                    </VerticalStackLayout>
-
-                                    <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" HorizontalOptions="End">
-                                        <Label Text="{Binding TRA_PRIX, StringFormat='{0:F2} €'}" 
-                                               FontSize="20" 
-                                               FontAttributes="Bold" 
-                                               TextColor="Orange"/>
-                                        <Border BackgroundColor="#FFF3E0" Padding="8,2">
-                                            <Border.StrokeShape>
-                                                <RoundRectangle CornerRadius="5"/>
-                                            </Border.StrokeShape>
-                                            <Label Text="Disponible" FontSize="10" TextColor="Orange" FontAttributes="Bold"/>
-                                        </Border>
-                                    </VerticalStackLayout>
-
-                                    <Button Grid.Column="3"
-                                            Text="🗑️"
-                                            BackgroundColor="Transparent"
-                                            FontSize="18"
-                                            VerticalOptions="Center"
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TrajetViewModel}}, Path=DeleteTrajetCommand}"
-                                            CommandParameter="{Binding .}"/>
-
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-
-            </VerticalStackLayout>
-        </ScrollView>
+                                <Button Grid.Column="3"
+                                        Text="🗑️"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TrajetViewModel}}, Path=DeleteTrajetCommand}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="Transparent" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
     </Grid>
 </ContentPage>

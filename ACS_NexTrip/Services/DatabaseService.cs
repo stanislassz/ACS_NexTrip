@@ -116,6 +116,39 @@ namespace ACS_NexTrip.Services
 
 
 
+        public async Task<bool> DeleteTrajetAsync(int id)
+        {
+            // Affiche l'ID dans la console "Sortie" (Output) de Visual Studio
+            System.Diagnostics.Debug.WriteLine($"---> Tentative de suppression de l'ID : {id}");
+
+            try
+            {
+                this.Ouvrir();
+                using (SqlCommand cmd = new SqlCommand("ps_DeleteTrajet", this.Connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    // On utilise bien TON paramètre SQL : @IdTrajet
+                    cmd.Parameters.AddWithValue("@IdTrajet", id);
+
+                    int rows = await cmd.ExecuteNonQueryAsync();
+                    return rows > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Si SQL refuse (clé étrangère), l'erreur s'affichera ici
+                System.Diagnostics.Debug.WriteLine("---> ERREUR SQL : " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                this.Fermer();
+            }
+        }
+
+
+
 
 
         public async Task<List<Lieu>> GetLieuxAsync()
@@ -187,29 +220,31 @@ namespace ACS_NexTrip.Services
         public async Task<List<Trajet>> GetTrajetsAsync()
         {
             List<Trajet> liste = new List<Trajet>();
-
             this.Ouvrir();
 
-            string queryString = "ps_GetTrajets";
-            SqlCommand command = new SqlCommand(queryString, this.Connection);
-            command.CommandType = CommandType.StoredProcedure;
-            SqlDataReader reader = await command.ExecuteReaderAsync();
-
-            while (reader.Read())
+            using (SqlCommand command = new SqlCommand("ps_GetTrajets", this.Connection))
             {
-                liste.Add(new Trajet
+                command.CommandType = CommandType.StoredProcedure;
+                using (SqlDataReader reader = await command.ExecuteReaderAsync())
                 {
-                    TRA_DATEDEPART = (DateTime)reader["TRA_DATEDEPART"],
-                    TRA_LIEU_DEPART = reader["TRA_LIEU_DEPART"].ToString(),
-                    TRA_LIEU_ARRIVEE = reader["TRA_LIEU_ARRIVEE"].ToString(),
-                    TYP_LIBELLE = reader["TYP_LIBELLE"].ToString(),
-                    TRA_PRIX = Convert.ToDecimal(reader["TRA_PRIX"])
-                });
+                    while (reader.Read())
+                    {
+                        liste.Add(new Trajet
+                        {
+                            // C'EST CETTE LIGNE QUI FAIT LE LIEN :
+                            // On récupère l'ID que SQL a généré automatiquement
+                            TRA_ID = Convert.ToInt32(reader["TRA_ID"]),
+
+                            TRA_DATEDEPART = (DateTime)reader["TRA_DATEDEPART"],
+                            TRA_LIEU_DEPART = reader["TRA_LIEU_DEPART"].ToString(),
+                            TRA_LIEU_ARRIVEE = reader["TRA_LIEU_ARRIVEE"].ToString(),
+                            TYP_LIBELLE = reader["TYP_LIBELLE"].ToString(),
+                            TRA_PRIX = Convert.ToDecimal(reader["TRA_PRIX"])
+                        });
+                    }
+                }
             }
-
-            reader.Close();
             this.Fermer();
-
             return liste;
         }
 
