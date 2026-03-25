@@ -19,6 +19,7 @@ namespace ACS_NexTrip
 
             builder.Services.AddSingleton<ConnexionBD>();
             builder.Services.AddSingleton<TrajetViewModel>();
+            builder.Services.AddSingleton<SettingsViewModel>();
 
 #if DEBUG
             builder.Logging.AddDebug();
