@@ -1,84 +1,36 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ACS_NexTrip.ViewModel"
+             xmlns:models="clr-namespace:ACS_NexTrip.Models"
              x:Class="ACS_NexTrip.Pages.TrajetPage"
-             BackgroundColor="#121212"
-             Title="Destinations disponibles">
+             x:DataType="vm:TrajetViewModel"
+             Title="Trajets Disponibles">
 
-    <Grid RowDefinitions="Auto, *" Padding="20" RowSpacing="15">
+    <ContentPage.BindingContext>
+        <vm:TrajetViewModel />
+    </ContentPage.BindingContext>
 
-        <VerticalStackLayout Grid.Row="0" Spacing="5" Margin="0,0,0,10">
-            <Label Text="Où partons-nous ?" 
-                   FontSize="24" 
-                   FontAttributes="Bold" 
-                   TextColor="White" />
-            <Label Text="Découvrez nos meilleurs itinéraires" 
-                   TextColor="#888" 
-                   FontSize="14" />
-        </VerticalStackLayout>
-
-        <CollectionView x:Name="TrajetsCollection" Grid.Row="1">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical" ItemSpacing="15" />
-            </CollectionView.ItemsLayout>
-
+    <Grid>
+        <CollectionView ItemsSource="{Binding Trajets}" x:Name="TrajetsCollection">
             <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame BackgroundColor="#1E1E1E" 
-                           BorderColor="#333" 
-                           CornerRadius="15" 
-                           HasShadow="True" 
-                           Padding="0"
-                           HeightRequest="110">
+                <DataTemplate x:DataType="models:Trajet">
+                    <Frame Margin="10" Padding="15" CornerRadius="10" HasShadow="True">
+                        <VerticalStackLayout Spacing="5">
+                            <HorizontalStackLayout Spacing="10">
+                                <Label Text="{Binding TRA_LIEU_DEPART}" FontAttributes="Bold" FontSize="18"/>
+                                <Label Text="➔" VerticalOptions="Center"/>
+                                <Label Text="{Binding TRA_LIEU_ARRIVEE}" FontAttributes="Bold" FontSize="18"/>
+                            </HorizontalStackLayout>
 
-                        <Grid ColumnDefinitions="*, 100">
+                            <Label Text="{Binding TYP_LIBELLE}" TextColor="Gray" FontSize="14"/>
 
-                            <StackLayout Grid.Column="0" Padding="15" VerticalOptions="Center">
-                                <HorizontalStackLayout Spacing="10">
-                                    <Label Text="{Binding TRA_LIEU_DEPART}" 
-                                           FontSize="18" 
-                                           FontAttributes="Bold" 
-                                           TextColor="White" />
-                                    <Label Text="➔" 
-                                           TextColor="#512BD4" 
-                                           VerticalTextAlignment="Center" />
-                                    <Label Text="{Binding TRA_LIEU_ARRIVEE}" 
-                                           FontSize="18" 
-                                           FontAttributes="Bold" 
-                                           TextColor="White" />
-                                </HorizontalStackLayout>
-
-                                <HorizontalStackLayout Spacing="8" Margin="0,5,0,0">
-                                    <Border BackgroundColor="#2A2A2A" 
-                                            Padding="8,2" 
-                                            StrokeShape="RoundRectangle 5">
-                                        <Label Text="{Binding TYP_LIBELLE}" 
-                                               FontSize="11" 
-                                               TextColor="#BBB" 
-                                               TextTransform="Uppercase"/>
-                                    </Border>
-                                    <Label Text="{Binding TRA_DATEDEPART, StringFormat='{0:dd MMM yyyy}'}" 
-                                           FontSize="12" 
-                                           TextColor="#666" 
-                                           VerticalTextAlignment="Center"/>
-                                </HorizontalStackLayout>
-                            </StackLayout>
-
-                            <BoxView Grid.Column="1" Color="#252525" />
-                            <StackLayout Grid.Column="1" 
-                                         VerticalOptions="Center" 
-                                         HorizontalOptions="Center">
-                                <Label Text="Dès" 
-                                       FontSize="10" 
-                                       TextColor="#888" 
-                                       HorizontalTextAlignment="Center"/>
-                                <Label Text="{Binding TRA_PRIX, StringFormat='{0}€'}" 
-                                       FontSize="20" 
-                                       FontAttributes="Bold" 
-                                       TextColor="#4CAF50" />
-                            </StackLayout>
-
-                        </Grid>
+                            <HorizontalStackLayout Spacing="20" Margin="0,5,0,0">
+                                <Label Text="{Binding TRA_DATEDEPART, StringFormat='{0:dd/MM/yyyy HH:mm}'}" />
+                                <Label Text="{Binding TRA_PRIX, StringFormat='{0:F2} €'}" 
+                                       TextColor="Green" 
+                                       FontAttributes="Bold" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
