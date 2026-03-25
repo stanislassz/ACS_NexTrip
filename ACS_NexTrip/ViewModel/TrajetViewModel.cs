@@ -1,31 +1,28 @@
 ﻿using System.Collections.ObjectModel;
 using ACS_NexTrip.Models;
 using ACS_NexTrip.Services;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace ACS_NexTrip.ViewModel
 {
-    public class TrajetViewModel : BindableObject
+    public partial class TrajetViewModel : ObservableObject
     {
-        private readonly ConnexionBD _db = new ConnexionBD();
+        private readonly ConnexionBD _db;
 
         // La liste qui sera liée au CollectionView dans le XAML
-        public ObservableCollection<Trajet> Trajets { get; set; } = new ObservableCollection<Trajet>();
+        [ObservableProperty]
+        private ObservableCollection<Trajet> _trajets;
 
-        public TrajetViewModel()
+        public TrajetViewModel(ConnexionBD db)
         {
             // On charge les trajets dès l'initialisation
+            _db = db;
             ChargerTrajets();
         }
 
         public async void ChargerTrajets()
         {
-            Trajets.Clear(); // On vide la liste actuelle
-            var result = await _db.GetTrajetsAsync();
-
-            foreach (var t in result)
-            {
-                Trajets.Add(t);
-            }
+            Trajets = new ObservableCollection<Trajet>(await _db.GetTrajetsAsync());
         }
     }
 }

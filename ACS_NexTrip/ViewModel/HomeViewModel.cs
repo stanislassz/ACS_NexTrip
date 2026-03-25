@@ -26,19 +26,12 @@
 
         private async Task GoToTripsAsync()
         {
-            //Dans un ViewModel, on utilise Shell ou Application.Current.MainPage pour naviguer
-            if (Application.Current?.MainPage != null)
-            {
-                await Application.Current.MainPage.Navigation.PushAsync(new TrajetPage());
-            }
+            await Shell.Current.GoToAsync("TrajetPage");
         }
 
         private async Task GoToUsersAsync()
         {
-            if (Application.Current?.MainPage != null)
-            {
-                await Application.Current.MainPage.Navigation.PushAsync(new SettingsPage());
-            }
+            await Shell.Current.GoToAsync("SettingsPage");
         }
     }
 }

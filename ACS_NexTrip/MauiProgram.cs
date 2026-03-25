@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using ACS_NexTrip.Services;
+using ACS_NexTrip.ViewModel;
+using Microsoft.Extensions.Logging;
 
 namespace ACS_NexTrip
 {
@@ -15,8 +17,11 @@ namespace ACS_NexTrip
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.AddSingleton<ConnexionBD>();
+            builder.Services.AddSingleton<TrajetViewModel>();
+
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

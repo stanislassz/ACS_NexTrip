@@ -13,6 +13,8 @@ namespace ACS_NexTrip
             // "nameof(HomePage)" donne le texte "HomePage"
             Routing.RegisterRoute("RegisterPage", typeof(ACS_NexTrip.Pages.RegisterPage));
             Routing.RegisterRoute("HomePage", typeof(ACS_NexTrip.Pages.HomePage));
+            Routing.RegisterRoute("TrajetPage", typeof(ACS_NexTrip.Pages.TrajetPage));
+            Routing.RegisterRoute("SettingsPage", typeof(ACS_NexTrip.Pages.SettingsPage));
         }
     }
 }
