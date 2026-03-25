@@ -14,11 +14,11 @@ namespace ACS_NexTrip.Services
         {
             var builder = new SqlConnectionStringBuilder
             {
-                DataSource = @"STAN",
+                DataSource = @"SIO-TCA",
                 InitialCatalog = "ACS_VOYAGE",
                 IntegratedSecurity = false,
                 UserID = "sa",
-                Password = "sa",
+                Password = "Info76240#",
                 TrustServerCertificate = true
             };
 
