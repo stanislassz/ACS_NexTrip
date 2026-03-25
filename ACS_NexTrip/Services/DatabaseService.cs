@@ -247,7 +247,7 @@ namespace ACS_NexTrip.Services
                 UTI_EMAIL = (string?)reader["UTI_EMAIL"],
                 LIE_LIBELLE = (string?)reader["LIE_LIBELLE"],
                 ROL_LIBELLE = (string?)reader["ROL_LIBELLE"]
-            });
+            }); 
             
 
             reader.Close();
