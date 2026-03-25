@@ -60,15 +60,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<AndroidResource Remove="Pages\**" />
-		<Compile Remove="Pages\**" />
-		<EmbeddedResource Remove="Pages\**" />
-		<MauiCss Remove="Pages\**" />
-		<MauiXaml Remove="Pages\**" />
-		<None Remove="Pages\**" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="Microsoft.Data.SqlClient" Version="7.0.0-preview4.26064.3" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.40" />
@@ -76,31 +67,24 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="ViewModels\" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<MauiXaml Update="Views\HomePage.xaml">
+		<MauiXaml Update="Pages\HomePage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Views\LoginPage.xaml">
+		<MauiXaml Update="Pages\LoginPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Views\RegisterPage.xaml">
+		<MauiXaml Update="Pages\RegisterPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Views\SettingsPage.xaml">
+		<MauiXaml Update="Pages\SettingsPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Views\TrajetPage.xaml">
+		<MauiXaml Update="Pages\TrajetPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Views\UserPage.xaml">
+		<MauiXaml Update="Pages\UserPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-	  <Folder Include="ViewModels\" />
-	  <Folder Include="Pages\" />
-	  <Folder Include="ViewModels\" />
 	</ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ACS_NexTrip.Views.RegisterPage"
+             x:Class="ACS_NexTrip.Pages.RegisterPage"
              BackgroundColor="#E6F2F5">
 
     <ScrollView>

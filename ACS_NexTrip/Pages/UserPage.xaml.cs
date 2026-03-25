@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ACS_NexTrip.Views
+namespace ACS_NexTrip.Pages
 {
     public partial class UserPage : ContentPage
     {

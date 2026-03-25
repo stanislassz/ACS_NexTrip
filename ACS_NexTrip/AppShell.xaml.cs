@@ -1,5 +1,5 @@
 ﻿using Microsoft.Maui.Controls;
-using ACS_NexTrip.Views;
+using ACS_NexTrip.Pages;
 
 namespace ACS_NexTrip
 {
@@ -11,8 +11,8 @@ namespace ACS_NexTrip
 
             // On enregistre la route pour pouvoir y naviguer plus tard
             // "nameof(HomePage)" donne le texte "HomePage"
-            Routing.RegisterRoute("RegisterPage", typeof(Views.RegisterPage));
-            Routing.RegisterRoute("HomePage", typeof(Views.HomePage));
+            Routing.RegisterRoute("RegisterPage", typeof(Pages.RegisterPage));
+            Routing.RegisterRoute("HomePage", typeof(Pages.HomePage));
         }
     }
 }

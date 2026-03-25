@@ -1,6 +1,6 @@
 using ACS_NexTrip.Services;
 
-namespace ACS_NexTrip.Views;
+namespace ACS_NexTrip.Pages;
 
 public partial class TrajetPage : ContentPage
 {
