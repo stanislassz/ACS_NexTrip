@@ -79,7 +79,7 @@
                                  HorizontalOptions="Fill"/>
 
                         <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnTrajetsClicked"/>
+                            <TapGestureRecognizer Command="{Binding NavigateToTripsCommand}"/>
                         </VerticalStackLayout.GestureRecognizers>
                     </VerticalStackLayout>
 
@@ -92,7 +92,7 @@
                            HorizontalOptions="Center"/>
                         <BoxView HeightRequest="2" Color="Transparent" HorizontalOptions="Fill"/>
                         <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnUtilisateurClicked"/>
+                            <TapGestureRecognizer Command="{Binding NavigateToUsersCommand}"/>
                         </VerticalStackLayout.GestureRecognizers>
                     </VerticalStackLayout>
 
