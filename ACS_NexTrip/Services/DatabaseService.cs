@@ -14,11 +14,11 @@ namespace ACS_NexTrip.Services
         {
             var builder = new SqlConnectionStringBuilder
             {
-                DataSource = @"SIO-TCA",
+                DataSource = @"STAN",
                 InitialCatalog = "ACS_VOYAGE",
                 IntegratedSecurity = false,
                 UserID = "sa",
-                Password = "Info76240#",
+                Password = "sa",
                 TrustServerCertificate = true
             };
 
@@ -248,8 +248,35 @@ namespace ACS_NexTrip.Services
             return liste;
         }
 
+        // Afficher les 3 prochains trajets 
+        public async Task<List<Trajet>> GetNextTrajetsAsync()
+        {
+            List<Trajet> liste = new List<Trajet>();
 
+            this.Ouvrir();
 
+            string queryString = "ps_GetNextTrajet";
+            SqlCommand command = new SqlCommand(queryString, this.Connection);
+            command.CommandType = CommandType.StoredProcedure;
+            SqlDataReader reader = await command.ExecuteReaderAsync();
+
+            while (reader.Read())
+            {
+                liste.Add(new Trajet
+                {
+                    TRA_DATEDEPART = (DateTime)reader["TRA_DATEDEPART"],
+                    TRA_LIEU_DEPART = reader["TRA_LIEU_DEPART"].ToString(),
+                    TRA_LIEU_ARRIVEE = reader["TRA_LIEU_ARRIVEE"].ToString(),
+                    TYP_LIBELLE = reader["TYP_LIBELLE"].ToString(),
+                    TRA_PRIX = Convert.ToDecimal(reader["TRA_PRIX"])
+                });
+            }
+
+            reader.Close();
+            this.Fermer();
+
+            return liste;
+        }
 
 
 
