@@ -2,6 +2,7 @@
 using ACS_NexTrip.Models;
 using ACS_NexTrip.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace ACS_NexTrip.ViewModel
 {
@@ -23,6 +24,13 @@ namespace ACS_NexTrip.ViewModel
         public async void ChargerTrajets()
         {
             Trajets = new ObservableCollection<Trajet>(await _db.GetTrajetsAsync());
+        }
+
+        [RelayCommand]
+        private async Task GoToAddTrajet()
+        {
+            // On utilise Shell pour naviguer vers la page de création
+            await Shell.Current.GoToAsync(nameof(Pages.AddTrajetPage));
         }
     }
 }

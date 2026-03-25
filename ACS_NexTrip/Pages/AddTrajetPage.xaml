@@ -1,0 +1,34 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ACS_NexTrip.ViewModel"
+             x:Class="ACS_NexTrip.Pages.AddTrajetPage"
+             x:DataType="vm:AddTrajetViewModel"
+             Title="Nouveau Trajet">
+
+    <VerticalStackLayout Padding="30" Spacing="15">
+        <Label Text="Nouveau Trajet" FontSize="24" FontAttributes="Bold" TextColor="Orange" />
+
+        <Label Text="Ville de Départ" />
+        <Picker ItemsSource="{Binding Lieux}"
+            ItemDisplayBinding="{Binding LIE_LIBELLE}"
+            SelectedItem="{Binding SelectedDepart}"
+            Title="Sélectionner le départ" />
+
+        <Label Text="Ville d'Arrivée" />
+        <Picker ItemsSource="{Binding Lieux}"
+            ItemDisplayBinding="{Binding LIE_LIBELLE}"
+            SelectedItem="{Binding SelectedArrivee}"
+            Title="Sélectionner l'arrivée" />
+
+        <Label Text="Prix" />
+        <Entry Text="{Binding Prix}" Keyboard="Numeric" Placeholder="Ex: 50" />
+
+        <Label Text="Date" />
+        <DatePicker Date="{Binding DateDep}" />
+
+        <Button Text="Enregistrer" 
+            Command="{Binding SaveCommand}" 
+            BackgroundColor="Orange" 
+            Margin="0,20,0,0" />
+    </VerticalStackLayout>
+</ContentPage>
