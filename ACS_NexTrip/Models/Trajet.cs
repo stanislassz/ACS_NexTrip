@@ -10,11 +10,17 @@ namespace ACS_NexTrip.Models
     {
         public int TRA_ID { get; set; }
         public DateTime TRA_DATEDEPART { get; set; }
+        public DateTime TRA_DATEARRIVEE { get; set; } // Obligatoire pour ton code
+        public TimeSpan TRA_HEUREDEPART { get; set; } // Obligatoire
+        public TimeSpan TRA_HEUREARRIVEE { get; set; } // Obligatoire
+        public int TRA_LIEU_DEPART_ID { get; set; }  // L'ID pour la base
+        public int TRA_LIEU_ARRIVEE_ID { get; set; } // L'ID pour la base
+        public int TYP_ID { get; set; }
+        public decimal TRA_PRIX { get; set; }
+
+        // Libellés pour l'affichage (JOIN)
         public string TRA_LIEU_DEPART { get; set; }
         public string TRA_LIEU_ARRIVEE { get; set; }
         public string TYP_LIBELLE { get; set; }
-        public decimal TRA_PRIX { get; set; }
-
-        public string RecapTrajet => $"{TRA_LIEU_DEPART} ➔ {TRA_LIEU_ARRIVEE}";
     }
 }

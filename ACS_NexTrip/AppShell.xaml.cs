@@ -15,6 +15,7 @@ namespace ACS_NexTrip
             Routing.RegisterRoute("HomePage", typeof(ACS_NexTrip.Pages.HomePage));
             Routing.RegisterRoute("TrajetPage", typeof(ACS_NexTrip.Pages.TrajetPage));
             Routing.RegisterRoute("SettingsPage", typeof(ACS_NexTrip.Pages.SettingsPage));
+            Routing.RegisterRoute("AddTrajetPage", typeof(Pages.AddTrajetPage));
         }
     }
 }

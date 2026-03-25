@@ -76,6 +76,78 @@ namespace ACS_NexTrip.Services
 
 
 
+        public async Task<bool> AddTrajetAsync(Trajet t)
+        {
+            try
+            {
+                this.Ouvrir(); // Utilise ta méthode habituelle pour ouvrir la connexion
+
+                using (SqlCommand cmd = new SqlCommand("ps_AddTrajet", this.Connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    // On lie les paramètres de ta PS avec les propriétés de l'objet Trajet
+                    cmd.Parameters.AddWithValue("@TRA_DATEDEPART", t.TRA_DATEDEPART);
+                    cmd.Parameters.AddWithValue("@TRA_DATEARRIVEE", t.TRA_DATEARRIVEE);
+                    cmd.Parameters.AddWithValue("@TRA_HEUREDEPART", t.TRA_HEUREDEPART);
+                    cmd.Parameters.AddWithValue("@TRA_HEUREARRIVEE", t.TRA_HEUREARRIVEE);
+                    cmd.Parameters.AddWithValue("@TRA_LIEU_DEPART", t.TRA_LIEU_DEPART_ID);
+                    cmd.Parameters.AddWithValue("@TRA_LIEU_ARRIVEE", t.TRA_LIEU_ARRIVEE_ID);
+                    cmd.Parameters.AddWithValue("@TYP_ID", t.TYP_ID);
+                    cmd.Parameters.AddWithValue("@TRA_PRIX", t.TRA_PRIX);
+
+                    // ExecuteNonQuery retourne le nombre de lignes affectées
+                    int rows = await cmd.ExecuteNonQueryAsync();
+                    return rows > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Debugger ici en cas d'erreur SQL
+                Console.WriteLine("Erreur SQL : " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                this.Fermer(); // Toujours refermer la connexion
+            }
+        }
+
+
+
+
+
+
+        public async Task<List<Lieu>> GetLieuxAsync()
+        {
+            List<Lieu> liste = new List<Lieu>();
+            try
+            {
+                this.Ouvrir();
+                using (SqlCommand cmd = new SqlCommand("ps_GetLieux", this.Connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (SqlDataReader dr = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await dr.ReadAsync())
+                        {
+                            liste.Add(new Lieu
+                            {
+                                LIE_ID = Convert.ToInt32(dr["LIE_ID"]),
+                                LIE_LIBELLE = dr["LIE_LIBELLE"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { this.Fermer(); }
+
+            return liste;
+        }
+
+
+
 
 
         public async Task<bool> InscrireUtilisateurAsync(Utilisateur u)
@@ -140,6 +212,8 @@ namespace ACS_NexTrip.Services
 
             return liste;
         }
+
+
 
 
 

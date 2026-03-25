@@ -60,8 +60,24 @@
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="30" Spacing="20">
 
-                <Label Text="Trajets Disponibles" FontSize="28" FontAttributes="Bold" TextColor="{StaticResource Gray900}"/>
-                <Label Text="Consultez les voyages et réservations en cours" FontSize="14" TextColor="{StaticResource Gray600}" Margin="0,-15,0,10"/>
+                <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,10">
+                    <VerticalStackLayout Grid.Column="0" Spacing="5">
+                        <Label Text="Trajets Disponibles" FontSize="28" FontAttributes="Bold" TextColor="{StaticResource Gray900}"/>
+                        <Label Text="Consultez les voyages et réservations en cours" FontSize="14" TextColor="{StaticResource Gray600}"/>
+                    </VerticalStackLayout>
+
+                    <Button Grid.Column="1"
+                            Text="+"
+                            FontSize="24"
+                            FontAttributes="Bold"
+                            TextColor="White"
+                            BackgroundColor="Orange"
+                            HeightRequest="50"
+                            WidthRequest="50"
+                            CornerRadius="25"
+                            VerticalOptions="Center"
+                            Command="{Binding GoToAddTrajetCommand}"/>
+                </Grid>
 
                 <CollectionView ItemsSource="{Binding Trajets}">
                     <CollectionView.ItemsLayout>
@@ -77,7 +93,7 @@
                                     <Shadow Brush="Black" Offset="0,4" Radius="10" Opacity="0.05"/>
                                 </Border.Shadow>
 
-                                <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="20">
+                                <Grid ColumnDefinitions="Auto, *, Auto, Auto" ColumnSpacing="20">
 
                                     <Border Grid.Column="0" BackgroundColor="#E3F2FD" HeightRequest="60" WidthRequest="60" StrokeThickness="0">
                                         <Border.StrokeShape>
@@ -117,6 +133,14 @@
                                             <Label Text="Disponible" FontSize="10" TextColor="Orange" FontAttributes="Bold"/>
                                         </Border>
                                     </VerticalStackLayout>
+
+                                    <Button Grid.Column="3"
+                                            Text="🗑️"
+                                            BackgroundColor="Transparent"
+                                            FontSize="18"
+                                            VerticalOptions="Center"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TrajetViewModel}}, Path=DeleteTrajetCommand}"
+                                            CommandParameter="{Binding .}"/>
 
                                 </Grid>
                             </Border>
