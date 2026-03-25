@@ -74,7 +74,7 @@
                                FontAttributes="Bold"
                                HorizontalOptions="Center"/>
 
-                                            <BoxView HeightRequest="2" 
+                        <BoxView HeightRequest="2" 
                                  Color="Orange" 
                                  HorizontalOptions="Fill"/>
 
@@ -157,7 +157,7 @@
         </Border>
 
         <!-- Contenu principal -->
-        <ScrollView Grid.Row="1">
+        <ScrollView Grid.Row="1" BackgroundColor="white">
             <VerticalStackLayout>
 
                 <!-- Section avec le fond (jusqu'après les cartes) -->
@@ -173,74 +173,74 @@
                    HorizontalOptions="Center"
                    TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}"/>
 
-                <Label Text="Planifiez votre prochain voyage en quelque clics"
+                        <Label Text="Planifiez votre prochain voyage en quelque clics"
                    FontSize="16"
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
                    TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}"/>
 
-                <!-- Barre de recherche -->
-                <Border BackgroundColor="White"
+                        <!-- Barre de recherche -->
+                        <Border BackgroundColor="White"
                         Padding="30"
                         Margin="0, 10, 0, 10">
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="15"/>
-                    </Border.StrokeShape>
-                    <Border.Shadow>
-                        <Shadow Brush="{StaticResource Gray900}" Offset="0,4" Radius="15" Opacity="0.1"/>
-                    </Border.Shadow>
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="15"/>
+                            </Border.StrokeShape>
+                            <Border.Shadow>
+                                <Shadow Brush="{StaticResource Gray900}" Offset="0,4" Radius="15" Opacity="0.1"/>
+                            </Border.Shadow>
 
-                    <VerticalStackLayout Spacing="20">
-                        <!-- Champs de recherche -->
-                        <Grid ColumnDefinitions="*, *, *, *" ColumnSpacing="15" BackgroundColor="White">
+                            <VerticalStackLayout Spacing="20">
+                                <!-- Champs de recherche -->
+                                <Grid ColumnDefinitions="*, *, *, *" ColumnSpacing="15" BackgroundColor="White">
 
-                            <!-- D'où partez-vous -->
-                            <Border Grid.Column="0" Stroke="{StaticResource Gray300}" StrokeThickness="1" BackgroundColor="Transparent" Padding="15,0">
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="10"/>
-                                </Border.StrokeShape>
-                                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
-                                    <Label Text="📍" VerticalOptions="Center" TextColor="{StaticResource Gray500}"/>
-                                    <Entry Placeholder="D'où partez-vous ?" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Fill"/>
-                                </HorizontalStackLayout>
-                            </Border>
+                                    <!-- D'où partez-vous -->
+                                    <Border Grid.Column="0" Stroke="{StaticResource Gray300}" StrokeThickness="1" BackgroundColor="Transparent" Padding="15,0">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="10"/>
+                                        </Border.StrokeShape>
+                                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                                            <Label Text="📍" VerticalOptions="Center" TextColor="{StaticResource Gray500}"/>
+                                            <Entry Placeholder="D'où partez-vous ?" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Fill"/>
+                                        </HorizontalStackLayout>
+                                    </Border>
 
-                            <!-- Où allez-vous -->
-                            <Border Grid.Column="1" Stroke="{StaticResource Gray300}" StrokeThickness="1" BackgroundColor="Transparent" Padding="15,0">
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="10"/>
-                                </Border.StrokeShape>
-                                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
-                                    <Label Text="📍" VerticalOptions="Center" TextColor="{StaticResource Orange500}"/>
-                                    <Entry Placeholder="Où allez-vous ?" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Fill"/>
-                                </HorizontalStackLayout>
-                            </Border>
+                                    <!-- Où allez-vous -->
+                                    <Border Grid.Column="1" Stroke="{StaticResource Gray300}" StrokeThickness="1" BackgroundColor="Transparent" Padding="15,0">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="10"/>
+                                        </Border.StrokeShape>
+                                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                                            <Label Text="📍" VerticalOptions="Center" TextColor="{StaticResource Orange500}"/>
+                                            <Entry Placeholder="Où allez-vous ?" BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Fill"/>
+                                        </HorizontalStackLayout>
+                                    </Border>
 
-                            <!-- Date -->
-                            <Border Grid.Column="2" Stroke="{StaticResource Gray300}" StrokeThickness="1" BackgroundColor="Transparent" Padding="15,0" HeightRequest="45">
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="10"/>
-                                </Border.StrokeShape>
-                                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
-                                    <Label Text="📅" VerticalOptions="Center" TextColor="Black"/>
-                                    <DatePicker BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Fill"/>
-                                </HorizontalStackLayout>
-                            </Border>
+                                    <!-- Date -->
+                                    <Border Grid.Column="2" Stroke="{StaticResource Gray300}" StrokeThickness="1" BackgroundColor="Transparent" Padding="15,0" HeightRequest="45">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="10"/>
+                                        </Border.StrokeShape>
+                                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                                            <Label Text="📅" VerticalOptions="Center" TextColor="Black"/>
+                                            <DatePicker BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Fill" TextColor="Black"/>
+                                        </HorizontalStackLayout>
+                                    </Border>
 
-                            <!-- Heure -->
-                            <Border Grid.Column="3" Stroke="{StaticResource Gray300}" StrokeThickness="1" BackgroundColor="Transparent" Padding="15,0" HeightRequest="45">
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="10"/>
-                                </Border.StrokeShape>
-                                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
-                                    <Label Text="🕒" VerticalOptions="Center" TextColor="Black"/>
-                                    <TimePicker BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Fill"/>
-                                </HorizontalStackLayout>
-                            </Border>
-                        </Grid>
+                                    <!-- Heure -->
+                                    <Border Grid.Column="3" Stroke="{StaticResource Gray300}" StrokeThickness="1" BackgroundColor="Transparent" Padding="15,0" HeightRequest="45">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="10"/>
+                                        </Border.StrokeShape>
+                                        <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                                            <Label Text="🕒" VerticalOptions="Center" TextColor="Black"/>
+                                            <TimePicker BackgroundColor="Transparent" VerticalOptions="Center" HorizontalOptions="Fill" TextColor="Black"/>
+                                        </HorizontalStackLayout>
+                                    </Border>
+                                </Grid>
 
-                        <!-- Bouton Rechercher -->
-                        <Button Text="🔍 Rechercher" 
+                                <!-- Bouton Rechercher -->
+                                <Button Text="🔍 Rechercher" 
                                 BackgroundColor="{StaticResource Orange500}"
                                 TextColor="White"
                                 FontAttributes="Bold"
@@ -248,85 +248,85 @@
                                 HeightRequest="45"
                                 WidthRequest="200"
                                 HorizontalOptions="Center"/>
-                    </VerticalStackLayout>
-                </Border>
+                            </VerticalStackLayout>
+                        </Border>
 
-                <!-- Statistiques rapides -->
-                <Grid ColumnDefinitions=" *, *, *, *" ColumnSpacing="20">
+                        <!-- Statistiques rapides -->
+                        <Grid ColumnDefinitions=" *, *, *, *" ColumnSpacing="20">
 
-                    <!-- Card 1 -->
-                    <Border Grid.Column="0" 
+                            <!-- Card 1 -->
+                            <Border Grid.Column="0" 
                         BackgroundColor="White"
                         Padding="50">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="15"/>
-                        </Border.StrokeShape>
-                        <Border.Shadow>
-                            <Shadow Brush="{StaticResource Gray900}"
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="15"/>
+                                </Border.StrokeShape>
+                                <Border.Shadow>
+                                    <Shadow Brush="{StaticResource Gray900}"
                                 Offset="0,4"
                                 Radius="15"
                                 Opacity="0.1"/>
-                        </Border.Shadow>
-                        <VerticalStackLayout Spacing="10">
-                            <Label Text="🛣️ Voir mes trajets" FontSize="22" TextColor="Black"/>
-                        </VerticalStackLayout>
-                    </Border>
+                                </Border.Shadow>
+                                <VerticalStackLayout Spacing="10">
+                                    <Label Text="🛣️ Voir mes trajets" FontSize="22" TextColor="Black"/>
+                                </VerticalStackLayout>
+                            </Border>
 
-                    <!-- Card 2 -->
-                    <Border Grid.Column="1" 
+                            <!-- Card 2 -->
+                            <Border Grid.Column="1" 
                         BackgroundColor="White"
                         Padding="50">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="15"/>
-                        </Border.StrokeShape>
-                        <Border.Shadow>
-                            <Shadow Brush="{StaticResource Gray900}"
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="15"/>
+                                </Border.StrokeShape>
+                                <Border.Shadow>
+                                    <Shadow Brush="{StaticResource Gray900}"
                                 Offset="0,4"
                                 Radius="15"
                                 Opacity="0.1"/>
-                        </Border.Shadow>
-                        <VerticalStackLayout Spacing="10">
-                            <Label Text="📍 Réserver un nouveau trajet" FontSize="22" TextColor="Black"/>
-                        </VerticalStackLayout>
-                    </Border>
+                                </Border.Shadow>
+                                <VerticalStackLayout Spacing="10">
+                                    <Label Text="📍 Réserver un nouveau trajet" FontSize="22" TextColor="Black"/>
+                                </VerticalStackLayout>
+                            </Border>
 
-                    <!-- Card 3 -->
-                    <Border Grid.Column="2" 
+                            <!-- Card 3 -->
+                            <Border Grid.Column="2" 
                         BackgroundColor="White"
                         Padding="50">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="15"/>
-                        </Border.StrokeShape>
-                        <Border.Shadow>
-                            <Shadow Brush="{StaticResource Gray900}"
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="15"/>
+                                </Border.StrokeShape>
+                                <Border.Shadow>
+                                    <Shadow Brush="{StaticResource Gray900}"
                                 Offset="0,4"
                                 Radius="15"
                                 Opacity="0.1"/>
-                        </Border.Shadow>
-                        <VerticalStackLayout Spacing="10">
-                            <Label Text="⏱️ Historique" FontSize="22" TextColor="Black"/>
-                        </VerticalStackLayout>
-                    </Border>
+                                </Border.Shadow>
+                                <VerticalStackLayout Spacing="10">
+                                    <Label Text="⏱️ Historique" FontSize="22" TextColor="Black"/>
+                                </VerticalStackLayout>
+                            </Border>
 
-                    <!-- Card 4 -->
-                    <Border Grid.Column="3" 
+                            <!-- Card 4 -->
+                            <Border Grid.Column="3" 
                         BackgroundColor="White"
                         Padding="50">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="15"/>
-                        </Border.StrokeShape>
-                        <Border.Shadow>
-                            <Shadow Brush="{StaticResource Gray900}"
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="15"/>
+                                </Border.StrokeShape>
+                                <Border.Shadow>
+                                    <Shadow Brush="{StaticResource Gray900}"
                                 Offset="0,4"
                                 Radius="15"
                                 Opacity="0.1"/>
-                        </Border.Shadow>
-                        <VerticalStackLayout Spacing="10">
-                            <Label Text="ℹ️ Infos trafic" FontSize="22" TextColor="Black"/>
-                        </VerticalStackLayout>
-                    </Border>
+                                </Border.Shadow>
+                                <VerticalStackLayout Spacing="10">
+                                    <Label Text="ℹ️ Infos trafic" FontSize="22" TextColor="Black"/>
+                                </VerticalStackLayout>
+                            </Border>
 
-                </Grid>
+                        </Grid>
 
                     </VerticalStackLayout>
                 </Grid>
@@ -334,19 +334,13 @@
                 <!-- Section inférieure (sans le fond nuage) -->
                 <VerticalStackLayout Padding="30, 20, 30, 30">
 
-                <!-- Section trajets récents -->
-                <Border BackgroundColor="{AppThemeBinding Light=White, Dark={StaticResource Gray800}}" Padding="20,10">
-                    <Border.Shadow>
-                        <Shadow Brush="{StaticResource Gray900}" Offset="0,2" Radius="8" Opacity="0.1"/>
-                    </Border.Shadow>
-
+                    <!-- Section trajets récents -->
                     <VerticalStackLayout Spacing="15" Margin="0,0,0,20">
                         <Label Text="Prochains trajets" 
                            FontSize="24" 
                            FontAttributes="Bold"
-                           TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}"/>
+                           TextColor="Black"/>
                     </VerticalStackLayout>
-                </Border>
 
 
                 </VerticalStackLayout>
