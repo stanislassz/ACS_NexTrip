@@ -61,8 +61,8 @@
 
 <!-- Paramètre inactif -->
 <VerticalStackLayout VerticalOptions="Center" Spacing="5">
-    <Label Text="Paramètre" 
-       TextColor="Orange" 
+    <Label Text="Paramètres" 
+       TextColor="Transparent" 
        FontSize="14"
        FontAttributes="Bold"
        HorizontalOptions="Center"/>
