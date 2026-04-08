@@ -14,12 +14,17 @@ namespace ACS_NexTrip.Services
         {
             var builder = new SqlConnectionStringBuilder
             {
-                DataSource = @"STAN",
+                // Nom du serveur copié de ton image
+                DataSource = @"2SIO-MAL\MSSQLSERVER01",
                 InitialCatalog = "ACS_VOYAGE",
+
+                // On passe en Authentification SQL Server
                 IntegratedSecurity = false,
                 UserID = "sa",
-                Password = "sa",
+                Password = "SLAMbest@2024", // Remplace par ton vrai mot de passe
+
                 TrustServerCertificate = true
+
             };
 
             // Initialisation de la connexion avec la chaîne générée
@@ -233,32 +238,33 @@ namespace ACS_NexTrip.Services
         public async Task<List<Trajet>> GetNextTrajetsAsync()
         {
             List<Trajet> liste = new List<Trajet>();
-
-            this.Ouvrir();
-
-            string queryString = "ps_GetNextTrajet";
-            SqlCommand command = new SqlCommand(queryString, this.Connection);
-            command.CommandType = CommandType.StoredProcedure;
-            SqlDataReader reader = await command.ExecuteReaderAsync();
-
-            while (reader.Read())
+            try
             {
-                liste.Add(new Trajet
+                SqlCommand command = new SqlCommand("ps_GetNextTrajet", this.Connection);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                while (reader.Read())
                 {
-                    TRA_DATEDEPART = (DateTime)reader["TRA_DATEDEPART"],
-                    TRA_DATEARRIVEE = (DateTime)reader["TRA_DATEARRIVEE"],
-                    TRA_HEUREDEPART = (TimeSpan)reader["TRA_HEUREDEPART"],
-                    TRA_HEUREARRIVEE = (TimeSpan)reader["TRA_HEUREARRIVEE"],
-                    TRA_LIEU_DEPART = reader["TRA_LIEU_DEPART"].ToString(),
-                    TRA_LIEU_ARRIVEE = reader["TRA_LIEU_ARRIVEE"].ToString(),
-                    TYP_LIBELLE = reader["TYP_LIBELLE"].ToString(),
-                    TRA_PRIX = Convert.ToDecimal(reader["TRA_PRIX"])
-                });
+                    liste.Add(new Trajet
+                    {
+                        TRA_DATEDEPART = (DateTime)reader["TRA_DATEDEPART"],
+                        TRA_DATEARRIVEE = (DateTime)reader["TRA_DATEARRIVEE"],
+                        TRA_HEUREDEPART = (TimeSpan)reader["TRA_HEUREDEPART"],
+                        TRA_HEUREARRIVEE = (TimeSpan)reader["TRA_HEUREARRIVEE"],
+                        TRA_LIEU_DEPART = reader["TRA_LIEU_DEPART"].ToString(),
+                        TRA_LIEU_ARRIVEE = reader["TRA_LIEU_ARRIVEE"].ToString(),
+                        TYP_LIBELLE = reader["TYP_LIBELLE"].ToString(),
+                        TRA_PRIX = Convert.ToDecimal(reader["TRA_PRIX"])
+                    });
+                }
+                reader.Close();
             }
-
-            reader.Close();
-            this.Fermer();
-
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(">>> CRASH GetNextTrajetsAsync : " + ex.Message);
+                System.Diagnostics.Debug.WriteLine(">>> DETAIL : " + ex.ToString());
+            }
             return liste;
         }
 
@@ -315,7 +321,6 @@ namespace ACS_NexTrip.Services
             List<TypeTransport> liste = new List<TypeTransport>();
             try
             {
-                this.Ouvrir();
                 using (SqlCommand cmd = new SqlCommand("ps_GetTypes", this.Connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
