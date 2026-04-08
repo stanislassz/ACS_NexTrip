@@ -16,7 +16,9 @@ namespace ACS_NexTrip.Models
         public string UTI_CP { get; set; }
         public string UTI_TEL { get; set; }
         public string UTI_EMAIL { get; set; }
-        public string LIE_LIBELLE { get; set; }
-        public string ROL_LIBELLE { get; set; }
+        public int LIE_ID { get; set; }    // L'ID pour enregistrer
+        public string? LIE_LIBELLE { get; set; } // Le nom pour afficher
+        public int ROL_ID { get; set; }    // L'ID pour enregistrer
+        public string? ROL_LIBELLE { get; set; } // Le nom pour afficher
     }
 }

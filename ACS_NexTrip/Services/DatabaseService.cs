@@ -14,17 +14,12 @@ namespace ACS_NexTrip.Services
         {
             var builder = new SqlConnectionStringBuilder
             {
-                // Nom du serveur copié de ton image
-                DataSource = @"2SIO-MAL\MSSQLSERVER01",
+                DataSource = @"SIO-TCA",
                 InitialCatalog = "ACS_VOYAGE",
-
-                // On passe en Authentification SQL Server
                 IntegratedSecurity = false,
                 UserID = "sa",
-                Password = "SLAMbest@2024", // Remplace par ton vrai mot de passe
-
+                Password = "Info76240#",
                 TrustServerCertificate = true
-
             };
 
             // Initialisation de la connexion avec la chaîne générée
@@ -271,42 +266,40 @@ namespace ACS_NexTrip.Services
 
 
 
-
         public async Task<List<Utilisateur>> GetUtilisateurAsync()
         {
             List<Utilisateur> liste = new List<Utilisateur>();
-
-
-            string queryString = "ps_GetUtilisateur";
-            SqlCommand command = new SqlCommand(queryString, this.Connection);
-            command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@IdUtilisateur", 4);
-            SqlDataReader reader = await command.ExecuteReaderAsync();
-
-            reader.Read();
-            
-            liste.Add(new Utilisateur
+            using (SqlCommand command = new SqlCommand("ps_GetUtilisateur", this.Connection))
             {
-                UTI_LOGIN = (string?)reader["UTI_LOGIN"],
-                UTI_PASSWORD = (string?)reader["UTI_PASSWORD"],
-                UTI_NOM = (string?)reader["UTI_NOM"],
-                UTI_PRENOM = (string?)reader["UTI_PRENOM"],
-                UTI_DATENAISSANCE = (DateTime)reader["UTI_DATENAISSANCE"],
-                UTI_ADRESSE = (string?)reader["UTI_ADRESSE"],
-                UTI_CP = (string?)reader["UTI_CP"],
-                UTI_TEL = (string?)reader["UTI_TEL"],
-                UTI_EMAIL = (string?)reader["UTI_EMAIL"],
-                LIE_LIBELLE = (string?)reader["LIE_LIBELLE"],
-                ROL_LIBELLE = (string?)reader["ROL_LIBELLE"]
-            }); 
-            
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@IdUtilisateur", 4);
 
-            reader.Close();
-
+                using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        liste.Add(new Utilisateur
+                        {
+                            UTI_ID = (int)reader["UTI_ID"],
+                            UTI_LOGIN = (string?)reader["UTI_LOGIN"],
+                            UTI_PASSWORD = (string?)reader["UTI_PASSWORD"],
+                            UTI_NOM = (string?)reader["UTI_NOM"],
+                            UTI_PRENOM = (string?)reader["UTI_PRENOM"],
+                            UTI_DATENAISSANCE = (DateTime)reader["UTI_DATENAISSANCE"],
+                            UTI_ADRESSE = (string?)reader["UTI_ADRESSE"],
+                            UTI_CP = (string?)reader["UTI_CP"],
+                            UTI_TEL = (string?)reader["UTI_TEL"],
+                            UTI_EMAIL = (string?)reader["UTI_EMAIL"],
+                            LIE_LIBELLE = (string?)reader["LIE_LIBELLE"],
+                            ROL_LIBELLE = (string?)reader["ROL_LIBELLE"],
+                            LIE_ID = (int)reader["LIE_ID"], // Récupéré via la jointure
+                            ROL_ID = (int)reader["ROL_ID"],
+                        });
+                    }
+                }
+            }
             return liste;
         }
-
-
 
 
 
@@ -343,6 +336,49 @@ namespace ACS_NexTrip.Services
                 System.Diagnostics.Debug.WriteLine("DETAIL : " + ex.ToString());
             }
             return liste; // ✅ toujours retourner la liste, même vide en cas d'erreur
+        }
+
+        public async Task<bool> UpdateUtilisateurAsync(Utilisateur u)
+        {
+            try
+            {
+                // On s'assure que la connexion est ouverte
+                this.Ouvrir();
+
+                using (SqlCommand cmd = new SqlCommand("ps_UpdateUtilisateur", this.Connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    // Mapping des paramètres selon votre procédure stockée
+                    // Attention : Assurez-vous que votre classe "Utilisateur" possède bien ces propriétés (UTI_ID, LIE_ID, ROL_ID)
+                    cmd.Parameters.AddWithValue("@IdUtilisateur", u.UTI_ID);
+                    cmd.Parameters.AddWithValue("@UTI_LOGIN", u.UTI_LOGIN ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@UTI_PASSWORD", u.UTI_PASSWORD ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@UTI_NOM", u.UTI_NOM ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@UTI_PRENOM", u.UTI_PRENOM ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@UTI_DATENAISSANCE", u.UTI_DATENAISSANCE);
+                    cmd.Parameters.AddWithValue("@UTI_ADRESSE", u.UTI_ADRESSE ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@UTI_CP", u.UTI_CP ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@UTI_TEL", u.UTI_TEL ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@UTI_EMAIL", u.UTI_EMAIL ?? (object)DBNull.Value);
+
+                    // Si vous n'avez pas encore LIE_ID et ROL_ID dans votre modèle Utilisateur, 
+                    // il faudra les ajouter pour que l'Update fonctionne.
+                    cmd.Parameters.AddWithValue("@LIE_ID", u.LIE_ID);
+                    cmd.Parameters.AddWithValue("@ROL_ID", u.ROL_ID);
+
+                    // Exécution de la requête
+                    int rows = await cmd.ExecuteNonQueryAsync();
+
+                    // Retourne true si au moins une ligne a été modifiée
+                    return rows > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Erreur UpdateUtilisateur : " + ex.Message);
+                return false;
+            }
         }
     }
 }
