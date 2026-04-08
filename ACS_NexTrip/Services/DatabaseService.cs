@@ -14,11 +14,11 @@ namespace ACS_NexTrip.Services
         {
             var builder = new SqlConnectionStringBuilder
             {
-                DataSource = @"2SIO-MAL\MSSQLSERVER01",
+                DataSource = @"STAN",
                 InitialCatalog = "ACS_VOYAGE",
                 IntegratedSecurity = false,
                 UserID = "sa",
-                Password = "SLAMbest@2024",
+                Password = "sa",
                 TrustServerCertificate = true
             };
 
@@ -233,6 +233,7 @@ namespace ACS_NexTrip.Services
         {
             List<Trajet> liste = new List<Trajet>();
 
+            this.Ouvrir();
 
             string queryString = "ps_GetNextTrajet";
             SqlCommand command = new SqlCommand(queryString, this.Connection);
@@ -244,6 +245,9 @@ namespace ACS_NexTrip.Services
                 liste.Add(new Trajet
                 {
                     TRA_DATEDEPART = (DateTime)reader["TRA_DATEDEPART"],
+                    TRA_DATEARRIVEE = (DateTime)reader["TRA_DATEARRIVEE"],
+                    TRA_HEUREDEPART = (TimeSpan)reader["TRA_HEUREDEPART"],
+                    TRA_HEUREARRIVEE = (TimeSpan)reader["TRA_HEUREARRIVEE"],
                     TRA_LIEU_DEPART = reader["TRA_LIEU_DEPART"].ToString(),
                     TRA_LIEU_ARRIVEE = reader["TRA_LIEU_ARRIVEE"].ToString(),
                     TYP_LIBELLE = reader["TYP_LIBELLE"].ToString(),
@@ -252,6 +256,7 @@ namespace ACS_NexTrip.Services
             }
 
             reader.Close();
+            this.Fermer();
 
             return liste;
         }
