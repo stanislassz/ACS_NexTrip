@@ -14,16 +14,17 @@ namespace ACS_NexTrip.Services
         {
             var builder = new SqlConnectionStringBuilder
             {
-                DataSource = @"SIO-TCA",
+                DataSource = @"2SIO-MAL\MSSQLSERVER01",
                 InitialCatalog = "ACS_VOYAGE",
                 IntegratedSecurity = false,
                 UserID = "sa",
-                Password = "Info76240#",
+                Password = "SLAMbest@2024",
                 TrustServerCertificate = true
             };
 
             // Initialisation de la connexion avec la chaîne générée
             Connection = new SqlConnection(builder.ConnectionString);
+            Connection.Open();
         }
 
         // Méthode pour ouvrir la connexion avant une requête
@@ -47,7 +48,6 @@ namespace ACS_NexTrip.Services
         {
             try
             {
-                this.Ouvrir();
                 using (SqlCommand cmd = new SqlCommand("ps_Connexion", this.Connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -66,10 +66,6 @@ namespace ACS_NexTrip.Services
                 System.Diagnostics.Debug.WriteLine("Erreur Login SQL : " + ex.Message);
                 return false;
             }
-            finally
-            {
-                this.Fermer();
-            }
         }
 
 
@@ -80,7 +76,6 @@ namespace ACS_NexTrip.Services
         {
             try
             {
-                this.Ouvrir(); // Utilise ta méthode habituelle pour ouvrir la connexion
 
                 using (SqlCommand cmd = new SqlCommand("ps_AddTrajet", this.Connection))
                 {
@@ -107,10 +102,6 @@ namespace ACS_NexTrip.Services
                 Console.WriteLine("Erreur SQL : " + ex.Message);
                 return false;
             }
-            finally
-            {
-                this.Fermer(); // Toujours refermer la connexion
-            }
         }
 
 
@@ -123,7 +114,6 @@ namespace ACS_NexTrip.Services
 
             try
             {
-                this.Ouvrir();
                 using (SqlCommand cmd = new SqlCommand("ps_DeleteTrajet", this.Connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -141,10 +131,6 @@ namespace ACS_NexTrip.Services
                 System.Diagnostics.Debug.WriteLine("---> ERREUR SQL : " + ex.Message);
                 return false;
             }
-            finally
-            {
-                this.Fermer();
-            }
         }
 
 
@@ -156,7 +142,6 @@ namespace ACS_NexTrip.Services
             List<Lieu> liste = new List<Lieu>();
             try
             {
-                this.Ouvrir();
                 using (SqlCommand cmd = new SqlCommand("ps_GetLieux", this.Connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -174,7 +159,6 @@ namespace ACS_NexTrip.Services
                 }
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
-            finally { this.Fermer(); }
 
             return liste;
         }
@@ -187,7 +171,6 @@ namespace ACS_NexTrip.Services
         {
             try
             {
-                this.Ouvrir();
                 using (SqlCommand cmd = new SqlCommand("ps_Inscription", this.Connection))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -208,7 +191,6 @@ namespace ACS_NexTrip.Services
                 System.Diagnostics.Debug.WriteLine("Erreur SQL : " + ex.Message);
                 return false;
             }
-            finally { this.Fermer(); }
         }
 
 
@@ -220,7 +202,6 @@ namespace ACS_NexTrip.Services
         public async Task<List<Trajet>> GetTrajetsAsync()
         {
             List<Trajet> liste = new List<Trajet>();
-            this.Ouvrir();
 
             using (SqlCommand command = new SqlCommand("ps_GetTrajets", this.Connection))
             {
@@ -244,7 +225,6 @@ namespace ACS_NexTrip.Services
                     }
                 }
             }
-            this.Fermer();
             return liste;
         }
 
@@ -253,7 +233,6 @@ namespace ACS_NexTrip.Services
         {
             List<Trajet> liste = new List<Trajet>();
 
-            this.Ouvrir();
 
             string queryString = "ps_GetNextTrajet";
             SqlCommand command = new SqlCommand(queryString, this.Connection);
@@ -273,7 +252,6 @@ namespace ACS_NexTrip.Services
             }
 
             reader.Close();
-            this.Fermer();
 
             return liste;
         }
@@ -286,7 +264,6 @@ namespace ACS_NexTrip.Services
         {
             List<Utilisateur> liste = new List<Utilisateur>();
 
-            this.Ouvrir();
 
             string queryString = "ps_GetUtilisateur";
             SqlCommand command = new SqlCommand(queryString, this.Connection);
@@ -313,7 +290,6 @@ namespace ACS_NexTrip.Services
             
 
             reader.Close();
-            this.Fermer();
 
             return liste;
         }

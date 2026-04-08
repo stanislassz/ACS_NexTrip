@@ -47,7 +47,7 @@ namespace ACS_NexTrip.ViewModel
 
             // On charge les trajets dès l'initialisation
             _db = db;
-            ChargerTrajets();
+            //ChargerTrajets();
         }
 
         public async void ChargerTrajets()
@@ -66,20 +66,9 @@ namespace ACS_NexTrip.ViewModel
         public async Task Appearing()
         {
             // On appelle ta méthode de chargement
-            await GetTrajets();
+            
+            ChargerTrajets();
         }
-
-        [RelayCommand]
-        public async Task GetTrajets()
-        {
-            var data = await _db.GetTrajetsAsync();
-            Trajets.Clear();
-            foreach (var t in data)
-            {
-                Trajets.Add(t);
-            }
-        }
-
 
         [RelayCommand]
         public async Task DeleteTrajet(Trajet trajet)
