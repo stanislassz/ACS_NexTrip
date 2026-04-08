@@ -18,6 +18,12 @@ namespace ACS_NexTrip.ViewModel
         [ObservableProperty]
         private ObservableCollection<TypeTransport> _types;
 
+        [ObservableProperty]
+        private TimeSpan _heureDep = DateTime.Now.TimeOfDay;
+
+        [ObservableProperty]
+        private TimeSpan _heureArr = DateTime.Now.TimeOfDay.Add(TimeSpan.FromHours(2));
+
         // ✅ selectedType est bien un TypeTransport
         [ObservableProperty]
         private TypeTransport _selectedType;
@@ -35,25 +41,22 @@ namespace ACS_NexTrip.ViewModel
         [ObservableProperty]
         private DateTime _dateDep = DateTime.Now;
 
+        // ✅ On attend que la première soit finie avant de lancer la deuxième
+        public async void ChargerDonnees()
+        {
+            var villes = await _db.GetLieuxAsync();
+            Lieux = new ObservableCollection<Lieu>(villes);
+
+            var types = await _db.GetTypesAsync();
+            Types = new ObservableCollection<TypeTransport>(types);
+        }
+
         public AddTrajetViewModel(ConnexionBD db)
         {
             _db = db;
-            ChargerVilles();
-            ChargerTypes();
+            ChargerDonnees();
         }
 
-        public async void ChargerVilles()
-        {
-            // On récupère la liste via ton service
-            var data = await _db.GetLieuxAsync();
-            Lieux = new ObservableCollection<Lieu>(data);
-        }
-
-        public async void ChargerTypes()
-        {
-            var data = await _db.GetTypesAsync();
-            Types = new ObservableCollection<TypeTransport>(data); // ✅ on met data dedans
-        }
 
         [RelayCommand]
         private async Task Save()

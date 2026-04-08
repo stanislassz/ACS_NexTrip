@@ -22,5 +22,7 @@ namespace ACS_NexTrip.Models
         public string TRA_LIEU_DEPART { get; set; }
         public string TRA_LIEU_ARRIVEE { get; set; }
         public string TYP_LIBELLE { get; set; }
+
+        public string AffichageDepart => $"{TRA_DATEDEPART:dd/MM/yyyy} {TRA_HEUREDEPART:hh\\:mm}";
     }
 }

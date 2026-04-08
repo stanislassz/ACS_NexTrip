@@ -5,30 +5,45 @@
              x:DataType="vm:AddTrajetViewModel"
              Title="Nouveau Trajet">
 
-    <VerticalStackLayout Padding="30" Spacing="15">
-        <Label Text="Nouveau Trajet" FontSize="24" FontAttributes="Bold" TextColor="Orange" />
+    <ScrollView VerticalOptions="FillAndExpand">
 
-        <Label Text="Ville de Départ" />
-        <Picker ItemsSource="{Binding Lieux}"
+        <VerticalStackLayout Padding="30" Spacing="15">
+            <Label Text="Nouveau Trajet" FontSize="24" FontAttributes="Bold" TextColor="Orange" />
+
+            <Label Text="Ville de Départ" />
+            <Picker ItemsSource="{Binding Lieux}"
             ItemDisplayBinding="{Binding LIE_LIBELLE}"
             SelectedItem="{Binding SelectedDepart}"
             Title="Sélectionner le départ" />
 
-        <Label Text="Ville d'Arrivée" />
-        <Picker ItemsSource="{Binding Lieux}"
+            <Label Text="Ville d'Arrivée" />
+            <Picker ItemsSource="{Binding Lieux}"
             ItemDisplayBinding="{Binding LIE_LIBELLE}"
             SelectedItem="{Binding SelectedArrivee}"
             Title="Sélectionner l'arrivée" />
 
-        <Label Text="Prix" />
-        <Entry Text="{Binding Prix}" Keyboard="Numeric" Placeholder="Ex: 50" />
+            <Label Text="Type de transport" />
+            <Picker ItemsSource="{Binding Types}"
+                ItemDisplayBinding="{Binding TYP_LIBELLE}"
+                SelectedItem="{Binding SelectedType}"
+                Title="Sélectionner un type" />
 
-        <Label Text="Date" />
-        <DatePicker Date="{Binding DateDep}" />
+            <Label Text="Prix" />
+            <Entry Text="{Binding Prix}" Keyboard="Numeric" Placeholder="Ex: 50" />
 
-        <Button Text="Enregistrer" 
+            <Label Text="Date" />
+            <DatePicker Date="{Binding DateDep}" />
+
+            <Label Text="Heure de départ" />
+            <TimePicker Time="{Binding HeureDep}" />
+
+            <Label Text="Heure d'arrivée" />
+            <TimePicker Time="{Binding HeureArr}" />
+
+            <Button Text="Enregistrer" 
             Command="{Binding SaveCommand}" 
             BackgroundColor="Orange" 
             Margin="0,20,0,0" />
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

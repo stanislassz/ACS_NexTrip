@@ -217,6 +217,7 @@ namespace ACS_NexTrip.Services
                             TRA_ID = Convert.ToInt32(reader["TRA_ID"]),
 
                             TRA_DATEDEPART = (DateTime)reader["TRA_DATEDEPART"],
+                            TRA_HEUREDEPART = (TimeSpan)reader["TRA_HEUREDEPART"],
                             TRA_LIEU_DEPART = reader["TRA_LIEU_DEPART"].ToString(),
                             TRA_LIEU_ARRIVEE = reader["TRA_LIEU_ARRIVEE"].ToString(),
                             TYP_LIBELLE = reader["TYP_LIBELLE"].ToString(),
@@ -331,10 +332,12 @@ namespace ACS_NexTrip.Services
                     }
                 }
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
-            finally { this.Fermer(); }
-
-            return liste;
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("ERREUR GetTypesAsync : " + ex.Message);
+                System.Diagnostics.Debug.WriteLine("DETAIL : " + ex.ToString());
+            }
+            return liste; // ✅ toujours retourner la liste, même vide en cas d'erreur
         }
     }
 }
