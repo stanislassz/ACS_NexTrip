@@ -75,7 +75,7 @@
                             HorizontalOptions="Center"/>
 
                         <BoxView HeightRequest="2" 
-                                 Color="Orange" 
+                                 Color="Transparent" 
                                  HorizontalOptions="Fill"/>
 
                     <VerticalStackLayout.GestureRecognizers>
