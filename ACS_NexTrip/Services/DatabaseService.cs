@@ -326,10 +326,12 @@ namespace ACS_NexTrip.Services
                     }
                 }
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
-            finally { this.Fermer(); }
-
-            return liste;
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("ERREUR GetTypesAsync : " + ex.Message);
+                System.Diagnostics.Debug.WriteLine("DETAIL : " + ex.ToString());
+            }
+            return liste; // ✅ toujours retourner la liste, même vide en cas d'erreur
         }
     }
 }

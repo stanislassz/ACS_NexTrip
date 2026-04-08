@@ -20,6 +20,12 @@
             SelectedItem="{Binding SelectedArrivee}"
             Title="Sélectionner l'arrivée" />
 
+        <Label Text="Type de transport" />
+        <Picker ItemsSource="{Binding Types}"
+                ItemDisplayBinding="{Binding TYP_LIBELLE}"
+                SelectedItem="{Binding SelectedType}"
+                Title="Sélectionner un type" />
+
         <Label Text="Prix" />
         <Entry Text="{Binding Prix}" Keyboard="Numeric" Placeholder="Ex: 50" />
 
