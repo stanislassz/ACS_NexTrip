@@ -217,6 +217,7 @@ namespace ACS_NexTrip.Services
                             TRA_ID = Convert.ToInt32(reader["TRA_ID"]),
 
                             TRA_DATEDEPART = (DateTime)reader["TRA_DATEDEPART"],
+                            TRA_HEUREDEPART = (TimeSpan)reader["TRA_HEUREDEPART"],
                             TRA_LIEU_DEPART = reader["TRA_LIEU_DEPART"].ToString(),
                             TRA_LIEU_ARRIVEE = reader["TRA_LIEU_ARRIVEE"].ToString(),
                             TYP_LIBELLE = reader["TYP_LIBELLE"].ToString(),

@@ -18,6 +18,12 @@ namespace ACS_NexTrip.ViewModel
         [ObservableProperty]
         private ObservableCollection<TypeTransport> _types;
 
+        [ObservableProperty]
+        private TimeSpan _heureDep = DateTime.Now.TimeOfDay;
+
+        [ObservableProperty]
+        private TimeSpan _heureArr = DateTime.Now.TimeOfDay.Add(TimeSpan.FromHours(2));
+
         // ✅ selectedType est bien un TypeTransport
         [ObservableProperty]
         private TypeTransport _selectedType;
