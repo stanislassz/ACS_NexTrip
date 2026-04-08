@@ -130,11 +130,11 @@
                                 </Border.Shadow>
 
                                 <Grid Grid.Row="1" Grid.Column="1" 
-      ColumnDefinitions="*, *" 
-      RowDefinitions="Auto, Auto, Auto, Auto, Auto" 
-      ColumnSpacing="15" 
-      RowSpacing="18" 
-      Margin="0,20,0,0">
+                                      ColumnDefinitions="*, *" 
+                                      RowDefinitions="Auto, Auto, Auto, Auto, Auto" 
+                                      ColumnSpacing="15" 
+                                      RowSpacing="18" 
+                                      Margin="0,20,0,0">
 
                                     <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="5">
                                         <Label Text="NOM" FontSize="11" FontAttributes="Bold" TextColor="{StaticResource Gray500}" Margin="5,0"/>
