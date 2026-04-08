@@ -62,11 +62,11 @@
 <!-- Paramètre inactif -->
 <VerticalStackLayout VerticalOptions="Center" Spacing="5">
     <Label Text="Paramètres" 
-       TextColor="Transparent" 
+       TextColor="Orange" 
        FontSize="14"
        FontAttributes="Bold"
        HorizontalOptions="Center"/>
-    <BoxView HeightRequest="2" Color="Orange" HorizontalOptions="Fill"/>
+    <BoxView HeightRequest="2" Color="Transparent" HorizontalOptions="Fill"/>
     <VerticalStackLayout.GestureRecognizers>
         <TapGestureRecognizer Command="{Binding NavigateToUsersCommand}"/>
     </VerticalStackLayout.GestureRecognizers>
