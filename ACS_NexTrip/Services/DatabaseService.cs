@@ -293,5 +293,43 @@ namespace ACS_NexTrip.Services
 
             return liste;
         }
+
+
+
+
+
+
+
+
+
+
+
+        public async Task<List<TypeTransport>> GetTypesAsync()
+        {
+            List<TypeTransport> liste = new List<TypeTransport>();
+            try
+            {
+                this.Ouvrir();
+                using (SqlCommand cmd = new SqlCommand("ps_GetTypes", this.Connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    using (SqlDataReader dr = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await dr.ReadAsync())
+                        {
+                            liste.Add(new TypeTransport
+                            {
+                                TYP_ID = Convert.ToInt32(dr["TYP_ID"]),
+                                TYP_LIBELLE = dr["TYP_LIBELLE"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            finally { this.Fermer(); }
+
+            return liste;
+        }
     }
 }

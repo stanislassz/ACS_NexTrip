@@ -14,6 +14,14 @@ namespace ACS_NexTrip.ViewModel
         [ObservableProperty]
         private ObservableCollection<Lieu> _lieux;
 
+        // ✅ On utilise TypeTransport, pas le type système "Type"
+        [ObservableProperty]
+        private ObservableCollection<TypeTransport> _types;
+
+        // ✅ selectedType est bien un TypeTransport
+        [ObservableProperty]
+        private TypeTransport _selectedType;
+
         // Ce que l'utilisateur sélectionne
         [ObservableProperty]
         private Lieu _selectedDepart;
@@ -31,6 +39,7 @@ namespace ACS_NexTrip.ViewModel
         {
             _db = db;
             ChargerVilles();
+            ChargerTypes();
         }
 
         public async void ChargerVilles()
@@ -38,6 +47,12 @@ namespace ACS_NexTrip.ViewModel
             // On récupère la liste via ton service
             var data = await _db.GetLieuxAsync();
             Lieux = new ObservableCollection<Lieu>(data);
+        }
+
+        public async void ChargerTypes()
+        {
+            var data = await _db.GetTypesAsync();
+            Types = new ObservableCollection<TypeTransport>(data); // ✅ on met data dedans
         }
 
         [RelayCommand]
@@ -53,7 +68,7 @@ namespace ACS_NexTrip.ViewModel
                 TRA_HEUREARRIVEE = DateTime.Now.TimeOfDay.Add(TimeSpan.FromHours(2)),
                 TRA_LIEU_DEPART_ID = SelectedDepart.LIE_ID, // On utilise l'ID de l'objet choisi
                 TRA_LIEU_ARRIVEE_ID = SelectedArrivee.LIE_ID,
-                TYP_ID = 1,
+                TYP_ID = _selectedType.TYP_ID,
                 TRA_PRIX = Prix
             };
 

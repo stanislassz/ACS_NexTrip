@@ -36,7 +36,7 @@
        FontSize="14"
        FontAttributes="Bold"
        HorizontalOptions="Center"/>
-    <BoxView HeightRequest="2" Color="{StaticResource Orange500}" HorizontalOptions="Fill"/>
+    <BoxView HeightRequest="2" Color="Transparent" HorizontalOptions="Fill"/>
     <VerticalStackLayout.GestureRecognizers>
         <TapGestureRecognizer Command="{Binding NavigateToDashboardCommand}"/>
     </VerticalStackLayout.GestureRecognizers>
@@ -66,7 +66,7 @@
        FontSize="14"
        FontAttributes="Bold"
        HorizontalOptions="Center"/>
-    <BoxView HeightRequest="2" Color="Transparent" HorizontalOptions="Fill"/>
+    <BoxView HeightRequest="2" Color="Orange" HorizontalOptions="Fill"/>
     <VerticalStackLayout.GestureRecognizers>
         <TapGestureRecognizer Command="{Binding NavigateToUsersCommand}"/>
     </VerticalStackLayout.GestureRecognizers>
