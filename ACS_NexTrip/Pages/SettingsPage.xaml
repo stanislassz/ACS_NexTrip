@@ -129,66 +129,61 @@
                                     <Shadow Brush="{StaticResource Gray900}" Offset="0,4" Radius="10" Opacity="0.08"/>
                                 </Border.Shadow>
 
-                                <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto, Auto" ColumnSpacing="20">
+                                <Grid Grid.Row="1" Grid.Column="1" 
+                                      ColumnDefinitions="*, *" 
+                                      RowDefinitions="Auto, Auto, Auto, Auto, Auto" 
+                                      ColumnSpacing="15" 
+                                      RowSpacing="18" 
+                                      Margin="0,20,0,0">
 
-                                    <Border Grid.RowSpan="2" Grid.Column="0" 
-                                            BackgroundColor="{StaticResource Orange500}" 
-                                            HeightRequest="60" WidthRequest="60" 
-                                            StrokeThickness="0" 
-                                            VerticalOptions="Start">
-                                        <Border.StrokeShape>
-                                            <RoundRectangle CornerRadius="30"/>
-                                        </Border.StrokeShape>
-                                        <Label Text="👤" FontSize="24" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
-                                    </Border>
-
-                                    <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Spacing="10" VerticalOptions="Center">
-                                        <Label Text="{Binding UTI_PRENOM}" FontSize="18" FontAttributes="Bold" TextColor="Black"/>
-                                        <Label Text="{Binding UTI_NOM}" FontSize="18" FontAttributes="Bold" TextColor="Black" TextTransform="Uppercase"/>
-
-                                        <Border BackgroundColor="#FFF3E0" Padding="10,2" Margin="10,0,0,0" VerticalOptions="Center">
-                                            <Border.StrokeShape>
-                                                <RoundRectangle CornerRadius="8"/>
-                                            </Border.StrokeShape>
-                                            <Label Text="{Binding ROL_LIBELLE}" TextColor="{StaticResource Orange500}" FontSize="12" FontAttributes="Bold"/>
+                                    <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="5">
+                                        <Label Text="NOM" FontSize="11" FontAttributes="Bold" TextColor="{StaticResource Gray500}" Margin="5,0"/>
+                                        <Border StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="{StaticResource Gray200}" BackgroundColor="#F8F9FA" Padding="12,0">
+                                            <Entry Text="{Binding UTI_NOM}" Placeholder="Ex: Dupont" Keyboard="Text" FontSize="15" HeightRequest="45" TextColor="Black"/>
                                         </Border>
-                                    </HorizontalStackLayout>
+                                    </VerticalStackLayout>
 
-                                    <Grid Grid.Row="1" Grid.Column="1" 
-                                          ColumnDefinitions="*, *" RowDefinitions="Auto, Auto, Auto" 
-                                          ColumnSpacing="15" RowSpacing="8" 
-                                          Margin="0,15,0,0">
+                                    <VerticalStackLayout Grid.Row="0" Grid.Column="1" Spacing="5">
+                                        <Label Text="PRÉNOM" FontSize="11" FontAttributes="Bold" TextColor="{StaticResource Gray500}" Margin="5,0"/>
+                                        <Border StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="{StaticResource Gray200}" BackgroundColor="#F8F9FA" Padding="12,0">
+                                            <Entry Text="{Binding UTI_PRENOM}" Placeholder="Ex: Jean" Keyboard="Text" FontSize="15" HeightRequest="45" TextColor="Black"/>
+                                        </Border>
+                                    </VerticalStackLayout>
 
-                                        <HorizontalStackLayout Grid.Row="0" Grid.Column="0" Spacing="8">
-                                            <Label Text="📧" FontSize="14"/>
-                                            <Label Text="{Binding UTI_EMAIL}" TextColor="{StaticResource Gray600}" FontSize="13" VerticalOptions="Center"/>
-                                        </HorizontalStackLayout>
+                                    <VerticalStackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Spacing="5">
+                                        <Label Text="ADRESSE E-MAIL" FontSize="11" FontAttributes="Bold" TextColor="{StaticResource Gray500}" Margin="5,0"/>
+                                        <Border StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="{StaticResource Gray200}" BackgroundColor="#F8F9FA" Padding="12,0">
+                                            <Entry Text="{Binding UTI_EMAIL}" Placeholder="jean.dupont@email.com" Keyboard="Email" FontSize="15" HeightRequest="45" TextColor="Black"/>
+                                        </Border>
+                                    </VerticalStackLayout>
 
-                                        <HorizontalStackLayout Grid.Row="1" Grid.Column="0" Spacing="8">
-                                            <Label Text="📞" FontSize="14"/>
-                                            <Label Text="{Binding UTI_TEL}" TextColor="{StaticResource Gray600}" FontSize="13" VerticalOptions="Center"/>
-                                        </HorizontalStackLayout>
+                                    <VerticalStackLayout Grid.Row="2" Grid.Column="0" Spacing="5">
+                                        <Label Text="CODE POSTAL" FontSize="11" FontAttributes="Bold" TextColor="{StaticResource Gray500}" Margin="5,0"/>
+                                        <Border StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="{StaticResource Gray200}" BackgroundColor="#F8F9FA" Padding="12,0">
+                                            <Entry Text="{Binding UTI_CP}" Placeholder="75000" Keyboard="Numeric" FontSize="15" HeightRequest="45" TextColor="Black"/>
+                                        </Border>
+                                    </VerticalStackLayout>
 
-                                        <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Spacing="8">
-                                            <Label Text="🔑" FontSize="14"/>
-                                            <Label Text="{Binding UTI_LOGIN}" TextColor="{StaticResource Gray600}" FontSize="13" VerticalOptions="Center"/>
-                                        </HorizontalStackLayout>
+                                    <VerticalStackLayout Grid.Row="2" Grid.Column="1" Spacing="5">
+                                        <Label Text="TÉLÉPHONE" FontSize="11" FontAttributes="Bold" TextColor="{StaticResource Gray500}" Margin="5,0"/>
+                                        <Border StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="{StaticResource Gray200}" BackgroundColor="#F8F9FA" Padding="12,0">
+                                            <Entry Text="{Binding UTI_TEL}" Placeholder="06 00 00 00 00" Keyboard="Telephone" FontSize="15" HeightRequest="45" TextColor="Black"/>
+                                        </Border>
+                                    </VerticalStackLayout>
 
-                                        <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Spacing="8">
-                                            <Label Text="🏠" FontSize="14"/>
-                                            <Label Text="{Binding UTI_ADRESSE}" TextColor="{StaticResource Gray600}" FontSize="13" VerticalOptions="Center" LineBreakMode="TailTruncation"/>
-                                        </HorizontalStackLayout>
+                                    <VerticalStackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Spacing="5">
+                                        <Label Text="ADRESSE RÉSIDENTIELLE" FontSize="11" FontAttributes="Bold" TextColor="{StaticResource Gray500}" Margin="5,0"/>
+                                        <Border StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="{StaticResource Gray200}" BackgroundColor="#F8F9FA" Padding="12,0">
+                                            <Entry Text="{Binding UTI_ADRESSE}" Placeholder="12 rue des Fleurs" Keyboard="Text" FontSize="15" HeightRequest="45" TextColor="Black"/>
+                                        </Border>
+                                    </VerticalStackLayout>
 
-                                        <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Spacing="8">
-                                            <Label Text="📍" FontSize="14"/>
-                                            <Label Text="{Binding UTI_CP}" TextColor="{StaticResource Gray600}" FontSize="13" VerticalOptions="Center"/>
-                                        </HorizontalStackLayout>
-
-                                        <HorizontalStackLayout Grid.Row="2" Grid.Column="1" Spacing="8">
-                                            <Label Text="🎂" FontSize="14"/>
-                                            <Label Text="{Binding UTI_DATENAISSANCE}" TextColor="{StaticResource Gray600}" FontSize="13" VerticalOptions="Center"/>
-                                        </HorizontalStackLayout>
-                                    </Grid>
+                                    <VerticalStackLayout Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Spacing="5">
+                                        <Label Text="DATE DE NAISSANCE" FontSize="11" FontAttributes="Bold" TextColor="{StaticResource Gray500}" Margin="5,0"/>
+                                        <Border StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="{StaticResource Gray200}" BackgroundColor="#F8F9FA" Padding="12,5">
+                                            <DatePicker Date="{Binding UTI_DATENAISSANCE}" Format="dd-MM-yyyy" FontSize="15" TextColor="Black" MinimumHeightRequest="45"/>
+                                        </Border>
+                                    </VerticalStackLayout>
 
                                 </Grid>
                             </Border>
