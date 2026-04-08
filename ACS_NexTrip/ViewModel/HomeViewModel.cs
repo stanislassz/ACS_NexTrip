@@ -18,6 +18,12 @@ namespace ACS_NexTrip.ViewModel
         public ICommand NavigateToUsersCommand { get; }
         public ICommand ShowNotificationsCommand { get; }
         public ICommand ShowProfileCommand { get; }
+        public ICommand DeleteTrajetCommand { get; }
+
+        private readonly ConnexionBD _db;
+
+        [ObservableProperty]
+        private ObservableCollection<Trajet> _trajets;
 
         public HomeViewModel()
         {
@@ -27,6 +33,34 @@ namespace ACS_NexTrip.ViewModel
             NavigateToUsersCommand = new Command(async () => await GoToSettingsAsync());
             ShowNotificationsCommand = new Command(() => { /* À implémenter */ });
             ShowProfileCommand = new Command(() => { /* À implémenter */ });
+            DeleteTrajetCommand = new Command<Trajet>((trajet) => {
+                if (trajet != null && Trajets != null && Trajets.Contains(trajet))
+                {
+                    Trajets.Remove(trajet);
+                }
+            });
+
+            _db = new ConnexionBD();
+            ChargerTrajets();
+        }
+
+        public HomeViewModel(ConnexionBD db)
+        {
+            // Initialisation des commandes
+            NavigateToDashboardCommand = new Command(async () => await GoToHomeAsync());
+            NavigateToTripsCommand = new Command(async () => await GoToTripsAsync());
+            NavigateToUsersCommand = new Command(async () => await GoToSettingsAsync());
+            ShowNotificationsCommand = new Command(() => { /* À implémenter */ });
+            ShowProfileCommand = new Command(() => { /* À implémenter */ });
+            DeleteTrajetCommand = new Command<Trajet>((trajet) => {
+                if (trajet != null && Trajets != null && Trajets.Contains(trajet))
+                {
+                    Trajets.Remove(trajet);
+                }
+            });
+
+            _db = db;
+            ChargerTrajets();
         }
 
         private async Task GoToTripsAsync()
@@ -43,20 +77,13 @@ namespace ACS_NexTrip.ViewModel
             await Shell.Current.GoToAsync("HomePage");
         }
 
-        private readonly ConnexionBD _db;
-
-        [ObservableProperty]
-        private ObservableCollection<Trajet> _trajets;
-
-        public HomeViewModel(ConnexionBD db)
-        {
-            _db = db;
-            ChargerTrajets();
-        }
-
         public async void ChargerTrajets()
         {
-            Trajets = new ObservableCollection<Trajet>(await _db.GetNextTrajetsAsync());
+            var prochainsTrajets = await _db.GetNextTrajetsAsync();
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                Trajets = new ObservableCollection<Trajet>(prochainsTrajets);
+            });
         }
     }
 }

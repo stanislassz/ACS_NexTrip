@@ -142,7 +142,7 @@
                                     <HorizontalStackLayout Spacing="15">
                                         <HorizontalStackLayout Spacing="5">
                                             <Label Text="📅" FontSize="12"/>
-                                            <Label Text="{Binding TRA_DATEDEPART, StringFormat='{0:dd/MM/yyyy HH:mm}'}" TextColor="{StaticResource Gray600}" FontSize="13"/>
+                                            <Label Text="{Binding AffichageDepart}" TextColor="{StaticResource Gray600}" FontSize="13"/>
                                         </HorizontalStackLayout>
                                         <HorizontalStackLayout Spacing="5">
                                             <Label Text="🏷️" FontSize="12"/>
