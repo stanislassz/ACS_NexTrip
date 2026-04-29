@@ -4,9 +4,6 @@
              x:Class="ACS_NexTrip.Pages.LoginPage"
              x:DataType="vm:LoginViewModel">
 
-    <ContentPage.BindingContext>
-        <vm:LoginViewModel />
-    </ContentPage.BindingContext>
 
     <ScrollView VerticalOptions="FillAndExpand">
         <Grid Padding="20">

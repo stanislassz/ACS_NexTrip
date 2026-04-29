@@ -69,7 +69,7 @@ namespace ACS_NexTrip.ViewModel
                 TRA_DATEARRIVEE = DateDep,
                 TRA_HEUREDEPART = DateTime.Now.TimeOfDay,
                 TRA_HEUREARRIVEE = DateTime.Now.TimeOfDay.Add(TimeSpan.FromHours(2)),
-                TRA_LIEU_DEPART_ID = SelectedDepart.LIE_ID, // On utilise l'ID de l'objet choisi
+                TRA_LIEU_DEPART_ID = SelectedDepart.LIE_ID, 
                 TRA_LIEU_ARRIVEE_ID = SelectedArrivee.LIE_ID,
                 TYP_ID = _selectedType.TYP_ID,
                 TRA_PRIX = Prix

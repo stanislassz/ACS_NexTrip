@@ -1,64 +1,70 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ACS_NexTrip.Models;
 using ACS_NexTrip.Services;
-using ACS_NexTrip.Models;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace ACS_NexTrip.ViewModel
 {
-    public class RegisterViewModel : BindableObject
+    public partial class RegisterViewModel : ObservableObject
     {
-        private readonly ConnexionBD _db = new ConnexionBD();
+        private readonly ConnexionBD _db;
 
-        // On ne garde que les 4 propriétés nécessaires
-        public string Nom { get; set; }
-        public string Prenom { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
-        public string Email { get; set; }
+        [ObservableProperty]
+        private string _nom = string.Empty;
 
-        public Command RegisterCommand { get; }
-        public Command GoBackCommand { get; }
+        [ObservableProperty]
+        private string _prenom = string.Empty;
 
-        public RegisterViewModel()
+        [ObservableProperty]
+        private string _login = string.Empty;
+
+        [ObservableProperty]
+        private string _password = string.Empty;
+
+        [ObservableProperty]
+        private string _email = string.Empty;
+
+        public RegisterViewModel(ConnexionBD db)
         {
-            RegisterCommand = new Command(async () =>
-            {
-                // Vérification : tous les champs doivent être remplis
-                if (string.IsNullOrWhiteSpace(Nom) || string.IsNullOrWhiteSpace(Prenom) ||
-                    string.IsNullOrWhiteSpace(Login) || string.IsNullOrWhiteSpace(Password))
-                {
-                    await App.Current.MainPage.DisplayAlert("Attention", "Tous les champs sont obligatoires.", "OK");
-                    return;
-                }
-
-                // On crée l'objet utilisateur avec les 4 infos
-                var u = new Utilisateur
-                {
-                    UTI_NOM = Nom,
-                    UTI_PRENOM = Prenom,
-                    UTI_LOGIN = Login,
-                    UTI_PASSWORD = Password,
-                    UTI_EMAIL = Email
-                };
-
-                // Appel de la PS via le service
-                bool success = await _db.InscrireUtilisateurAsync(u);
-
-                if (success)
-                {
-                    await App.Current.MainPage.DisplayAlert("Succès", "Inscription terminée !", "OK");
-                    await Shell.Current.GoToAsync("..");
-                }
-                else
-                {
-                    await App.Current.MainPage.DisplayAlert("Erreur", "L'inscription a échoué.", "OK");
-                }
-            });
-
-            GoBackCommand = new Command(async () => await Shell.Current.GoToAsync(".."));
+            _db = db;
         }
+
+        // Génère "RegisterCommand"
+        [RelayCommand]
+        private async Task Register()
+        {
+            if (string.IsNullOrWhiteSpace(Nom) || string.IsNullOrWhiteSpace(Prenom) ||
+                string.IsNullOrWhiteSpace(Login) || string.IsNullOrWhiteSpace(Password))
+            {
+                await App.Current.MainPage.DisplayAlert("Attention", "Tous les champs sont obligatoires.", "OK");
+                return;
+            }
+
+            var u = new Utilisateur
+            {
+                UTI_NOM = Nom,
+                UTI_PRENOM = Prenom,
+                UTI_LOGIN = Login,
+                UTI_PASSWORD = Password,
+                UTI_EMAIL = Email
+            };
+
+            bool success = await _db.InscrireUtilisateurAsync(u);
+
+            if (success)
+            {
+                await App.Current.MainPage.DisplayAlert("Succès", "Inscription terminée !", "OK");
+                await Shell.Current.GoToAsync("..");
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Erreur", "L'inscription a échoué.", "OK");
+            }
+        }
+
+        // Génère "GoBackCommand"
+        [RelayCommand]
+        private async Task GoBack() =>
+            await Shell.Current.GoToAsync("..");
     }
 }

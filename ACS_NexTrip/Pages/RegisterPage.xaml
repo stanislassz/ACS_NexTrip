@@ -4,9 +4,6 @@
              x:Class="ACS_NexTrip.Pages.RegisterPage"
              x:DataType="vm:RegisterViewModel">
 
-    <ContentPage.BindingContext>
-        <vm:RegisterViewModel />
-    </ContentPage.BindingContext>
 
     <ScrollView>
         <Grid Padding="20">
