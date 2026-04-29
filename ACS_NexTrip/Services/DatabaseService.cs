@@ -1,7 +1,8 @@
 ﻿using System.Data;
 using System.Diagnostics;
-using Microsoft.Data.SqlClient; // Pilote pour SQL Server
+using System.Security.Cryptography;
 using ACS_NexTrip.Models;
+using Microsoft.Data.SqlClient; // Pilote pour SQL Server
 
 namespace ACS_NexTrip.Services
 {
@@ -44,8 +45,6 @@ namespace ACS_NexTrip.Services
             if (Connection.State == System.Data.ConnectionState.Open)
                 Connection.Close();
         }
-
-
 
 
         public async Task<bool> VerifierConnexionAsync(string login, string password)
@@ -180,7 +179,7 @@ namespace ACS_NexTrip.Services
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     // Dans InscrireUtilisateurAsync
-                    cmd.Parameters.AddWithValue("@Login", u.UTI_LOGIN);   
+                    cmd.Parameters.AddWithValue("@Login", u.UTI_LOGIN);
                     cmd.Parameters.AddWithValue("@Password", u.UTI_PASSWORD);
                     cmd.Parameters.AddWithValue("@Nom", u.UTI_NOM);
                     cmd.Parameters.AddWithValue("@Prenom", u.UTI_PRENOM);
