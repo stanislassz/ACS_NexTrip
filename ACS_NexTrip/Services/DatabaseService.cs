@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Security.Cryptography;
 using ACS_NexTrip.Models;
 using Microsoft.Data.SqlClient; // Pilote pour SQL Server
+using System.Text;
 
 namespace ACS_NexTrip.Services
 {
@@ -16,13 +17,13 @@ namespace ACS_NexTrip.Services
             var builder = new SqlConnectionStringBuilder
             {
                 // Nom du serveur copié de ton image
-                DataSource = @"2SIO-MAL\MSSQLSERVER01",
+                DataSource = @"localhost",
                 InitialCatalog = "ACS_VOYAGE",
 
                 // On passe en Authentification SQL Server
                 IntegratedSecurity = false,
                 UserID = "sa",
-                Password = "SLAMbest@2024", // Remplace par ton vrai mot de passe
+                Password = "Info76240#", // Remplace par ton vrai mot de passe
 
                 TrustServerCertificate = true
             };
@@ -46,6 +47,41 @@ namespace ACS_NexTrip.Services
                 Connection.Close();
         }
 
+        public static string Hashage(string clearText)
+        {
+            var sb = new StringBuilder();
+            var bytes = Encoding.UTF8.GetBytes(clearText);
+            var algo = HashAlgorithm.Create(nameof(SHA256));
+            var hash = algo!.ComputeHash(bytes);
+            foreach (var byt in hash)
+                sb.Append(byt.ToString("x2"));
+            return sb.ToString();
+        }
+        public async Task<bool> InscrireUtilisateurAsync(Utilisateur u)
+        {
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand("ps_Inscription", this.Connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    // Dans InscrireUtilisateurAsync
+                    cmd.Parameters.AddWithValue("@Login", u.UTI_LOGIN);
+                    cmd.Parameters.AddWithValue("@Password", Hashage(u.UTI_PASSWORD));
+                    cmd.Parameters.AddWithValue("@Nom", u.UTI_NOM);
+                    cmd.Parameters.AddWithValue("@Prenom", u.UTI_PRENOM);
+                    cmd.Parameters.AddWithValue("@Email", u.UTI_EMAIL);
+
+                    int rows = await cmd.ExecuteNonQueryAsync();
+                    return rows > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Erreur SQL : " + ex.Message);
+                return false;
+            }
+        }
 
         public async Task<bool> VerifierConnexionAsync(string login, string password)
         {
@@ -55,12 +91,19 @@ namespace ACS_NexTrip.Services
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@Login", login);
-                    cmd.Parameters.AddWithValue("@Password", password);
 
                     using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                     {
-                        // HasRows renvoie true si la PS a trouvé un utilisateur correspondant
-                        return reader.HasRows;
+                        if (await reader.ReadAsync()) // On avance sur la première ligne
+                        {
+                            string tempPassword = reader["UTI_PASSWORD"].ToString();
+                            
+                            if(Hashage(password) == tempPassword)
+                            {
+                                return true;
+                            }
+                        }
+                        return false;
                     }
                 }
             }
@@ -165,40 +208,6 @@ namespace ACS_NexTrip.Services
 
             return liste;
         }
-
-
-
-
-
-        public async Task<bool> InscrireUtilisateurAsync(Utilisateur u)
-        {
-            try
-            {
-                using (SqlCommand cmd = new SqlCommand("ps_Inscription", this.Connection))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    // Dans InscrireUtilisateurAsync
-                    cmd.Parameters.AddWithValue("@Login", u.UTI_LOGIN);
-                    cmd.Parameters.AddWithValue("@Password", u.UTI_PASSWORD);
-                    cmd.Parameters.AddWithValue("@Nom", u.UTI_NOM);
-                    cmd.Parameters.AddWithValue("@Prenom", u.UTI_PRENOM);
-                    cmd.Parameters.AddWithValue("@Email", u.UTI_EMAIL);
-
-                    int rows = await cmd.ExecuteNonQueryAsync();
-                    return rows > 0;
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine("Erreur SQL : " + ex.Message);
-                return false;
-            }
-        }
-
-
-
-
 
 
         // Afficher les trajets 
