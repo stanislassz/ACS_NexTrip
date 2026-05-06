@@ -5,4 +5,5 @@
              Shell.NavBarIsVisible="False"
              Title="UserPage">
 
+    <Label>test</Label>
 </ContentPage>

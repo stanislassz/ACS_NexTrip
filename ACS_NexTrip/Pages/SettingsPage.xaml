@@ -73,7 +73,7 @@
                            HorizontalOptions="Center"/>
                         <BoxView HeightRequest="2" Color="Orange" HorizontalOptions="Fill"/>
                         <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateToUsersCommand}"/>
+                            <TapGestureRecognizer Command="{Binding NavigateToSettingsCommand}"/>
                         </VerticalStackLayout.GestureRecognizers>
                     </VerticalStackLayout>
 
