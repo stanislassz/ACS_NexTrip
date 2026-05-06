@@ -1,68 +1,42 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:models="clr-namespace:ACS_NexTrip.Models"
              xmlns:vm="clr-namespace:ACS_NexTrip.ViewModel"
+             xmlns:models="clr-namespace:ACS_NexTrip.Models"
              x:Class="ACS_NexTrip.Pages.UserPage"
+             x:DataType="vm:UserViewModel"
              Shell.NavBarIsVisible="False"
-             Title="UserPage"
-             x:DataType="vm:UserViewModel">
-    
-    <Grid RowDefinitions="Auto, *, Auto">
+             BackgroundColor="{AppThemeBinding Light=#F5F5F5, Dark={StaticResource Gray900}}"
+             Title="Utilisateurs">
 
-        <!-- Header personnalisé -->
-        <Border Grid.Row="0" 
-            BackgroundColor="White"
-            Padding="20,10">
+    <Grid RowDefinitions="Auto, *">
+
+        <Border Grid.Row="0" BackgroundColor="White" Padding="20,10">
             <Border.Shadow>
-                <Shadow Brush="{StaticResource Gray900}"
-                    Offset="0,2"
-                    Radius="8"
-                    Opacity="0.1"/>
+                <Shadow Brush="{StaticResource Gray900}" Offset="0,2" Radius="8" Opacity="0.1"/>
             </Border.Shadow>
 
-            <Grid ColumnDefinitions="Auto, *, Auto" 
-              ColumnSpacing="20"
-              HeightRequest="60">
+            <Grid ColumnDefinitions="Auto, *, Auto" ColumnSpacing="20" HeightRequest="60">
 
-                <!-- Logo à gauche -->
-                <HorizontalStackLayout Grid.Column="0" 
-                                   Spacing="10" 
-                                   VerticalOptions="Center">
-                    <Border BackgroundColor="{StaticResource Orange500}"
-                        HeightRequest="40"
-                        WidthRequest="40"
-                        StrokeThickness="0">
+                <HorizontalStackLayout Grid.Column="0" Spacing="10" VerticalOptions="Center">
+                    <Border BackgroundColor="Orange" HeightRequest="40" WidthRequest="40" StrokeThickness="0">
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="10"/>
                         </Border.StrokeShape>
-                        <Label Text="TM" 
-                           FontSize="18" 
-                           FontAttributes="Bold" 
-                           TextColor="Orange"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"/>
+                        <Label Text="TM" FontSize="18" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
                     </Border>
-                    <Label Text="TravelManager" 
-                       FontSize="22" 
-                       FontAttributes="Bold" 
-                       TextColor="Orange"
-                       VerticalOptions="Center"/>
+                    <Label Text="TravelManager" FontSize="22" FontAttributes="Bold" TextColor="Orange" VerticalOptions="Center"/>
                 </HorizontalStackLayout>
 
-                <!-- Boutons de navigation au centre -->
-                <HorizontalStackLayout Grid.Column="1" 
-                                   HorizontalOptions="Center" 
-                                   VerticalOptions="Center"
-                                   Spacing="30">
-
+                <HorizontalStackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Spacing="30">
                     <!-- Accueil actif -->
                     <VerticalStackLayout VerticalOptions="Center" Spacing="5">
                         <Label Text="Accueil" 
-                        TextColor="Orange" 
-                        FontSize="14"
-                        FontAttributes="Bold"
-                        HorizontalOptions="Center"/>
+                           TextColor="Orange" 
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+                        <BoxView HeightRequest="2" Color="Transparent" HorizontalOptions="Fill"/>
                         <VerticalStackLayout.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding NavigateToDashboardCommand}"/>
                         </VerticalStackLayout.GestureRecognizers>
@@ -71,13 +45,13 @@
                     <!-- Trajets actif -->
                     <VerticalStackLayout VerticalOptions="Center" Spacing="5" Padding="10,0">
                         <Label Text="Trajets" 
-                            TextColor="Orange" 
-                            FontSize="14"
-                            FontAttributes="Bold"
-                            HorizontalOptions="Center"/>
+                               TextColor="Orange" 
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"/>
 
                         <BoxView HeightRequest="2" 
-                                 Color="Transparent" 
+                                 Color="Orange" 
                                  HorizontalOptions="Fill"/>
 
                         <VerticalStackLayout.GestureRecognizers>
@@ -85,90 +59,29 @@
                         </VerticalStackLayout.GestureRecognizers>
                     </VerticalStackLayout>
 
-                    <!-- Utilisateurs actif -->
-                    <VerticalStackLayout VerticalOptions="Center" Spacing="5">
-                        <Label Text="Utilisateurs" 
-                                 TextColor="Orange" 
-                                 FontSize="14"
-                                 FontAttributes="Bold"
-                                 HorizontalOptions="Center"/>
-                        <BoxView HeightRequest="2" Color="{StaticResource Orange500}" HorizontalOptions="Fill"/>
-                        <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateToUsersCommand}"/>
-                        </VerticalStackLayout.GestureRecognizers>
-                    </VerticalStackLayout>
-
-
-                    <VerticalStackLayout VerticalOptions="Center" Spacing="5">
-                        <Label Text="Lieu" 
-                                TextColor="Orange" 
-                                FontSize="14"
-                                FontAttributes="Bold"
-                                HorizontalOptions="Center"/>
-                        <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateToLieuCommand}"/>
-                        </VerticalStackLayout.GestureRecognizers>
-                    </VerticalStackLayout>
-
-                    <!-- Utilisateurs actif -->
+                    <!-- Paramètre inactif -->
                     <VerticalStackLayout VerticalOptions="Center" Spacing="5">
                         <Label Text="Paramètres" 
-                        TextColor="Orange" 
-                        FontSize="14"
-                        FontAttributes="Bold"
-                        HorizontalOptions="Center"/>
+                                       TextColor="Orange" 
+                                       FontSize="14"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center"/>
                         <BoxView HeightRequest="2" Color="Transparent" HorizontalOptions="Fill"/>
                         <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateToUsersCommand}"/>
+                            <TapGestureRecognizer Command="{Binding NavigateToSettingsCommand}"/>
                         </VerticalStackLayout.GestureRecognizers>
                     </VerticalStackLayout>
-
                 </HorizontalStackLayout>
 
-                <!-- Profil utilisateur à droite -->
-                <HorizontalStackLayout Grid.Column="2" 
-                                   Spacing="15" 
-                                   VerticalOptions="Center">
-
-                    <!-- Notifications -->
-                    <Border BackgroundColor="White"
-                        HeightRequest="40"
-                        WidthRequest="40"
-                        StrokeThickness="0">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="20"/>
-                        </Border.StrokeShape>
-                        <Label Text="🔔" 
-                           FontSize="20"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"/>
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ShowNotificationsCommand}"/>
-                        </Border.GestureRecognizers>
-                    </Border>
-
-                    <!-- Profil utilisateur -->
-                    <Border BackgroundColor="Orange"
-                        HeightRequest="45"
-                        WidthRequest="45"
-                        StrokeThickness="2"
-                        Stroke="{StaticResource Orange300}">
+                <HorizontalStackLayout Grid.Column="2" Spacing="15" VerticalOptions="Center">
+                    <Label Text="🔔" FontSize="20" VerticalOptions="Center"/>
+                    <Border BackgroundColor="Orange" HeightRequest="45" WidthRequest="45" StrokeThickness="0">
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="22.5"/>
                         </Border.StrokeShape>
-                        <Label Text="JD" 
-                           FontSize="16" 
-                           FontAttributes="Bold" 
-                           TextColor="Black"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"/>
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ShowProfileCommand}"/>
-                        </Border.GestureRecognizers>
+                        <Label Text="JD" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
                     </Border>
-
                 </HorizontalStackLayout>
-
             </Grid>
         </Border>
 
@@ -180,6 +93,18 @@
                         <VerticalStackLayout Grid.Column="0" Spacing="5">
                             <Label Text="Liste des utilisateurs" FontSize="28" FontAttributes="Bold" TextColor="{StaticResource Gray900}"/>
                         </VerticalStackLayout>
+
+                        <Button Grid.Column="1"
+                                Text="+"
+                                FontSize="24"
+                                FontAttributes="Bold"
+                                TextColor="White"
+                                BackgroundColor="Orange"
+                                HeightRequest="50"
+                                WidthRequest="50"
+                                CornerRadius="25"
+                                VerticalOptions="Center"
+                                Command="{Binding GoToAddTrajetCommand}"/>
                     </Grid>
                 </CollectionView.Header>
 
@@ -189,81 +114,55 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Utilisateur">
-                        <!-- Carte Utilisateur -->
-                        <Border BackgroundColor="White" Padding="15" Margin="0,0,0,10">
+                        <Border BackgroundColor="White" Padding="20">
                             <Border.StrokeShape>
                                 <RoundRectangle CornerRadius="15"/>
                             </Border.StrokeShape>
                             <Border.Shadow>
-                                <Shadow Brush="{StaticResource Gray900}" Offset="0,4" Radius="8" Opacity="0.08"/>
+                                <Shadow Brush="Black" Offset="0,4" Radius="10" Opacity="0.05"/>
                             </Border.Shadow>
 
-                            <!-- Grille à 4 colonnes : Avatar, Contacts, Infos, Actions -->
-                            <Grid ColumnDefinitions="Auto, *, Auto, Auto" ColumnSpacing="15">
+                            <Grid ColumnDefinitions="Auto, *, Auto, Auto" ColumnSpacing="20">
 
-                                <!-- 1. Avatar (inchangé) -->
-                                <Border Grid.Column="0" BackgroundColor="#FFF4E5" HeightRequest="55" WidthRequest="55" StrokeThickness="0" VerticalOptions="Start">
-                                    <Border.StrokeShape><RoundRectangle CornerRadius="27.5"/></Border.StrokeShape>
-                                    <Label Text="👤" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <Border Grid.Column="0" BackgroundColor="#E3F2FD" HeightRequest="60" WidthRequest="60" StrokeThickness="0">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="30"/>
+                                    </Border.StrokeShape>
+                                    <Label Text="✈️" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
                                 </Border>
 
-                                <!-- 2. Identité et Contact (inchangé) -->
-                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="4">
-                                    <HorizontalStackLayout Spacing="5">
-                                        <Label Text="{Binding UTI_PRENOM}" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
-                                        <Label Text="{Binding UTI_NOM}" FontSize="16" FontAttributes="Bold" TextColor="Black" TextTransform="Uppercase"/>
-                                    </HorizontalStackLayout>
-                                    <HorizontalStackLayout Spacing="6" VerticalOptions="Center">
-                                        <Label Text="✉️" FontSize="12" VerticalOptions="Center"/>
-                                        <Label Text="{Binding UTI_EMAIL}" FontSize="13" TextColor="DimGray" VerticalOptions="Center"/>
-                                    </HorizontalStackLayout>
-                                    <HorizontalStackLayout Spacing="6" VerticalOptions="Center">
-                                        <Label Text="📞" FontSize="12" VerticalOptions="Center"/>
-                                        <Label Text="{Binding UTI_TEL}" FontSize="13" TextColor="DimGray" VerticalOptions="Center"/>
+                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="5">
+
+                                    <HorizontalStackLayout Spacing="15">
+                                        <HorizontalStackLayout Spacing="5">
+                                            <Label Text="🏷️" FontSize="12"/>
+                                            <Label Text="{Binding UTI_Login}" TextColor="{StaticResource Gray600}" FontSize="13"/>
+                                        </HorizontalStackLayout>
                                     </HorizontalStackLayout>
                                 </VerticalStackLayout>
 
-                                <!-- 3. Rôle et Localisation (inchangé) -->
-                                <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" Spacing="8" HorizontalOptions="End">
-                                    <Border BackgroundColor="{StaticResource Orange500}" Padding="10,4" StrokeThickness="0" HorizontalOptions="End">
-                                        <Border.StrokeShape><RoundRectangle CornerRadius="6"/></Border.StrokeShape>
-                                        <Label Text="{Binding ROL_LIBELLE}" FontSize="11" FontAttributes="Bold" TextColor="White"/>
-                                    </Border>
-                                    <HorizontalStackLayout Spacing="4" HorizontalOptions="End">
-                                        <Label Text="{Binding UTI_ADRESSE}" FontSize="12" TextColor="Gray"/>
-                                        <Label Text="{Binding UTI_CP}" FontSize="12" TextColor="Gray"/>
-                                    </HorizontalStackLayout>
-                                </VerticalStackLayout>
 
-                                <!-- 4. ACTIONS : Boutons Modifier / Supprimer -->
-                                <VerticalStackLayout Grid.Column="3" VerticalOptions="Center" Spacing="10" Margin="10,0,0,0">
-                                    
-                                    <!-- Bouton Modifier -->
-                                    <Button Text="✏️" 
-                                            BackgroundColor="Transparent" 
-                                            Padding="0"
-                                            HeightRequest="30"
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:UserViewModel}}, Path=EditUserCommand}"
-                                            CommandParameter="{Binding .}"/>
-                                    
-                                    <!-- Bouton Supprimer -->
-                                    <Button Text="🗑️" 
-                                            BackgroundColor="Transparent" 
-                                            Padding="0"
-                                            HeightRequest="30"
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:UserViewModel}}, Path=DeleteUserCommand}"
-                                            CommandParameter="{Binding .}"/>
 
-                                </VerticalStackLayout>
+
+                                <Button Grid.Column="3"
+                                        Text="🗑️"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TrajetViewModel}}, Path=DeleteTrajetCommand}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="Transparent" />
+                                <Button Text="📝"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TrajetViewModel}}, Path=GoToEditCommand}"
+                                        CommandParameter="{Binding .}"
+                                        FontSize="20"
+                                        BackgroundColor="Transparent"
+                                        TextColor="Black"
+                                        Padding="0"
+                                        WidthRequest="45"
+                                        HeightRequest="45" />
                             </Grid>
                         </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </Grid>
-
     </Grid>
-
-    
-
 </ContentPage>

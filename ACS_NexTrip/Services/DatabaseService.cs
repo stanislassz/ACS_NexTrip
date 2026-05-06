@@ -16,11 +16,11 @@ namespace ACS_NexTrip.Services
         {
             var builder = new SqlConnectionStringBuilder
             {
-                DataSource = @"2SIO-MAL\MSSQLSERVER01",
+                DataSource = @"localhost",
                 InitialCatalog = "ACS_VOYAGE",
                 IntegratedSecurity = false,
                 UserID = "sa",
-                Password = "SLAMbest@2024",
+                Password = "Info76240#",
                 TrustServerCertificate = true
             };
 
@@ -340,7 +340,7 @@ namespace ACS_NexTrip.Services
         }
 
         // Afficher les utilisateurs
-        public async Task<List<Utilisateur>> GetUsersAsync()
+        public async Task<List<Utilisateur>> GetUtilisateursAsync()
         {
             List<Utilisateur> liste = new List<Utilisateur>();
 
