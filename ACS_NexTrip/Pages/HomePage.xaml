@@ -84,21 +84,23 @@
                             <TapGestureRecognizer Command="{Binding NavigateToTripsCommand}"/>
                         </VerticalStackLayout.GestureRecognizers>
                     </VerticalStackLayout>
+                    
+                    
+                    
 
-                    <!-- Utilisateur actif -->
                     <VerticalStackLayout VerticalOptions="Center" Spacing="5">
-                        <Label Text="Utilisateurs" 
+                        <Label Text="Lieu" 
                                 TextColor="Orange" 
                                 FontSize="14"
                                 FontAttributes="Bold"
                                 HorizontalOptions="Center"/>
-                        <BoxView HeightRequest="2" Color="Transparent" HorizontalOptions="Fill"/>
+                        <BoxView HeightRequest="2" Color="{StaticResource Orange500}" HorizontalOptions="Fill"/>
                         <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateToUsersCommand}"/>
+                            <TapGestureRecognizer Command="{Binding NavigateToLieuCommand}"/>
                         </VerticalStackLayout.GestureRecognizers>
                     </VerticalStackLayout>
-                    
-                    <!-- Paramètres actif -->
+
+                    <!-- Utilisateurs actif -->
                     <VerticalStackLayout VerticalOptions="Center" Spacing="5">
                         <Label Text="Paramètres" 
                         TextColor="Orange" 
@@ -107,7 +109,7 @@
                         HorizontalOptions="Center"/>
                         <BoxView HeightRequest="2" Color="Transparent" HorizontalOptions="Fill"/>
                         <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateToSettingsCommand}"/>
+                            <TapGestureRecognizer Command="{Binding NavigateToUsersCommand}"/>
                         </VerticalStackLayout.GestureRecognizers>
                     </VerticalStackLayout>
 

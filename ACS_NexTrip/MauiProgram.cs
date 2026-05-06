@@ -30,7 +30,7 @@ namespace ACS_NexTrip
             builder.Services.AddSingleton<HomeViewModel>();
             builder.Services.AddSingleton<TrajetViewModel>();
             builder.Services.AddSingleton<SettingsViewModel>();
-            builder.Services.AddSingleton<UserViewModel>();
+            builder.Services.AddSingleton<LieuViewModel>();
 
             // --- PAGES ---
             builder.Services.AddTransient<LoginPage>();
@@ -38,7 +38,8 @@ namespace ACS_NexTrip
             builder.Services.AddTransient<AddTrajetPage>();
             builder.Services.AddSingleton<HomePage>();
             builder.Services.AddSingleton<TrajetPage>();
-            builder.Services.AddSingleton<UserPage>();
+            builder.Services.AddSingleton<SettingsPage>();
+            builder.Services.AddSingleton<LieuPage>();
 
 #if DEBUG
             builder.Logging.AddDebug();
