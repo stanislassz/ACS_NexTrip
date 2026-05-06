@@ -175,8 +175,9 @@ namespace ACS_NexTrip.Services
             }
         }
 
-
-
+// --------------------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------ LIEU --------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------------
 
 
         public async Task<List<Lieu>> GetLieuxAsync()
@@ -206,9 +207,6 @@ namespace ACS_NexTrip.Services
         }
 
 
-
-
-
         public async Task<bool> AddLieuAsync(Lieu l)
         {
             try
@@ -232,6 +230,26 @@ namespace ACS_NexTrip.Services
                 Console.WriteLine("Erreur SQL : " + ex.Message);
                 return false;
             }
+        }
+
+
+
+        public async Task<bool> UpdateLieuAsync(Lieu l)
+        {
+            try
+            {
+                if (this.Connection.State != ConnectionState.Open) await this.Connection.OpenAsync();
+
+                using (SqlCommand cmd = new SqlCommand("ps_UpdateLieu", this.Connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@LIE_ID", l.LIE_ID); // Crucial pour savoir quel lieu modifier
+                    cmd.Parameters.AddWithValue("@LIE_LIBELLE", l.LIE_LIBELLE);
+
+                    return await cmd.ExecuteNonQueryAsync() > 0;
+                }
+            }
+            catch { return false; }
         }
 
 

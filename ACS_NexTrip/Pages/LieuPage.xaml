@@ -16,20 +16,15 @@
                    FontAttributes="Bold" 
                    TextColor="#333333"/>
 
-            <Button Grid.Row="1"
-                    Text="➕ Ajouter une destination"
+            <Button Text="➕ Ajouter une destination"
                     Command="{Binding GoToAddLieuCommand}"
                     CornerRadius="8"
                     HeightRequest="50"
                     BackgroundColor="#2196F3"
                     FontAttributes="Bold"
-                    TextColor="White"
-                    Margin="20,10">
+                    TextColor="White">
                 <Button.Shadow>
-                    <Shadow Brush="Black"
-                Offset="2,2"
-                Radius="5"
-                Opacity="0.2" />
+                    <Shadow Brush="Black" Offset="2,2" Radius="5" Opacity="0.2" />
                 </Button.Shadow>
             </Button>
         </VerticalStackLayout>
@@ -41,15 +36,7 @@
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
             </CollectionView.ItemsLayout>
-
-            <CollectionView.EmptyView>
-                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Padding="50">
-                    <Label Text="📍" FontSize="50" HorizontalOptions="Center"/>
-                    <Label Text="Aucun lieu enregistré." 
-                           TextColor="Gray"
-                           HorizontalOptions="Center" />
-                </VerticalStackLayout>
-            </CollectionView.EmptyView>
+  
 
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Lieu">
@@ -72,17 +59,27 @@
                                    TextColor="#444444"
                                    VerticalOptions="Center" />
 
-                            <ImageButton Grid.Column="2"
-                                         Source="delete_icon.png"
-                                         Command="{Binding Source={RelativeSource AncestorType={x:Type vm:LieuViewModel}}, Path=DeleteLieuCommand}"
-                                         CommandParameter="{Binding .}"
-                                         HeightRequest="30"
-                                         WidthRequest="30"
-                                         Padding="5"
-                                         VerticalOptions="Center">
-                                <ImageButton.Behaviors>
-                                </ImageButton.Behaviors>
-                            </ImageButton>
+                            <HorizontalStackLayout Grid.Column="2" Spacing="10" VerticalOptions="Center">
+
+                                <Button Text="📝"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:LieuViewModel}}, Path=GoToEditCommand}"
+                                        CommandParameter="{Binding .}"
+                                        FontSize="20"
+                                        BackgroundColor="Transparent"
+                                        TextColor="Black"
+                                        Padding="0"
+                                        WidthRequest="45"
+                                        HeightRequest="45" />
+
+                                <Button Text="🗑️"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:LieuViewModel}}, Path=DeleteLieuCommand}"
+                                        CommandParameter="{Binding .}"
+                                        FontSize="20"
+                                        BackgroundColor="Transparent"
+                                        Padding="0"
+                                        WidthRequest="40"
+                                        HeightRequest="40" />
+                            </HorizontalStackLayout>
                         </Grid>
                     </Border>
                 </DataTemplate>
