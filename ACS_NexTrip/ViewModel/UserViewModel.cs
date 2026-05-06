@@ -16,7 +16,7 @@ namespace ACS_NexTrip.ViewModel
         private readonly ConnexionBD _db;
 
         [ObservableProperty]
-        private ObservableCollection<Utilisateur> _utilisateurs;
+        private ObservableCollection<Utilisateur> _utilisateurs = new();
 
         public UserViewModel(ConnexionBD db)
         {

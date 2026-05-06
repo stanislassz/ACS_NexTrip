@@ -5,7 +5,8 @@
              xmlns:vm="clr-namespace:ACS_NexTrip.ViewModel"
              x:Class="ACS_NexTrip.Pages.UserPage"
              Shell.NavBarIsVisible="False"
-             Title="UserPage">
+             Title="UserPage"
+             x:DataType="vm:UserViewModel">
     
     <Grid RowDefinitions="Auto, *, Auto">
 
@@ -188,23 +189,71 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Utilisateur">
-                        <Border BackgroundColor="White" Padding="20">
+                        <!-- Carte Utilisateur -->
+                        <Border BackgroundColor="White" Padding="15" Margin="0,0,0,10">
                             <Border.StrokeShape>
                                 <RoundRectangle CornerRadius="15"/>
                             </Border.StrokeShape>
                             <Border.Shadow>
-                                <Shadow Brush="Black" Offset="0,4" Radius="10" Opacity="0.05"/>
+                                <Shadow Brush="{StaticResource Gray900}" Offset="0,4" Radius="8" Opacity="0.08"/>
                             </Border.Shadow>
 
-                            <Grid ColumnDefinitions="Auto, *, Auto, Auto" ColumnSpacing="20">
+                            <!-- Grille à 4 colonnes : Avatar, Contacts, Infos, Actions -->
+                            <Grid ColumnDefinitions="Auto, *, Auto, Auto" ColumnSpacing="15">
 
-                                <VerticalStackLayout>
-                                    <HorizontalStackLayout>
-                                        <Label Text="{Binding UTI_NOM}"></Label>
+                                <!-- 1. Avatar (inchangé) -->
+                                <Border Grid.Column="0" BackgroundColor="#FFF4E5" HeightRequest="55" WidthRequest="55" StrokeThickness="0" VerticalOptions="Start">
+                                    <Border.StrokeShape><RoundRectangle CornerRadius="27.5"/></Border.StrokeShape>
+                                    <Label Text="👤" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                </Border>
+
+                                <!-- 2. Identité et Contact (inchangé) -->
+                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="4">
+                                    <HorizontalStackLayout Spacing="5">
+                                        <Label Text="{Binding UTI_PRENOM}" FontSize="16" FontAttributes="Bold" TextColor="Black"/>
+                                        <Label Text="{Binding UTI_NOM}" FontSize="16" FontAttributes="Bold" TextColor="Black" TextTransform="Uppercase"/>
                                     </HorizontalStackLayout>
-                                    <HorizontalStackLayout>
-                                        <Label Text="{Binding UTI_PRENOM}"></Label>
+                                    <HorizontalStackLayout Spacing="6" VerticalOptions="Center">
+                                        <Label Text="✉️" FontSize="12" VerticalOptions="Center"/>
+                                        <Label Text="{Binding UTI_EMAIL}" FontSize="13" TextColor="DimGray" VerticalOptions="Center"/>
                                     </HorizontalStackLayout>
+                                    <HorizontalStackLayout Spacing="6" VerticalOptions="Center">
+                                        <Label Text="📞" FontSize="12" VerticalOptions="Center"/>
+                                        <Label Text="{Binding UTI_TEL}" FontSize="13" TextColor="DimGray" VerticalOptions="Center"/>
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+
+                                <!-- 3. Rôle et Localisation (inchangé) -->
+                                <VerticalStackLayout Grid.Column="2" VerticalOptions="Center" Spacing="8" HorizontalOptions="End">
+                                    <Border BackgroundColor="{StaticResource Orange500}" Padding="10,4" StrokeThickness="0" HorizontalOptions="End">
+                                        <Border.StrokeShape><RoundRectangle CornerRadius="6"/></Border.StrokeShape>
+                                        <Label Text="{Binding ROL_LIBELLE}" FontSize="11" FontAttributes="Bold" TextColor="White"/>
+                                    </Border>
+                                    <HorizontalStackLayout Spacing="4" HorizontalOptions="End">
+                                        <Label Text="{Binding UTI_ADRESSE}" FontSize="12" TextColor="Gray"/>
+                                        <Label Text="{Binding UTI_CP}" FontSize="12" TextColor="Gray"/>
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+
+                                <!-- 4. ACTIONS : Boutons Modifier / Supprimer -->
+                                <VerticalStackLayout Grid.Column="3" VerticalOptions="Center" Spacing="10" Margin="10,0,0,0">
+                                    
+                                    <!-- Bouton Modifier -->
+                                    <Button Text="✏️" 
+                                            BackgroundColor="Transparent" 
+                                            Padding="0"
+                                            HeightRequest="30"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:UserViewModel}}, Path=EditUserCommand}"
+                                            CommandParameter="{Binding .}"/>
+                                    
+                                    <!-- Bouton Supprimer -->
+                                    <Button Text="🗑️" 
+                                            BackgroundColor="Transparent" 
+                                            Padding="0"
+                                            HeightRequest="30"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:UserViewModel}}, Path=DeleteUserCommand}"
+                                            CommandParameter="{Binding .}"/>
+
                                 </VerticalStackLayout>
                             </Grid>
                         </Border>
