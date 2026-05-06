@@ -60,6 +60,19 @@ namespace ACS_NexTrip.ViewModel
         }
 
         [RelayCommand]
+        private async Task GoToEdit(Trajet trajetSelectionne)
+        {
+            if (trajetSelectionne == null) return;
+
+            var parametres = new Dictionary<string, object>
+        {
+            { "TrajetEchange", trajetSelectionne }
+        };
+            // On navigue vers ta nouvelle page de modification
+            await Shell.Current.GoToAsync("EditTrajetPage", parametres);
+        }
+
+        [RelayCommand]
         private async Task DeleteTrajet(Trajet trajet)
         {
             if (trajet == null) return;
