@@ -164,15 +164,10 @@
                                     </Border>
                                 </VerticalStackLayout>
 
-                                
-                                
-
-                                <Button Grid.Column="3"
-                                        Text="🗑️"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TrajetViewModel}}, Path=DeleteTrajetCommand}"
-                                        CommandParameter="{Binding .}"
-                                        BackgroundColor="Transparent" />
-                                <Button Text="📝"
+                                <HorizontalStackLayout Grid.Column="3"
+                                                       Spacing="10"
+                                                       VerticalOptions="Center">
+                                    <Button Text="📝"
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TrajetViewModel}}, Path=GoToEditCommand}"
                                         CommandParameter="{Binding .}"
                                         FontSize="20"
@@ -181,6 +176,14 @@
                                         Padding="0"
                                         WidthRequest="45"
                                         HeightRequest="45" />
+
+
+                                    <Button Grid.Column="3"
+                                        Text="🗑️"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TrajetViewModel}}, Path=DeleteTrajetCommand}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="Transparent" />
+                                </HorizontalStackLayout>
                             </Grid>
                         </Border>
                     </DataTemplate>
