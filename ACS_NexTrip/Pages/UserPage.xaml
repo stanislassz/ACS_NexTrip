@@ -6,6 +6,7 @@
              x:Class="ACS_NexTrip.Pages.UserPage"
              Shell.NavBarIsVisible="False"
              Title="UserPage">
+    
     <Grid RowDefinitions="Auto, *, Auto">
 
         <!-- Header personnalisé -->
@@ -170,8 +171,50 @@
             </Grid>
         </Border>
 
+        <Grid Grid.Row="1" Padding="30">
+            <CollectionView ItemsSource="{Binding Utilisateurs}">
 
+                <CollectionView.Header>
+                    <Grid ColumnDefinitions="*, Auto" Margin="0,0,0,20">
+                        <VerticalStackLayout Grid.Column="0" Spacing="5">
+                            <Label Text="Liste des utilisateurs" FontSize="28" FontAttributes="Bold" TextColor="{StaticResource Gray900}"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </CollectionView.Header>
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="15" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Utilisateur">
+                        <Border BackgroundColor="White" Padding="20">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="15"/>
+                            </Border.StrokeShape>
+                            <Border.Shadow>
+                                <Shadow Brush="Black" Offset="0,4" Radius="10" Opacity="0.05"/>
+                            </Border.Shadow>
+
+                            <Grid ColumnDefinitions="Auto, *, Auto, Auto" ColumnSpacing="20">
+
+                                <VerticalStackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label Text="{Binding UTI_NOM}"></Label>
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label Text="{Binding UTI_PRENOM}"></Label>
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
 
     </Grid>
-                
+
+    
+
 </ContentPage>

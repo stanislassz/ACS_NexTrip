@@ -290,6 +290,43 @@ namespace ACS_NexTrip.Services
             return liste;
         }
 
+        // Afficher les utilisateurs
+        public async Task<List<Utilisateur>> GetUsersAsync()
+        {
+            List<Utilisateur> liste = new List<Utilisateur>();
+
+            using (SqlCommand command = new SqlCommand("ps_GetUtilisateurs", this.Connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                {
+                    while (reader.Read())
+                    {
+                        liste.Add(new Utilisateur
+                        {
+                            // C'EST CETTE LIGNE QUI FAIT LE LIEN :
+                            // On récupère l'ID que SQL a généré automatiquement
+                            UTI_ID = Convert.ToInt32(reader["UTI_ID"]),
+                            UTI_LOGIN = reader["UTI_LOGIN"].ToString(),
+                            UTI_PASSWORD = reader["UTI_PASSWORD"].ToString(),
+                            UTI_NOM = reader["UTI_NOM"].ToString(),
+                            UTI_PRENOM = reader["UTI_PRENOM"].ToString(),
+                            UTI_DATENAISSANCE = (DateTime)reader["UTI_DATENAISSANCE"],
+                            UTI_ADRESSE = reader["UTI_ADRESSE"].ToString(),
+                            UTI_CP = reader["UTI_CP"].ToString(),
+                            UTI_TEL = reader["UTI_TEL"].ToString(),
+                            UTI_EMAIL = reader["UTI_EMAIL"].ToString(),
+                            LIE_ID = Convert.ToInt32(reader["LIE_ID"]),
+                            LIE_LIBELLE = reader["LIE_LIBELLE"].ToString(),
+                            ROL_ID = Convert.ToInt32(reader["ROL_ID"]),
+                            ROL_LIBELLE = reader["ROL_LIBELLE"].ToString()
+                        });
+                    }
+                }
+            }
+            return liste;
+        }
+
         // Afficher les 3 prochains trajets 
         public async Task<List<Trajet>> GetNextTrajetsAsync()
         {

@@ -49,5 +49,14 @@ namespace ACS_NexTrip.ViewModel
 
         [RelayCommand]
         private void ShowProfile() { /* À implémenter */ }
+
+        [RelayCommand]
+        private async Task GetUsers()
+        {
+            var data = await _db.GetUsersAsync();
+            Utilisateurs.Clear();
+            foreach (var t in data)
+                Utilisateurs.Add(t);
+        }
     }
 }
