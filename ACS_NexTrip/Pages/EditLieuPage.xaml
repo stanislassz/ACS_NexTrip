@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:ACS_NexTrip.ViewModel"
+             x:Class="ACS_NexTrip.Pages.EditLieuPage"
+             x:DataType="vm:EditLieuViewModel"
+             Title="Modifier la destination"
+             BackgroundColor="#F5F5F5">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="20">
+
+            <Label Text="Modification"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="#333333" />
+
+            <Label Text="📝" 
+                   FontSize="50" 
+                   HorizontalOptions="Center" />
+
+            <VerticalStackLayout Spacing="5">
+                <Label Text="Nom du lieu :" FontAttributes="Bold" Margin="5,0" />
+                <Border StrokeShape="RoundRectangle 10" Padding="10,2" BackgroundColor="Black">
+                    <Entry Text="{Binding Libelle}"
+                           Placeholder="Ex: Paris, Lyon..."
+                           FontSize="18" />
+                </Border>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="10" Margin="0,20">
+
+                <Button Text="Enregistrer les modifications"
+                        Command="{Binding UpdateCommand}"
+                        BackgroundColor="Orange"
+                        TextColor="White"
+                        HeightRequest="50"
+                        CornerRadius="10"
+                        FontAttributes="Bold" />
+
+                <Button Text="Annuler"
+                        Command="{Binding CancelCommand}"
+                        BackgroundColor="Transparent"
+                        TextColor="Gray"
+                        HeightRequest="50" />
+
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

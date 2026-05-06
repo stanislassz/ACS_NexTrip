@@ -55,6 +55,24 @@ namespace ACS_NexTrip.ViewModel
             }
         }
 
+
+
+
+        [RelayCommand]
+        private async Task GoToEdit(Lieu lieuSelectionne)
+        {
+            if (lieuSelectionne == null) return;
+
+            var parametres = new Dictionary<string, object>
+        {
+            { "LieuEchange", lieuSelectionne }
+        };
+            // On navigue vers ta nouvelle page de modification
+            await Shell.Current.GoToAsync("EditLieuPage", parametres);
+        }
+
+
+
         [RelayCommand]
         private async Task DeleteLieu(Lieu lieu)
         {
