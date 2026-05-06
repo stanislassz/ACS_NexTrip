@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ACS_NexTrip.ViewModel
 {
-    internal class DetailsUserViewModel
+    public class DetailsUserViewModel
     {
     }
 }

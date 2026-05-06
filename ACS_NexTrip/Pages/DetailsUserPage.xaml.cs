@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ACS_NexTrip.ViewModel;
 
 namespace ACS_NexTrip.Pages
 {
-    public class DetailsUserPage
+    public partial class DetailsUserPage : ContentPage
     {
+        public DetailsUserPage(DetailsUserViewModel vm)
+        {
+            InitializeComponent();
+            BindingContext = vm;
+        }
     }
 }
