@@ -16,11 +16,11 @@ namespace ACS_NexTrip.Services
         {
             var builder = new SqlConnectionStringBuilder
             {
-                DataSource = @"localhost",
+                DataSource = @"2SIO-MAL\MSSQLSERVER01",
                 InitialCatalog = "ACS_VOYAGE",
                 IntegratedSecurity = false,
                 UserID = "sa",
-                Password = "Info76240#",
+                Password = "SLAMbest@2024",
                 TrustServerCertificate = true
             };
 
@@ -203,6 +203,35 @@ namespace ACS_NexTrip.Services
             catch (Exception ex) { Console.WriteLine(ex.Message); }
 
             return liste;
+        }
+
+
+
+
+
+        public async Task<bool> AddLieuAsync(Lieu l)
+        {
+            try
+            {
+
+                using (SqlCommand cmd = new SqlCommand("ps_AddLieu", this.Connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    // On lie les paramètres de ta PS avec les propriétés de l'objet Trajet
+                    cmd.Parameters.AddWithValue("@LIE_LIBELLE", l.LIE_LIBELLE);
+
+                    // ExecuteNonQuery retourne le nombre de lignes affectées
+                    int rows = await cmd.ExecuteNonQueryAsync();
+                    return rows > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Debugger ici en cas d'erreur SQL
+                Console.WriteLine("Erreur SQL : " + ex.Message);
+                return false;
+            }
         }
 
 
