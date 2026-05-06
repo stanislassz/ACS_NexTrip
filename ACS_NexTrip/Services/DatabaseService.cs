@@ -16,15 +16,11 @@ namespace ACS_NexTrip.Services
         {
             var builder = new SqlConnectionStringBuilder
             {
-                // Nom du serveur copié de ton image
-                DataSource = @"localhost",
+                DataSource = @"2SIO-MAL\MSSQLSERVER01",
                 InitialCatalog = "ACS_VOYAGE",
-
-                // On passe en Authentification SQL Server
                 IntegratedSecurity = false,
                 UserID = "sa",
-                Password = "Info76240#", // Remplace par ton vrai mot de passe
-
+                Password = "SLAMbest@2024",
                 TrustServerCertificate = true
             };
 
@@ -207,6 +203,30 @@ namespace ACS_NexTrip.Services
             catch (Exception ex) { Console.WriteLine(ex.Message); }
 
             return liste;
+        }
+
+
+
+        public async Task<bool> DeleteLieuAsync(int id)
+        {
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand("ps_DeleteLieu", this.Connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    // ON UTILISE LE NOM EXACT DE TA PROCÉDURE : @LIE_ID
+                    cmd.Parameters.AddWithValue("@LIE_ID", id);
+
+                    int rows = await cmd.ExecuteNonQueryAsync();
+                    return rows > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Erreur SQL : " + ex.Message);
+                return false;
+            }
         }
 
 

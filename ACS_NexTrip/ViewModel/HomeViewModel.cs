@@ -34,6 +34,10 @@ namespace ACS_NexTrip.ViewModel
             await Shell.Current.GoToAsync("TrajetPage");
 
         [RelayCommand]
+        private async Task NavigateToLieu() =>
+            await Shell.Current.GoToAsync("LieuPage");
+
+        [RelayCommand]
         private async Task NavigateToUsers() =>
             await Shell.Current.GoToAsync("SettingsPage");
 

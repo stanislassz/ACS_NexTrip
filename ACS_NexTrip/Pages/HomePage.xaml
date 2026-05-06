@@ -84,6 +84,21 @@
                             <TapGestureRecognizer Command="{Binding NavigateToTripsCommand}"/>
                         </VerticalStackLayout.GestureRecognizers>
                     </VerticalStackLayout>
+                    
+                    
+                    
+
+                    <VerticalStackLayout VerticalOptions="Center" Spacing="5">
+                        <Label Text="Lieu" 
+                                TextColor="Orange" 
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                HorizontalOptions="Center"/>
+                        <BoxView HeightRequest="2" Color="{StaticResource Orange500}" HorizontalOptions="Fill"/>
+                        <VerticalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateToLieuCommand}"/>
+                        </VerticalStackLayout.GestureRecognizers>
+                    </VerticalStackLayout>
 
                     <!-- Utilisateurs actif -->
                     <VerticalStackLayout VerticalOptions="Center" Spacing="5">
