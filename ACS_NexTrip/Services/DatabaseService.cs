@@ -16,11 +16,11 @@ namespace ACS_NexTrip.Services
         {
             var builder = new SqlConnectionStringBuilder
             {
-                DataSource = @"localhost",
+                DataSource = @"2SIO-MAL\MSSQLSERVER01",
                 InitialCatalog = "ACS_VOYAGE",
                 IntegratedSecurity = false,
                 UserID = "sa",
-                Password = "Info76240#",
+                Password = "SLAMbest@2024",
                 TrustServerCertificate = true
             };
 
