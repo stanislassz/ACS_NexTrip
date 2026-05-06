@@ -1,18 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ACS_NexTrip.Services;
 using ACS_NexTrip.ViewModel;
 
-namespace ACS_NexTrip.Pages
+namespace ACS_NexTrip.Pages;
+
+public partial class UserPage : ContentPage
 {
-    public partial class UserPage : ContentPage
+    // On déclare le ViewModel pour y accéder plus facilement
+    UserViewModel _viewModel;
+
+    public UserPage(UserViewModel viewModel)
     {
-        public UserPage(UserViewModel vm) 
-        {
-            InitializeComponent();
-            BindingContext = vm;
-        }
+        InitializeComponent();
+        BindingContext = viewModel; // On lie le ViewModel à la page
+        _viewModel = viewModel; // On garde une référence pour les appels futurs
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        _viewModel.AppearingCommand.Execute(null); // On déclenche la commande pour rafraîchir les données
     }
 }

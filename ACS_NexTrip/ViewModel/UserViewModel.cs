@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using ACS_NexTrip.Models;
 using ACS_NexTrip.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -16,13 +11,16 @@ namespace ACS_NexTrip.ViewModel
         private readonly ConnexionBD _db;
 
         [ObservableProperty]
-        private ObservableCollection<Utilisateur> _utilisateurs;
+        private ObservableCollection<Utilisateur> _utilisateurs = new();
 
         public UserViewModel(ConnexionBD db)
         {
             _db = db;
+            // Plus de chargement ici — c'est Appearing qui s'en charge
+            // pour éviter deux requêtes simultanées sur la même connexion
         }
 
+        // --- Navigation ---
 
         [RelayCommand]
         private async Task NavigateToDashboard() =>
@@ -37,26 +35,57 @@ namespace ACS_NexTrip.ViewModel
             await Shell.Current.GoToAsync("SettingsPage");
 
         [RelayCommand]
-        private async Task NavigateToUsers() =>
-            await Shell.Current.GoToAsync("UsersPage");
-
-        [RelayCommand]
-        private async Task NavigateToLieu() =>
-            await Shell.Current.GoToAsync("LieuPage");
-
-        [RelayCommand]
         private void ShowNotifications() { /* À implémenter */ }
 
         [RelayCommand]
         private void ShowProfile() { /* À implémenter */ }
 
+        // --- Actions ---
+
+        //[RelayCommand]
+        //private async Task GoToAddUtilisateur() =>
+        //    await Shell.Current.GoToAsync(nameof(Pages.AddUtilisateurPage));
+
+        // Appelé automatiquement à chaque fois que la page devient visible
         [RelayCommand]
-        private async Task GetUsers()
+        private async Task Appearing() => await GetUtilisateurs();
+
+        [RelayCommand]
+        private async Task GetUtilisateurs()
         {
-            var data = await _db.GetUsersAsync();
+            var data = await _db.GetUtilisateursAsync();
             Utilisateurs.Clear();
             foreach (var t in data)
                 Utilisateurs.Add(t);
+        }
+
+        [RelayCommand]
+        private async Task GoToEdit(Utilisateur UtilisateurSelectionne)
+        {
+            if (UtilisateurSelectionne == null) return;
+
+            var parametres = new Dictionary<string, object>
+        {
+            { "UtilisateurEchange", UtilisateurSelectionne }
+        };
+            // On navigue vers ta nouvelle page de modification
+            await Shell.Current.GoToAsync("EditUtilisateurPage", parametres);
+        }
+
+        [RelayCommand]
+        private async Task DeleteUtilisateur(Utilisateur utilisateur)
+        {
+            if (utilisateur == null) return;
+
+            bool success = await _db.DeleteTrajetAsync(utilisateur.UTI_ID);
+
+            if (success)
+                Utilisateurs.Remove(utilisateur);
+            else
+                await App.Current.MainPage.DisplayAlert(
+                    "Erreur",
+                    "Impossible de supprimer ce trajet. Vérifiez s'il n'est pas lié à d'autres données.",
+                    "OK");
         }
     }
 }
