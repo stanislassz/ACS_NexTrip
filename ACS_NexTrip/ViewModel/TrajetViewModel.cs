@@ -77,6 +77,9 @@ namespace ACS_NexTrip.ViewModel
         {
             if (trajet == null) return;
 
+            bool answer = await App.Current.MainPage.DisplayAlert("Suppression",
+                $"Voulez-vous vraiment supprimer ce trajet ?", "Oui", "Non");
+
             bool success = await _db.DeleteTrajetAsync(trajet.TRA_ID);
 
             if (success)

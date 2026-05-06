@@ -173,14 +173,14 @@
                                         CommandParameter="{Binding .}"
                                         BackgroundColor="Transparent" />
                                 <Button Text="📝"
-        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TrajetViewModel}}, Path=GoToEditCommand}"
-        CommandParameter="{Binding .}"
-        FontSize="20"
-        BackgroundColor="Transparent"
-        TextColor="Black"
-        Padding="0"
-        WidthRequest="45"
-        HeightRequest="45" />
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:TrajetViewModel}}, Path=GoToEditCommand}"
+                                        CommandParameter="{Binding .}"
+                                        FontSize="20"
+                                        BackgroundColor="Transparent"
+                                        TextColor="Black"
+                                        Padding="0"
+                                        WidthRequest="45"
+                                        HeightRequest="45" />
                             </Grid>
                         </Border>
                     </DataTemplate>

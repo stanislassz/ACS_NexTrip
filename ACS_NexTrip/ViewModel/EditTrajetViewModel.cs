@@ -34,6 +34,13 @@ namespace ACS_NexTrip.ViewModel
         [ObservableProperty] private DateTime _dateDep;
         [ObservableProperty] private TimeSpan _heureDep;
 
+
+
+
+
+
+
+
         public EditTrajetViewModel(ConnexionBD db)
         {
             _db = db;
@@ -41,6 +48,7 @@ namespace ACS_NexTrip.ViewModel
             ChargerDonnees();
         }
 
+        // 1. On charge les listes depuis la BDD
         private async void ChargerDonnees()
         {
             var villes = await _db.GetLieuxAsync();
@@ -48,28 +56,44 @@ namespace ACS_NexTrip.ViewModel
 
             var types = await _db.GetTypesAsync();
             Types = new ObservableCollection<TypeTransport>(types);
+
+            // UNE FOIS QUE LES LISTES SONT PRÊTES : on tente le remplissage
+            RemplirPickers();
         }
 
-        // CETTE MÉTHODE EST AUTOMATIQUE : Elle remplit les champs quand le trajet arrive
+        // 2. Quand l'objet à modifier arrive
         partial void OnTrajetAModifierChanged(Trajet value)
         {
             if (value == null) return;
 
-            // On remplit les champs simples
+            // Données simples (ça, ça marche déjà chez toi)
             Prix = value.TRA_PRIX;
             DateDep = value.TRA_DATEDEPART;
             HeureDep = value.TRA_HEUREDEPART;
 
-            // --- CORRECTION DES PICKERS ---
-            // On cherche dans la liste "Lieux" celui dont l'ID correspond à TRA_LIEU_DEPART_ID
-            SelectedDepart = Lieux?.FirstOrDefault(l => l.LIE_ID == value.TRA_LIEU_DEPART_ID);
-
-            // On cherche dans la liste "Lieux" celui dont l'ID correspond à TRA_LIEU_ARRIVEE_ID
-            SelectedArrivee = Lieux?.FirstOrDefault(l => l.LIE_ID == value.TRA_LIEU_ARRIVEE_ID);
-
-            // Pour le type, c'est déjà TYP_ID dans ton modèle
-            SelectedType = Types?.FirstOrDefault(t => t.TYP_ID == value.TYP_ID);
+            // On tente le remplissage des objets complexes
+            RemplirPickers();
         }
+
+        // 3. La méthode de synchronisation
+        private void RemplirPickers()
+        {
+            // Sécurité : Si on n'a pas encore le trajet OU si les listes sont vides, on quitte.
+            // Cette méthode sera rappelée par l'autre fonction dès que les deux conditions seront vraies.
+            if (TrajetAModifier == null || Lieux == null || Types == null)
+                return;
+
+            // IMPORTANT : On compare les ID pour trouver l'objet correspondant dans la liste
+            SelectedDepart = Lieux.FirstOrDefault(l => l.LIE_ID == TrajetAModifier.TRA_LIEU_DEPART_ID);
+            SelectedArrivee = Lieux.FirstOrDefault(l => l.LIE_ID == TrajetAModifier.TRA_LIEU_ARRIVEE_ID);
+            SelectedType = Types.FirstOrDefault(t => t.TYP_ID == TrajetAModifier.TYP_ID);
+        }
+
+
+
+
+
+
 
         [RelayCommand]
         private async Task Update()

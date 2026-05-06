@@ -315,22 +315,28 @@ namespace ACS_NexTrip.Services
 
             using (SqlCommand command = new SqlCommand("ps_GetTrajets", this.Connection))
             {
-                command.CommandType = CommandType.StoredProcedure;
+                if (this.Connection.State != ConnectionState.Open) await this.Connection.OpenAsync();
+
                 using (SqlDataReader reader = await command.ExecuteReaderAsync())
                 {
                     while (reader.Read())
                     {
                         liste.Add(new Trajet
                         {
-                            // C'EST CETTE LIGNE QUI FAIT LE LIEN :
-                            // On récupère l'ID que SQL a généré automatiquement
                             TRA_ID = Convert.ToInt32(reader["TRA_ID"]),
-
                             TRA_DATEDEPART = (DateTime)reader["TRA_DATEDEPART"],
                             TRA_HEUREDEPART = (TimeSpan)reader["TRA_HEUREDEPART"],
+
+                            // Libellés (pour l'affichage dans la liste)
                             TRA_LIEU_DEPART = reader["TRA_LIEU_DEPART"].ToString(),
                             TRA_LIEU_ARRIVEE = reader["TRA_LIEU_ARRIVEE"].ToString(),
                             TYP_LIBELLE = reader["TYP_LIBELLE"].ToString(),
+
+                            // IDs (CRUCIAL pour que les Pickers de la page Edit fonctionnent)
+                            TRA_LIEU_DEPART_ID = Convert.ToInt32(reader["TRA_LIEU_DEPART_ID"]),
+                            TRA_LIEU_ARRIVEE_ID = Convert.ToInt32(reader["TRA_LIEU_ARRIVEE_ID"]),
+                            TYP_ID = Convert.ToInt32(reader["TYP_ID"]),
+
                             TRA_PRIX = Convert.ToDecimal(reader["TRA_PRIX"])
                         });
                     }
