@@ -16,11 +16,11 @@ namespace ACS_NexTrip.Services
         {
             var builder = new SqlConnectionStringBuilder
             {
-                DataSource = @"localhost",
+                DataSource = @"2SIO-MAL\MSSQLSERVER01",
                 InitialCatalog = "ACS_VOYAGE",
                 IntegratedSecurity = false,
                 UserID = "sa",
-                Password = "Info76240#",
+                Password = "SLAMbest@2024",
                 TrustServerCertificate = true
             };
 
@@ -113,6 +113,37 @@ namespace ACS_NexTrip.Services
 
 
 
+        public async Task<bool> UpdateTrajetAsync(Trajet t)
+        {
+            try
+            {
+                if (this.Connection.State != ConnectionState.Open) await this.Connection.OpenAsync();
+
+                using (SqlCommand cmd = new SqlCommand("ps_UpdateTrajet", this.Connection))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@IdTrajet", t.TRA_ID);
+                    cmd.Parameters.AddWithValue("@TRA_DATEDEPART", t.TRA_DATEDEPART);
+                    cmd.Parameters.AddWithValue("@TRA_DATEARRIVEE", t.TRA_DATEARRIVEE);
+                    cmd.Parameters.AddWithValue("@TRA_HEUREDEPART", t.TRA_HEUREDEPART);
+                    cmd.Parameters.AddWithValue("@TRA_HEUREARRIVEE", t.TRA_HEUREARRIVEE);
+                    cmd.Parameters.AddWithValue("@TRA_LIEU_DEPART", t.TRA_LIEU_DEPART_ID); // _ID à la fin
+                    cmd.Parameters.AddWithValue("@TRA_LIEU_ARRIVEE", t.TRA_LIEU_ARRIVEE_ID); // _ID à la fin
+                    cmd.Parameters.AddWithValue("@TYP_ID", t.TYP_ID);
+                    cmd.Parameters.AddWithValue("@TRA_PRIX", t.TRA_PRIX);
+
+                    return await cmd.ExecuteNonQueryAsync() > 0;
+                }
+            }
+            catch { return false; }
+        }
+
+
+
+
+
+
+
 
         public async Task<bool> AddTrajetAsync(Trajet t)
         {
@@ -176,7 +207,7 @@ namespace ACS_NexTrip.Services
         }
 
 // --------------------------------------------------------------------------------------------------------------------------
-// ------------------------------------------------ LIEU --------------------------------------------------------------------------
+// ------------------------------------------------ LIEU --------------------------------------------------------------------
 // --------------------------------------------------------------------------------------------------------------------------
 
 
