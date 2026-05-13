@@ -24,11 +24,24 @@ namespace ACS_NexTrip.ViewModel
         // --- NAVIGATION ---
 
         [RelayCommand]
-        private async Task GoToAddLieu()
-        {
-            // Navigue vers ta page d'ajout
-            await Shell.Current.GoToAsync("AddLieuPage");
-        }
+        private async Task NavigateToDashboard() =>
+            await Shell.Current.GoToAsync("HomePage");
+
+        [RelayCommand]
+        private async Task NavigateToTrips() =>
+            await Shell.Current.GoToAsync("TrajetPage");
+
+        [RelayCommand]
+        private async Task NavigateToLieu() =>
+            await Shell.Current.GoToAsync("LieuPage");
+
+        [RelayCommand]
+        private async Task NavigateToUsers() =>
+            await Shell.Current.GoToAsync("UsersPage");
+
+        [RelayCommand]
+        private async Task NavigateToSettings() =>
+            await Shell.Current.GoToAsync("SettingsPage");
 
         // --- ACTIONS ---
 

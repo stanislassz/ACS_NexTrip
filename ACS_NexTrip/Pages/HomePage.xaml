@@ -35,14 +35,14 @@
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="10"/>
                         </Border.StrokeShape>
-                        <Label Text="TM" 
+                        <Label Text="NT" 
                            FontSize="18" 
                            FontAttributes="Bold" 
                            TextColor="Orange"
                            HorizontalOptions="Center"
                            VerticalOptions="Center"/>
                     </Border>
-                    <Label Text="TravelManager" 
+                    <Label Text="NextTrip" 
                        FontSize="22" 
                        FontAttributes="Bold" 
                        TextColor="Orange"
@@ -99,6 +99,7 @@
                     </VerticalStackLayout>
 
 
+                    <!-- Lieu actif -->
                     <VerticalStackLayout VerticalOptions="Center" Spacing="5">
                         <Label Text="Lieu" 
                                 TextColor="Orange" 
@@ -111,7 +112,7 @@
                         </VerticalStackLayout.GestureRecognizers>
                     </VerticalStackLayout>
 
-                    <!-- Utilisateurs actif -->
+                    <!-- Paramètres actif -->
                     <VerticalStackLayout VerticalOptions="Center" Spacing="5">
                         <Label Text="Paramètres" 
                         TextColor="Orange" 
@@ -120,63 +121,8 @@
                         HorizontalOptions="Center"/>
                         <BoxView HeightRequest="2" Color="Transparent" HorizontalOptions="Fill"/>
                         <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateToUsersCommand}"/>
+                            <TapGestureRecognizer Command="{Binding NavigateToSettingsCommand}"/>
                         </VerticalStackLayout.GestureRecognizers>
-                    </VerticalStackLayout>
-
-                </HorizontalStackLayout>
-
-                <!-- Profil utilisateur à droite -->
-                <HorizontalStackLayout Grid.Column="2" 
-                                   Spacing="15" 
-                                   VerticalOptions="Center">
-
-                    <!-- Notifications -->
-                    <Border BackgroundColor="White"
-                        HeightRequest="40"
-                        WidthRequest="40"
-                        StrokeThickness="0">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="20"/>
-                        </Border.StrokeShape>
-                        <Label Text="🔔" 
-                           FontSize="20"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"/>
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ShowNotificationsCommand}"/>
-                        </Border.GestureRecognizers>
-                    </Border>
-
-                    <!-- Profil utilisateur -->
-                    <Border BackgroundColor="Orange"
-                        HeightRequest="45"
-                        WidthRequest="45"
-                        StrokeThickness="2"
-                        Stroke="{StaticResource Orange300}">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="22.5"/>
-                        </Border.StrokeShape>
-                        <Label Text="JD" 
-                           FontSize="16" 
-                           FontAttributes="Bold" 
-                           TextColor="Black"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center"/>
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ShowProfileCommand}"/>
-                        </Border.GestureRecognizers>
-                    </Border>
-
-                    <!-- Nom utilisateur -->
-                    <VerticalStackLayout VerticalOptions="Center" Spacing="2">
-                        <Label Text="Jean Dupont" 
-                           FontSize="14" 
-                           FontAttributes="Bold"
-                           TextColor="Black"/>
-                        <Label Text="Administrateur" 
-                           FontSize="11"
-                           TextColor="Black"/>
                     </VerticalStackLayout>
 
                 </HorizontalStackLayout>

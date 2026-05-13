@@ -31,14 +31,16 @@ namespace ACS_NexTrip.ViewModel
             await Shell.Current.GoToAsync("TrajetPage");
 
         [RelayCommand]
+        private async Task NavigateToLieu() =>
+            await Shell.Current.GoToAsync("LieuPage");
+
+        [RelayCommand]
+        private async Task NavigateToUsers() =>
+            await Shell.Current.GoToAsync("UsersPage");
+
+        [RelayCommand]
         private async Task NavigateToSettings() =>
             await Shell.Current.GoToAsync("SettingsPage");
-
-        [RelayCommand]
-        private void ShowNotifications() { /* À implémenter */ }
-
-        [RelayCommand]
-        private void ShowProfile() { /* À implémenter */ }
 
         // --- Actions ---
 
@@ -72,7 +74,6 @@ namespace ACS_NexTrip.ViewModel
             await Shell.Current.GoToAsync("EditTrajetPage", parametres);
         }
 
-
         [RelayCommand]
         private async Task DeleteTrajet(Trajet trajet)
         {
@@ -80,8 +81,6 @@ namespace ACS_NexTrip.ViewModel
 
             bool answer = await App.Current.MainPage.DisplayAlert("Suppression",
                 $"Voulez-vous vraiment supprimer ce trajet ?", "Oui", "Non");
-
-            if (!answer) return;
 
             bool success = await _db.DeleteTrajetAsync(trajet.TRA_ID);
 
