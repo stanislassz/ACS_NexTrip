@@ -45,6 +45,10 @@ namespace ACS_NexTrip.ViewModel
 
         // --- ACTIONS ---
 
+        [RelayCommand]
+        private async Task GoToAddLieu() =>
+            await Shell.Current.GoToAsync(nameof(Pages.AddLieuPage));
+
         // Cette méthode est appelée par l'événement OnAppearing de ta page XAML
         [RelayCommand]
         private async Task Appearing()
