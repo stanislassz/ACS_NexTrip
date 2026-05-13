@@ -86,20 +86,6 @@
                         </VerticalStackLayout.GestureRecognizers>
                     </VerticalStackLayout>
 
-                    <!-- Utilisateurs actif -->
-                    <VerticalStackLayout VerticalOptions="Center" Spacing="5">
-                        <Label Text="Utilisateurs" 
-                               TextColor="Orange" 
-                               FontSize="14"
-                               FontAttributes="Bold"
-                               HorizontalOptions="Center"/>
-                        <BoxView HeightRequest="2" Color="Transparent" HorizontalOptions="Fill"/>
-                        <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateToUsersCommand}"/>
-                        </VerticalStackLayout.GestureRecognizers>
-                    </VerticalStackLayout>
-
-
                     <!-- Lieu actif -->
                     <VerticalStackLayout VerticalOptions="Center" Spacing="5">
                         <Label Text="Lieu" 
