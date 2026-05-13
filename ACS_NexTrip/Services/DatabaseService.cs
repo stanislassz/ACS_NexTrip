@@ -29,20 +29,16 @@ namespace ACS_NexTrip.Services
             Connection.Open();
         }
 
-        // Méthode pour ouvrir la connexion avant une requête
         public void Ouvrir()
         {
             if (Connection.State == System.Data.ConnectionState.Closed)
                 Connection.Open();
         }
-
-        // Méthode pour fermer la connexion après usage
         public void Fermer()
         {
             if (Connection.State == System.Data.ConnectionState.Open)
                 Connection.Close();
         }
-
         public static string Hashage(string clearText)
         {
             var sb = new StringBuilder();
@@ -78,7 +74,6 @@ namespace ACS_NexTrip.Services
                 return false;
             }
         }
-
         public async Task<bool> VerifierConnexionAsync(string login, string password)
         {
             try
@@ -109,10 +104,6 @@ namespace ACS_NexTrip.Services
                 return false;
             }
         }
-
-
-
-
         public async Task<bool> UpdateTrajetAsync(Trajet t)
         {
             try
@@ -137,14 +128,6 @@ namespace ACS_NexTrip.Services
             }
             catch { return false; }
         }
-
-
-
-
-
-
-
-
         public async Task<bool> AddTrajetAsync(Trajet t)
         {
             try
@@ -176,10 +159,6 @@ namespace ACS_NexTrip.Services
                 return false;
             }
         }
-
-
-
-
         public async Task<bool> DeleteTrajetAsync(int id)
         {
             // Affiche l'ID dans la console "Sortie" (Output) de Visual Studio
@@ -205,12 +184,6 @@ namespace ACS_NexTrip.Services
                 return false;
             }
         }
-
-// --------------------------------------------------------------------------------------------------------------------------
-// ------------------------------------------------ LIEU --------------------------------------------------------------------
-// --------------------------------------------------------------------------------------------------------------------------
-
-
         public async Task<List<Lieu>> GetLieuxAsync()
         {
             List<Lieu> liste = new List<Lieu>();
@@ -236,8 +209,6 @@ namespace ACS_NexTrip.Services
 
             return liste;
         }
-
-
         public async Task<bool> AddLieuAsync(Lieu l)
         {
             try
@@ -262,9 +233,6 @@ namespace ACS_NexTrip.Services
                 return false;
             }
         }
-
-
-
         public async Task<bool> UpdateLieuAsync(Lieu l)
         {
             try
@@ -282,9 +250,6 @@ namespace ACS_NexTrip.Services
             }
             catch { return false; }
         }
-
-
-
         public async Task<bool> DeleteLieuAsync(int id)
         {
             try
@@ -306,9 +271,6 @@ namespace ACS_NexTrip.Services
                 return false;
             }
         }
-
-
-        // Afficher les trajets 
         public async Task<List<Trajet>> GetTrajetsAsync()
         {
             List<Trajet> liste = new List<Trajet>();
@@ -344,8 +306,6 @@ namespace ACS_NexTrip.Services
             }
             return liste;
         }
-
-        // Afficher les utilisateurs
         public async Task<List<Utilisateur>> GetUtilisateursAsync()
         {
             List<Utilisateur> liste = new List<Utilisateur>();
@@ -377,8 +337,6 @@ namespace ACS_NexTrip.Services
             }
             return liste;
         }
-
-        // Afficher les 3 prochains trajets 
         public async Task<List<Trajet>> GetNextTrajetsAsync()
         {
             List<Trajet> liste = new List<Trajet>();
@@ -411,10 +369,6 @@ namespace ACS_NexTrip.Services
             }
             return liste;
         }
-
-
-
-
         public async Task<List<Utilisateur>> GetUtilisateurAsync()
         {
             List<Utilisateur> liste = new List<Utilisateur>();
@@ -449,15 +403,6 @@ namespace ACS_NexTrip.Services
             }
             return liste;
         }
-
-
-
-
-
-
-
-
-
         public async Task<List<TypeTransport>> GetTypesAsync()
         {
             List<TypeTransport> liste = new List<TypeTransport>();
@@ -486,7 +431,6 @@ namespace ACS_NexTrip.Services
             }
             return liste; // ✅ toujours retourner la liste, même vide en cas d'erreur
         }
-
         public async Task<bool> UpdateUtilisateurAsync(Utilisateur u)
         {
             try
