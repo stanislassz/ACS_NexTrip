@@ -11,20 +11,27 @@ namespace ACS_NexTrip.ViewModel
         private readonly ConnexionBD _db;
 
         [ObservableProperty]
-        private ObservableCollection<Trajet> _trajets;
+        private ObservableCollection<Trajet> _trajets = new ObservableCollection<Trajet>();
 
         public HomeViewModel(ConnexionBD db)
         {
             _db = db;
-            ChargerTrajets();
         }
 
-        public async void ChargerTrajets()
+        [RelayCommand]
+        private async Task Appearing() => await GetNextTrajets();
+
+        [RelayCommand]
+        private async Task GetNextTrajets()
         {
-            Trajets = new ObservableCollection<Trajet>(await _db.GetNextTrajetsAsync());
+            var data = await _db.GetNextTrajetsAsync();
+            Trajets.Clear();
+            foreach (var t in data)
+                Trajets.Add(t);
         }
 
-        // [RelayCommand] génère "NavigateToDashboardCommand" automatiquement
+
+
         [RelayCommand]
         private async Task NavigateToDashboard() =>
             await Shell.Current.GoToAsync("HomePage");
