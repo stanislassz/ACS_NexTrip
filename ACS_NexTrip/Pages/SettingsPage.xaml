@@ -106,77 +106,72 @@
                        TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}"
                        Margin="0,-15,0,10"/>
 
-                <CollectionView ItemsSource="{Binding Utilisateurs}">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="15" />
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:Utilisateur">
-                            <Border BackgroundColor="White" Padding="20">
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="15"/>
-                                </Border.StrokeShape>
-                                <Border.Shadow>
-                                    <Shadow Brush="{StaticResource Gray900}" Offset="0,4" Radius="10" Opacity="0.08"/>
-                                </Border.Shadow>
 
-                                <Grid Grid.Row="1" Grid.Column="1" 
+                <Border BackgroundColor="White" Padding="20">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="15"/>
+                    </Border.StrokeShape>
+                    <Border.Shadow>
+                        <Shadow Brush="{StaticResource Gray900}" Offset="0,4" Radius="10" Opacity="0.08"/>
+                    </Border.Shadow>
+
+                    <Grid Grid.Row="1" Grid.Column="1" 
                                       ColumnDefinitions="*, *" 
                                       RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto" 
                                       ColumnSpacing="15" 
                                       RowSpacing="18" 
                                       Margin="0,20,0,0">
 
-                                    <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="5">
-                                        <Label Text="NOM" FontSize="11" FontAttributes="Bold" TextColor="{StaticResource Gray500}" Margin="5,0"/>
-                                        <Border StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="{StaticResource Gray200}" BackgroundColor="#F8F9FA" Padding="12,0">
-                                            <Entry Text="{Binding UTI_NOM}" Placeholder="Ex: Dupont" Keyboard="Text" FontSize="15" HeightRequest="45" TextColor="Black"/>
-                                        </Border>
-                                    </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="5">
+                            <Label Text="NOM" FontSize="11" FontAttributes="Bold" TextColor="{StaticResource Gray500}" Margin="5,0"/>
+                            <Border StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="{StaticResource Gray200}" BackgroundColor="#F8F9FA" Padding="12,0">
+                                <Entry Text="{Binding User.UTI_NOM}" Placeholder="Ex: Dupont" Keyboard="Text" FontSize="15" HeightRequest="45" TextColor="Black"/>
+                            </Border>
+                        </VerticalStackLayout>
 
-                                    <VerticalStackLayout Grid.Row="0" Grid.Column="1" Spacing="5">
-                                        <Label Text="PRÉNOM" FontSize="11" FontAttributes="Bold" TextColor="{StaticResource Gray500}" Margin="5,0"/>
-                                        <Border StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="{StaticResource Gray200}" BackgroundColor="#F8F9FA" Padding="12,0">
-                                            <Entry Text="{Binding UTI_PRENOM}" Placeholder="Ex: Jean" Keyboard="Text" FontSize="15" HeightRequest="45" TextColor="Black"/>
-                                        </Border>
-                                    </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Row="0" Grid.Column="1" Spacing="5">
+                            <Label Text="PRÉNOM" FontSize="11" FontAttributes="Bold" TextColor="{StaticResource Gray500}" Margin="5,0"/>
+                            <Border StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="{StaticResource Gray200}" BackgroundColor="#F8F9FA" Padding="12,0">
+                                <Entry Text="{Binding User.UTI_PRENOM}" Placeholder="Ex: Jean" Keyboard="Text" FontSize="15" HeightRequest="45" TextColor="Black"/>
+                            </Border>
+                        </VerticalStackLayout>
 
-                                    <VerticalStackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Spacing="5">
-                                        <Label Text="ADRESSE E-MAIL" FontSize="11" FontAttributes="Bold" TextColor="{StaticResource Gray500}" Margin="5,0"/>
-                                        <Border StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="{StaticResource Gray200}" BackgroundColor="#F8F9FA" Padding="12,0">
-                                            <Entry Text="{Binding UTI_EMAIL}" Placeholder="jean.dupont@email.com" Keyboard="Email" FontSize="15" HeightRequest="45" TextColor="Black"/>
-                                        </Border>
-                                    </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Spacing="5">
+                            <Label Text="ADRESSE E-MAIL" FontSize="11" FontAttributes="Bold" TextColor="{StaticResource Gray500}" Margin="5,0"/>
+                            <Border StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="{StaticResource Gray200}" BackgroundColor="#F8F9FA" Padding="12,0">
+                                <Entry Text="{Binding User.UTI_EMAIL}" Placeholder="jean.dupont@email.com" Keyboard="Email" FontSize="15" HeightRequest="45" TextColor="Black"/>
+                            </Border>
+                        </VerticalStackLayout>
 
-                                    <VerticalStackLayout Grid.Row="2" Grid.Column="0" Spacing="5">
-                                        <Label Text="CODE POSTAL" FontSize="11" FontAttributes="Bold" TextColor="{StaticResource Gray500}" Margin="5,0"/>
-                                        <Border StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="{StaticResource Gray200}" BackgroundColor="#F8F9FA" Padding="12,0">
-                                            <Entry Text="{Binding UTI_CP}" Placeholder="75000" Keyboard="Numeric" FontSize="15" HeightRequest="45" TextColor="Black"/>
-                                        </Border>
-                                    </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Row="2" Grid.Column="0" Spacing="5">
+                            <Label Text="CODE POSTAL" FontSize="11" FontAttributes="Bold" TextColor="{StaticResource Gray500}" Margin="5,0"/>
+                            <Border StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="{StaticResource Gray200}" BackgroundColor="#F8F9FA" Padding="12,0">
+                                <Entry Text="{Binding User.UTI_CP}" Placeholder="75000" Keyboard="Numeric" FontSize="15" HeightRequest="45" TextColor="Black"/>
+                            </Border>
+                        </VerticalStackLayout>
 
-                                    <VerticalStackLayout Grid.Row="2" Grid.Column="1" Spacing="5">
-                                        <Label Text="TÉLÉPHONE" FontSize="11" FontAttributes="Bold" TextColor="{StaticResource Gray500}" Margin="5,0"/>
-                                        <Border StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="{StaticResource Gray200}" BackgroundColor="#F8F9FA" Padding="12,0">
-                                            <Entry Text="{Binding UTI_TEL}" Placeholder="06 00 00 00 00" Keyboard="Telephone" FontSize="15" HeightRequest="45" TextColor="Black"/>
-                                        </Border>
-                                    </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Row="2" Grid.Column="1" Spacing="5">
+                            <Label Text="TÉLÉPHONE" FontSize="11" FontAttributes="Bold" TextColor="{StaticResource Gray500}" Margin="5,0"/>
+                            <Border StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="{StaticResource Gray200}" BackgroundColor="#F8F9FA" Padding="12,0">
+                                <Entry Text="{Binding User.UTI_TEL}" Placeholder="06 00 00 00 00" Keyboard="Telephone" FontSize="15" HeightRequest="45" TextColor="Black"/>
+                            </Border>
+                        </VerticalStackLayout>
 
-                                    <VerticalStackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Spacing="5">
-                                        <Label Text="ADRESSE RÉSIDENTIELLE" FontSize="11" FontAttributes="Bold" TextColor="{StaticResource Gray500}" Margin="5,0"/>
-                                        <Border StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="{StaticResource Gray200}" BackgroundColor="#F8F9FA" Padding="12,0">
-                                            <Entry Text="{Binding UTI_ADRESSE}" Placeholder="12 rue des Fleurs" Keyboard="Text" FontSize="15" HeightRequest="45" TextColor="Black"/>
-                                        </Border>
-                                    </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Spacing="5">
+                            <Label Text="ADRESSE RÉSIDENTIELLE" FontSize="11" FontAttributes="Bold" TextColor="{StaticResource Gray500}" Margin="5,0"/>
+                            <Border StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="{StaticResource Gray200}" BackgroundColor="#F8F9FA" Padding="12,0">
+                                <Entry Text="{Binding User.UTI_ADRESSE}" Placeholder="12 rue des Fleurs" Keyboard="Text" FontSize="15" HeightRequest="45" TextColor="Black"/>
+                            </Border>
+                        </VerticalStackLayout>
 
-                                    <VerticalStackLayout Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Spacing="5">
-                                        <Label Text="DATE DE NAISSANCE" FontSize="11" FontAttributes="Bold" TextColor="{StaticResource Gray500}" Margin="5,0"/>
-                                        <Border StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="{StaticResource Gray200}" BackgroundColor="#F8F9FA" Padding="12,5">
-                                            <DatePicker Date="{Binding UTI_DATENAISSANCE}" Format="dd-MM-yyyy" FontSize="15" TextColor="Black" MinimumHeightRequest="45"/>
-                                        </Border>
-                                    </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Spacing="5">
+                            <Label Text="DATE DE NAISSANCE" FontSize="11" FontAttributes="Bold" TextColor="{StaticResource Gray500}" Margin="5,0"/>
+                            <Border StrokeShape="RoundRectangle 12" StrokeThickness="1" Stroke="{StaticResource Gray200}" BackgroundColor="#F8F9FA" Padding="12,5">
+                                <DatePicker Date="{Binding User.UTI_DATENAISSANCE}" Format="dd-MM-yyyy" FontSize="15" TextColor="Black" MinimumHeightRequest="45"/>
+                            </Border>
+                        </VerticalStackLayout>
 
-                                    <Button Text="Enregistrer"  
+                        <Button Text="Enregistrer"  
                                             Grid.Row="5" 
                                             Grid.Column="0" 
                                             Grid.ColumnSpan="2"
@@ -185,11 +180,8 @@
                                             Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SettingsViewModel}}, Path=SaveCommand}"
                                             CommandParameter="{Binding .}" />
 
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                    </Grid>
+                </Border>
 
             </VerticalStackLayout>
         </ScrollView>

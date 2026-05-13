@@ -16,11 +16,11 @@ namespace ACS_NexTrip.Services
         {
             var builder = new SqlConnectionStringBuilder
             {
-                DataSource = @"2SIO-MAL\MSSQLSERVER01",
+                DataSource = @"STAN",
                 InitialCatalog = "ACS_VOYAGE",
                 IntegratedSecurity = false,
                 UserID = "sa",
-                Password = "SLAMbest@2024",
+                Password = "sa",
                 TrustServerCertificate = true
             };
 
@@ -87,6 +87,24 @@ namespace ACS_NexTrip.Services
                     {
                         if (await reader.ReadAsync()) // On avance sur la première ligne
                         {
+                            var user = new Utilisateur
+                            {
+                                UTI_ID = Convert.ToInt32(reader["UTI_ID"]),
+                                UTI_LOGIN = reader["UTI_LOGIN"] is DBNull ? string.Empty : reader["UTI_LOGIN"].ToString(),
+                                UTI_PASSWORD = reader["UTI_PASSWORD"] is DBNull ? string.Empty : reader["UTI_PASSWORD"].ToString(),
+                                UTI_NOM = reader["UTI_NOM"] is DBNull ? string.Empty : reader["UTI_NOM"].ToString(),
+                                UTI_PRENOM = reader["UTI_PRENOM"] is DBNull ? string.Empty : reader["UTI_PRENOM"].ToString(),
+                                UTI_DATENAISSANCE = reader["UTI_DATENAISSANCE"] is DBNull ? new DateTime() : (DateTime)reader["UTI_DATENAISSANCE"],
+                                UTI_ADRESSE = reader["UTI_ADRESSE"] is DBNull ? string.Empty : reader["UTI_ADRESSE"].ToString(),
+                                UTI_CP = reader["UTI_CP"] is DBNull ? string.Empty : reader["UTI_CP"].ToString(),
+                                UTI_TEL = reader["UTI_TEL"] is DBNull ? string.Empty : reader["UTI_TEL"].ToString(),
+                                UTI_EMAIL = reader["UTI_EMAIL"] is DBNull ? string.Empty : reader["UTI_EMAIL"].ToString(),
+                                ROL_ID = reader["ROL_ID"] is DBNull ? 0 : Convert.ToInt32(reader["ROL_ID"]),
+                                LIE_ID = reader["LIE_ID"] is DBNull ? 0 : Convert.ToInt32(reader["LIE_ID"]),
+                            };
+
+                            Session.CurrentUser = user;
+
                             string tempPassword = reader["UTI_PASSWORD"].ToString();
                             
                             if(Hashage(password) == tempPassword)

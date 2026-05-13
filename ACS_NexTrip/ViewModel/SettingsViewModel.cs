@@ -11,7 +11,7 @@ namespace ACS_NexTrip.ViewModel
         private readonly ConnexionBD _db;
 
         [ObservableProperty]
-        private ObservableCollection<Utilisateur> _utilisateurs;
+        private Utilisateur _user;
 
         public SettingsViewModel(ConnexionBD db)
         {
@@ -21,7 +21,7 @@ namespace ACS_NexTrip.ViewModel
 
         public async void ChargerUtilisateur()
         {
-            Utilisateurs = new ObservableCollection<Utilisateur>(await _db.GetUtilisateurAsync());
+            User = Session.CurrentUser;
         }
 
         // Commandes de navigation
