@@ -6,6 +6,8 @@
              Title="Nouveau Trajet">
 
     <ScrollView VerticalOptions="FillAndExpand">
+        
+        
 
         <VerticalStackLayout Padding="30" Spacing="15">
             <Label Text="Nouveau Trajet" FontSize="24" FontAttributes="Bold" TextColor="Orange" />
@@ -35,10 +37,10 @@
             <DatePicker Date="{Binding DateDep}" />
 
             <Label Text="Heure de départ" />
-            <TimePicker Time="{Binding HeureDep}" />
+            <TimePicker Time="{Binding HeureDep}" Format="HH:mm"/>
 
             <Label Text="Heure d'arrivée" />
-            <TimePicker Time="{Binding HeureArr}" />
+            <TimePicker Time="{Binding HeureArr}" Format="HH:mm"/>
 
             <Button Text="Enregistrer" 
             Command="{Binding SaveCommand}" 

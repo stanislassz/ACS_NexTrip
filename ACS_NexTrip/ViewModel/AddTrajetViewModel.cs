@@ -61,17 +61,25 @@ namespace ACS_NexTrip.ViewModel
         [RelayCommand]
         private async Task Save()
         {
-            if (SelectedDepart == null || SelectedArrivee == null) return;
+            // Ajoute une petite vérification pour le type aussi
+            if (SelectedDepart == null || SelectedArrivee == null || SelectedType == null)
+            {
+                await Shell.Current.DisplayAlert("Erreur", "Veuillez remplir tous les champs", "OK");
+                return;
+            }
 
             var nouveau = new Trajet
             {
-                TRA_DATEDEPART = DateDep,
-                TRA_DATEARRIVEE = DateDep,
-                TRA_HEUREDEPART = DateTime.Now.TimeOfDay,
-                TRA_HEUREARRIVEE = DateTime.Now.TimeOfDay.Add(TimeSpan.FromHours(2)),
-                TRA_LIEU_DEPART_ID = SelectedDepart.LIE_ID, 
+                TRA_DATEDEPART = DateDep.Date, // On s'assure de ne prendre que la date
+                TRA_DATEARRIVEE = DateDep.Date,
+
+                // CORRECTION ICI : On utilise les variables bindées au TimePicker
+                TRA_HEUREDEPART = HeureDep,
+                TRA_HEUREARRIVEE = HeureArr,
+
+                TRA_LIEU_DEPART_ID = SelectedDepart.LIE_ID,
                 TRA_LIEU_ARRIVEE_ID = SelectedArrivee.LIE_ID,
-                TYP_ID = _selectedType.TYP_ID,
+                TYP_ID = SelectedType.TYP_ID,
                 TRA_PRIX = Prix
             };
 
