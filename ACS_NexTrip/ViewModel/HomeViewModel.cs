@@ -44,11 +44,5 @@ namespace ACS_NexTrip.ViewModel
         [RelayCommand]
         private async Task NavigateToSettings() =>
             await Shell.Current.GoToAsync("SettingsPage");
-
-        [RelayCommand]
-        private void ShowNotifications() { /* À implémenter */ }
-
-        [RelayCommand]
-        private void ShowProfile() { /* À implémenter */ }
     }
 }

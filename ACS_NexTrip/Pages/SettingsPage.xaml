@@ -27,9 +27,9 @@
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="10"/>
                         </Border.StrokeShape>
-                        <Label Text="TM" FontSize="18" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+                        <Label Text="NT" FontSize="18" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
                     </Border>
-                    <Label Text="TravelManager" FontSize="22" FontAttributes="Bold" TextColor="Orange" VerticalOptions="Center"/>
+                    <Label Text="NextTrip" FontSize="22" FontAttributes="Bold" TextColor="Orange" VerticalOptions="Center"/>
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Spacing="30">
@@ -37,10 +37,10 @@
                     <!-- Accueil actif -->
                     <VerticalStackLayout VerticalOptions="Center" Spacing="5">
                         <Label Text="Accueil" 
-                           TextColor="Orange" 
-                           FontSize="14"
-                           FontAttributes="Bold"
-                           HorizontalOptions="Center"/>
+                               TextColor="Orange" 
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"/>
                         <BoxView HeightRequest="2" Color="Transparent" HorizontalOptions="Fill"/>
                         <VerticalStackLayout.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding NavigateToDashboardCommand}"/>
@@ -55,7 +55,7 @@
                                FontAttributes="Bold"
                                HorizontalOptions="Center"/>
 
-                                            <BoxView HeightRequest="2" 
+                        <BoxView HeightRequest="2" 
                                  Color="Transparent" 
                                  HorizontalOptions="Fill"/>
 
@@ -64,39 +64,44 @@
                         </VerticalStackLayout.GestureRecognizers>
                     </VerticalStackLayout>
 
-                    <!-- Paramètre actif -->
+                    <!-- Utilisateurs actif -->
                     <VerticalStackLayout VerticalOptions="Center" Spacing="5">
-                        <Label Text="Paramètres" 
-                           TextColor="Orange" 
-                           FontSize="14"
-                           FontAttributes="Bold"
-                           HorizontalOptions="Center"/>
-                        <BoxView HeightRequest="2" Color="Orange" HorizontalOptions="Fill"/>
+                        <Label Text="Utilisateurs" 
+                               TextColor="Orange" 
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"/>
+                        <BoxView HeightRequest="2" Color="Transparent" HorizontalOptions="Fill"/>
                         <VerticalStackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateToSettingsCommand}"/>
+                            <TapGestureRecognizer Command="{Binding NavigateToUsersCommand}"/>
                         </VerticalStackLayout.GestureRecognizers>
                     </VerticalStackLayout>
 
-                </HorizontalStackLayout>
 
-                <HorizontalStackLayout Grid.Column="2" Spacing="15" VerticalOptions="Center">
-                    <Border BackgroundColor="White" HeightRequest="40" WidthRequest="40" StrokeThickness="0">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="20"/>
-                        </Border.StrokeShape>
-                        <Label Text="🔔" FontSize="20" HorizontalOptions="Center" VerticalOptions="Center"/>
-                    </Border>
+                    <!-- Lieu actif -->
+                    <VerticalStackLayout VerticalOptions="Center" Spacing="5">
+                        <Label Text="Lieu" 
+                               TextColor="Orange" 
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"/>
+                        <BoxView HeightRequest="2" Color="Transparent" HorizontalOptions="Fill"/>
+                        <VerticalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateToLieuCommand}"/>
+                        </VerticalStackLayout.GestureRecognizers>
+                    </VerticalStackLayout>
 
-                    <Border BackgroundColor="Orange" HeightRequest="45" WidthRequest="45" StrokeThickness="2" Stroke="{StaticResource Orange300}">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="22.5"/>
-                        </Border.StrokeShape>
-                        <Label Text="JD" FontSize="16" FontAttributes="Bold" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
-                    </Border>
-
-                    <VerticalStackLayout VerticalOptions="Center" Spacing="2">
-                        <Label Text="Jean Dupont" FontSize="14" FontAttributes="Bold" TextColor="Black"/>
-                        <Label Text="Administrateur" FontSize="11" TextColor="Black"/>
+                    <!-- Paramètres actif -->
+                    <VerticalStackLayout VerticalOptions="Center" Spacing="5">
+                        <Label Text="Paramètres" 
+                               TextColor="Orange" 
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"/>
+                        <BoxView HeightRequest="2" Color="{StaticResource Orange500}" HorizontalOptions="Fill"/>
+                        <VerticalStackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateToSettingsCommand}"/>
+                        </VerticalStackLayout.GestureRecognizers>
                     </VerticalStackLayout>
                 </HorizontalStackLayout>
             </Grid>
@@ -193,7 +198,7 @@
                                             Margin="0,20,0,0"
                                             Command="{Binding Source={RelativeSource AncestorType={x:Type vm:SettingsViewModel}}, Path=SaveCommand}"
                                             CommandParameter="{Binding .}" />
-                                    
+
                                 </Grid>
                             </Border>
                         </DataTemplate>

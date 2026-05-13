@@ -24,6 +24,7 @@ namespace ACS_NexTrip.ViewModel
             Utilisateurs = new ObservableCollection<Utilisateur>(await _db.GetUtilisateurAsync());
         }
 
+        // Commandes de navigation
         [RelayCommand]
         private async Task NavigateToDashboard() =>
             await Shell.Current.GoToAsync("HomePage");
@@ -33,13 +34,15 @@ namespace ACS_NexTrip.ViewModel
             await Shell.Current.GoToAsync("TrajetPage");
 
         [RelayCommand]
+        private async Task NavigateToLieu() =>
+            await Shell.Current.GoToAsync("LieuPage");
+
+        [RelayCommand]
+        private async Task NavigateToUsers() =>
+            await Shell.Current.GoToAsync("UsersPage");
+
+        [RelayCommand]
         private async Task NavigateToSettings() =>
             await Shell.Current.GoToAsync("SettingsPage");
-
-        [RelayCommand]
-        private void ShowNotifications() { /* À implémenter */ }
-
-        [RelayCommand]
-        private void ShowProfile() { /* À implémenter */ }
     }
 }
